@@ -576,8 +576,8 @@ $('#listenBtn').onclick=playDemo;
 $('#pauseBtn').onclick=pauseDemo;
 $('#guideChk').checked=S.songGuide!==false;
 $('#guideChk').onchange=e=>{S.songGuide=e.target.checked;save();if(!e.target.checked)markKeys([]);};
-$('#fingerChk').checked=showFingers();
-$('#fingerChk').onchange=e=>{S.songFingers=e.target.checked;save();applyFingers();};
+const fingerChk=$('#fingerChk');   // si la plantilla es anterior (servidor sin recargar), no debe romper el resto
+if(fingerChk){ fingerChk.checked=showFingers(); fingerChk.onchange=e=>{S.songFingers=e.target.checked;save();applyFingers();}; }
 $('#strictChk').checked=S.strict;
 $('#strictChk').onchange=e=>{S.strict=e.target.checked;save();};
 bindKeys(kb,(m,ts)=>{const c=ac();tone(m,c.currentTime,0.6);onNote(m,'touch',ts);});
