@@ -1,0 +1,1218 @@
+# Traducciones de la app de piano. El texto original (msgid) está en español.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-29 15:47+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: piano <piano@example.com>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: cuentas/forms.py
+msgid "Nombre"
+msgstr "Prénom"
+
+#: cuentas/forms.py
+msgid "Correo electrónico"
+msgstr "E-mail"
+
+#: cuentas/forms.py
+msgid "Ya hay una cuenta con este correo."
+msgstr "Un compte existe déjà avec cet e-mail."
+
+#: cuentas/forms.py
+msgid "Tu cuenta aún no está activada. Cuando la activen podrás entrar."
+msgstr "Votre compte n'est pas encore activé. Vous pourrez vous connecter dès qu'il le sera."
+
+#: cuentas/models.py escalas/templates/escalas/song.html
+msgid "Partitura"
+msgstr "Partition"
+
+#: cuentas/models.py escalas/templates/escalas/song.html
+msgid "Lluvia de notas"
+msgstr "Pluie de notes"
+
+#: cuentas/models.py
+msgid "vista de las canciones"
+msgstr "affichage des chansons"
+
+#: cuentas/models.py
+msgid "Partitura: las notas en el pentagrama. Lluvia de notas: las notas caen hacia su tecla."
+msgstr "Partition : les notes sur la portée. Pluie de notes : les notes tombent vers leur touche."
+
+#: cuentas/templates/cuentas/preferences.html
+msgid "Preferencias · Piano"
+msgstr "Préférences · Piano"
+
+#: cuentas/templates/cuentas/preferences.html
+msgid "Preferencias"
+msgstr "Préférences"
+
+#: cuentas/templates/cuentas/preferences.html
+msgid "Las notas en el pentagrama, como en una partitura."
+msgstr "Les notes sur la portée, comme sur une partition."
+
+#: cuentas/templates/cuentas/preferences.html
+msgid "Las notas caen hacia su tecla del teclado, con un color para cada mano."
+msgstr "Les notes tombent vers leur touche du clavier, avec une couleur pour chaque main."
+
+#: cuentas/templates/cuentas/preferences.html
+msgid "Guardar"
+msgstr "Enregistrer"
+
+#: cuentas/templates/cuentas/register.html
+msgid "Registro · Piano"
+msgstr "Inscription · Piano"
+
+#: cuentas/templates/cuentas/register.html
+#, python-format
+msgid "¡Cuenta creada, %(name)s!"
+msgstr "Compte créé, %(name)s !"
+
+#: cuentas/templates/cuentas/register.html
+#, python-format
+msgid "Tu cuenta <b>%(user)s</b> está pendiente de activación. Para activarla, envía un correo a:"
+msgstr "Votre compte <b>%(user)s</b> est en attente d'activation. Pour l'activer, envoyez un e-mail à :"
+
+#: cuentas/templates/cuentas/register.html
+msgid "con tu nombre de usuario. Puedes usar este botón, que deja el mensaje escrito:"
+msgstr "avec votre nom d'utilisateur. Vous pouvez utiliser ce bouton, qui prépare le message :"
+
+#: cuentas/templates/cuentas/register.html
+msgid "Escribir el correo"
+msgstr "Écrire l'e-mail"
+
+#: cuentas/templates/cuentas/register.html
+#, python-format
+msgid "Cuando tu cuenta esté activa podrás <a href=\"%(login_url)s\">entrar</a>."
+msgstr "Quand votre compte sera actif, vous pourrez vous <a href=\"%(login_url)s\">connecter</a>."
+
+#: cuentas/templates/cuentas/register.html
+msgid "Crear cuenta"
+msgstr "Créer un compte"
+
+#: cuentas/templates/cuentas/register.html
+#, python-format
+msgid "Después de registrarte, envía un correo a <b>%(admin_email)s</b> para que activen tu cuenta."
+msgstr "Après votre inscription, envoyez un e-mail à <b>%(admin_email)s</b> pour faire activer votre compte."
+
+#: cuentas/templates/cuentas/register.html
+msgid "Registrarme"
+msgstr "M'inscrire"
+
+#: cuentas/templates/cuentas/register.html
+msgid "¿Ya tienes cuenta?"
+msgstr "Vous avez déjà un compte ?"
+
+#: cuentas/templates/cuentas/register.html
+#: cuentas/templates/registration/login.html
+#: escalas/templates/escalas/_nav.html
+msgid "Entrar"
+msgstr "Se connecter"
+
+#: cuentas/templates/registration/login.html
+msgid "Entrar · Piano"
+msgstr "Connexion · Piano"
+
+#: cuentas/templates/registration/login.html
+msgid "Tu avance se guarda en tu cuenta: escalas, módulos y canciones."
+msgstr "Votre progression est enregistrée dans votre compte : gammes, modules et chansons."
+
+#: cuentas/templates/registration/login.html
+msgid "¿No tienes cuenta?"
+msgstr "Pas encore de compte ?"
+
+#: cuentas/templates/registration/login.html
+msgid "Regístrate"
+msgstr "Inscrivez-vous"
+
+#: cuentas/views.py
+#, python-format
+msgid "Activar cuenta: %(user)s"
+msgstr "Activer le compte : %(user)s"
+
+#: cuentas/views.py
+#, python-format
+msgid ""
+"Hola, me registré en la app de piano y quisiera activar mi cuenta.\n"
+"\n"
+"Usuario: %(user)s\n"
+"Nombre: %(name)s\n"
+"Correo: %(email)s\n"
+msgstr ""
+
+#: cuentas/views.py
+msgid "Preferencias guardadas."
+msgstr "Préférences enregistrées."
+
+#: escalas/catalog_strings.py
+msgid "Acompaña canciones con acordes."
+msgstr "Accompagnez des chansons avec des accords."
+
+#: escalas/catalog_strings.py
+msgid "Acordes con sostenidos y bemoles"
+msgstr "Accords avec dièses et bémols"
+
+#: escalas/catalog_strings.py
+msgid "Acordes de séptima"
+msgstr "Accords de septième"
+
+#: escalas/catalog_strings.py
+msgid "Acordes de tensión y color para dar variedad a un acompañamiento."
+msgstr "Des accords de tension et de couleur pour varier un accompagnement."
+
+#: escalas/catalog_strings.py
+msgid "Acordes mayores"
+msgstr "Accords majeurs"
+
+#: escalas/catalog_strings.py
+msgid "Acordes menores"
+msgstr "Accords mineurs"
+
+#: escalas/catalog_strings.py
+msgid "Aprende a leer el pentagrama nota a nota, hasta tocar piezas escritas."
+msgstr "Apprenez à lire la portée note par note, jusqu'à jouer des pièces écrites."
+
+#: escalas/catalog_strings.py
+msgid "Aprende acordes, inversiones y progresiones para tocar con otros músicos."
+msgstr "Apprenez les accords, les renversements et les progressions pour jouer avec d'autres musiciens."
+
+#: escalas/catalog_strings.py
+msgid "Arpegios de dos octavas en corcheas y bajo en negras, con el final en acordes."
+msgstr "Arpèges sur deux octaves en croches et basse en noires, avec une fin en accords."
+
+#: escalas/catalog_strings.py
+msgid "Banda"
+msgstr "Groupe"
+
+#: escalas/catalog_strings.py
+msgid "Blues de 12 compases"
+msgstr "Blues en 12 mesures"
+
+#: escalas/catalog_strings.py
+msgid "Cada nota aparece en su clave, sol o fa, como en una partitura de piano. Cambia de lectura sin pausa."
+msgstr "Chaque note apparaît dans sa clé, sol ou fa, comme sur une partition de piano. Changez de lecture sans pause."
+
+#: escalas/catalog_strings.py
+msgid "Canción de 1968 con derechos de autor vigentes: importa tu partitura en MIDI y la app crea las tres versiones."
+msgstr "Chanson de 1968 toujours protégée par le droit d'auteur : importez votre partition MIDI et l'application crée les trois versions."
+
+#: escalas/catalog_strings.py
+msgid "Clave de fa: las notas del pentagrama"
+msgstr "Clé de fa : les notes de la portée"
+
+#: escalas/catalog_strings.py
+msgid "Clave de fa: líneas adicionales"
+msgstr "Clé de fa : lignes supplémentaires"
+
+#: escalas/catalog_strings.py
+msgid "Clave de sol: las notas del pentagrama"
+msgstr "Clé de sol : les notes de la portée"
+
+#: escalas/catalog_strings.py
+msgid "Clave de sol: líneas adicionales"
+msgstr "Clé de sol : lignes supplémentaires"
+
+#: escalas/catalog_strings.py
+msgid "Con segunda voz y bajo arpegiado"
+msgstr "Avec seconde voix et basse arpégée"
+
+#: escalas/catalog_strings.py
+msgid "Del Do2 grave hasta el Mi4, que se escribe sobre el pentagrama de fa."
+msgstr "Du do2 grave jusqu'au mi4, qui s'écrit au-dessus de la portée de fa."
+
+#: escalas/catalog_strings.py
+msgid "Disminuidos, aumentados y suspendidos"
+msgstr "Diminués, augmentés et suspendus"
+
+#: escalas/catalog_strings.py
+msgid "Do, Fa, Sol, Re, La y Mi: los acordes más usados en canciones. Verás sus notas en el teclado."
+msgstr "Do, fa, sol, ré, la et mi : les accords les plus utilisés dans les chansons. Vous verrez leurs notes sur le clavier."
+
+#: escalas/catalog_strings.py
+msgid "Doxología"
+msgstr "Doxologie"
+
+#: escalas/catalog_strings.py
+msgid "Dórica"
+msgstr "Dorienne"
+
+#: escalas/catalog_strings.py
+msgid "El famoso bajo en ciclo de quintas de la Suite en sol menor HWV 432. Aprende primero la mano derecha, luego la izquierda y al final las dos juntas."
+msgstr "La célèbre basse en cycle de quintes de la Suite en sol mineur HWV 432. Apprenez d'abord la main droite, puis la gauche, et enfin les deux ensemble."
+
+#: escalas/catalog_strings.py
+msgid "El himno más cantado del mundo (Amazing Grace), en compás de tres."
+msgstr "L'hymne le plus chanté au monde (Amazing Grace), à trois temps."
+
+#: escalas/catalog_strings.py
+msgid "El sonido más oscuro: La menor, Re menor, Mi menor y compañía."
+msgstr "Le son le plus sombre : la mineur, ré mineur, mi mineur et compagnie."
+
+#: escalas/catalog_strings.py
+msgid "El villancico de Navidad por excelencia, con su suave balanceo en tres."
+msgstr "Le chant de Noël par excellence, avec son doux balancement à trois temps."
+
+#: escalas/catalog_strings.py
+msgid "Encadena los tres acordes principales de una tonalidad, en Do y en Sol."
+msgstr "Enchaînez les trois accords principaux d'une tonalité, en do et en sol."
+
+#: escalas/catalog_strings.py
+msgid "Frases de ocho notas con saltos amplios y alteraciones en clave de sol."
+msgstr "Phrases de huit notes avec de grands sauts et des altérations en clé de sol."
+
+#: escalas/catalog_strings.py
+msgid "Frases de ocho notas para la mano izquierda, con saltos y alteraciones."
+msgstr "Phrases de huit notes pour la main gauche, avec sauts et altérations."
+
+#: escalas/catalog_strings.py
+msgid "Frases por grados conjuntos"
+msgstr "Phrases par degrés conjoints"
+
+#: escalas/catalog_strings.py
+msgid "Frigia"
+msgstr "Phrygienne"
+
+#: escalas/catalog_strings.py
+msgid "Generada automáticamente: la melodía y un bajo por medio compás."
+msgstr "Générée automatiquement : la mélodie et une basse toutes les demi-mesures."
+
+#: escalas/catalog_strings.py
+msgid "Generada automáticamente: teclas blancas, notas largas y una nota a la vez por mano."
+msgstr "Générée automatiquement : touches blanches, notes longues et une note à la fois par main."
+
+#: escalas/catalog_strings.py
+msgid "Himno de la alegría"
+msgstr "Hymne à la joie"
+
+#: escalas/catalog_strings.py
+msgid "Interestelar"
+msgstr "Interstellar"
+
+#: escalas/catalog_strings.py
+msgid "La cadencia básica del jazz, con acordes de séptima, en Do, Fa, Si♭ y Mi♭."
+msgstr "La cadence de base du jazz, avec des accords de septième, en do, fa, si♭ et mi♭."
+
+#: escalas/catalog_strings.py
+msgid "La clave de la mano izquierda: de Sol2 a La3, en líneas y espacios."
+msgstr "La clé de la main gauche : du sol2 au la3, sur les lignes et les interlignes."
+
+#: escalas/catalog_strings.py
+msgid "La forma completa del blues con acordes de séptima, en Do y en Sol."
+msgstr "La forme complète du blues avec des accords de septième, en do et en sol."
+
+#: escalas/catalog_strings.py
+msgid "La melodía completa con la fundamental de cada acorde en la izquierda."
+msgstr "La mélodie complète avec la fondamentale de chaque accord à la main gauche."
+
+#: escalas/catalog_strings.py
+msgid "La melodía de la Novena sinfonía, cantada en iglesias como «Jubilosos te adoramos»."
+msgstr "La mélodie de la Neuvième Symphonie, chantée dans les églises sous le titre « Jubilosos te adoramos »."
+
+#: escalas/catalog_strings.py
+msgid "La progresión de cientos de canciones, en cuatro tonalidades."
+msgstr "La progression de centaines de chansons, en quatre tonalités."
+
+#: escalas/catalog_strings.py
+msgid "La progresión pop: I–V–vi–IV"
+msgstr "La progression pop : I–V–vi–IV"
+
+#: escalas/catalog_strings.py
+msgid "Las dos claves alternadas"
+msgstr "Les deux clés en alternance"
+
+#: escalas/catalog_strings.py
+msgid "Las mismas notas de la clave de sol, ahora con ♯ y ♭. Fíjate en la alteración antes de tocar."
+msgstr "Les mêmes notes de la clé de sol, maintenant avec ♯ et ♭. Regardez l'altération avant de jouer."
+
+#: escalas/catalog_strings.py
+msgid "Lee frases cortas de cinco notas que se mueven por notas vecinas, como en una melodía."
+msgstr "Lisez de courtes phrases de cinq notes qui procèdent par notes voisines, comme dans une mélodie."
+
+#: escalas/catalog_strings.py
+msgid "Lee partituras y toca música clásica."
+msgstr "Lisez des partitions et jouez de la musique classique."
+
+#: escalas/catalog_strings.py
+msgid "Lidia"
+msgstr "Lydienne"
+
+#: escalas/catalog_strings.py
+msgid "Locria"
+msgstr "Locrienne"
+
+#: escalas/catalog_strings.py escalas/templates/escalas/index.html
+msgid "Mayor"
+msgstr "Majeur"
+
+#: escalas/catalog_strings.py
+msgid "Melodía en Do"
+msgstr "Mélodie en do"
+
+#: escalas/catalog_strings.py
+msgid "Menor armónica"
+msgstr "Mineur harmonique"
+
+#: escalas/catalog_strings.py
+msgid "Menor melódica"
+msgstr "Mineur mélodique"
+
+#: escalas/catalog_strings.py
+msgid "Menor natural"
+msgstr "Mineur naturel"
+
+#: escalas/catalog_strings.py
+msgid "Mixolidia"
+msgstr "Mixolydienne"
+
+#: escalas/catalog_strings.py
+msgid "Noche de paz"
+msgstr "Douce nuit"
+
+#: escalas/catalog_strings.py
+msgid "Pentatónica mayor"
+msgstr "Pentatonique majeure"
+
+#: escalas/catalog_strings.py
+msgid "Pentatónica menor"
+msgstr "Pentatonique mineure"
+
+#: escalas/catalog_strings.py
+msgid "Primera vista en clave de fa"
+msgstr "Lecture à vue en clé de fa"
+
+#: escalas/catalog_strings.py
+msgid "Primera vista: saltos y alteraciones"
+msgstr "Lecture à vue : sauts et altérations"
+
+#: escalas/catalog_strings.py
+msgid "Reconoce las nueve notas que caen en las líneas y espacios, de Mi4 a Fa5, y tócalas en el piano."
+msgstr "Reconnaissez les neuf notes qui tombent sur les lignes et les interlignes, du mi4 au fa5, et jouez-les au piano."
+
+#: escalas/catalog_strings.py
+msgid "Segunda voz en los tiempos fuertes y bajo arpegiado en negras."
+msgstr "Seconde voix sur les temps forts et basse arpégée en noires."
+
+#: escalas/catalog_strings.py
+msgid "Si♭, Mi♭, La♭, Fa♯ menor… Ahora las notas solo aparecen si te equivocas."
+msgstr "Si♭, mi♭, la♭, fa♯ mineur… Maintenant les notes n'apparaissent que si vous vous trompez."
+
+#: escalas/catalog_strings.py
+msgid "Solista"
+msgstr "Soliste"
+
+#: escalas/catalog_strings.py
+msgid "Solo teclas blancas: la melodía en notas largas y una nota de bajo por compás."
+msgstr "Touches blanches uniquement : la mélodie en notes longues et une note de basse par mesure."
+
+#: escalas/catalog_strings.py
+msgid "Sostenidos y bemoles"
+msgstr "Dièses et bémols"
+
+#: escalas/catalog_strings.py
+msgid "Sublime gracia"
+msgstr "Amazing Grace"
+
+#: escalas/catalog_strings.py
+msgid "Suma el Do central y las notas que se salen del pentagrama por arriba, hasta La5."
+msgstr "Ajoutez le do central et les notes qui dépassent de la portée vers le haut, jusqu'au la5."
+
+#: escalas/catalog_strings.py
+msgid "Séptima de dominante, menor séptima y séptima mayor: el color del pop, el soul y el jazz."
+msgstr "Septième de dominante, septième mineure et septième majeure : la couleur de la pop, de la soul et du jazz."
+
+#: escalas/catalog_strings.py
+msgid "Tu primera progresión: I–IV–V"
+msgstr "Votre première progression : I–IV–V"
+
+#: escalas/catalog_strings.py
+msgid "baja natural"
+msgstr "descendante naturelle"
+
+#: escalas/catalog_strings.py
+msgid "ii–V–I en cuatro tonalidades"
+msgstr "ii–V–I dans quatre tonalités"
+
+#: escalas/catalog_strings.py
+msgid "«A Dios el Padre celestial»: el antiguo salmo 100, en notas largas y solemnes."
+msgstr "« Louez Dieu, le Père céleste » : l'ancien psaume 100, en notes longues et solennelles."
+
+#: escalas/catalog_strings.py
+msgid "Jean Renard y Pierre Delanoë (canta Sylvie Vartan)"
+msgstr "Jean Renard et Pierre Delanoë (chantée par Sylvie Vartan)"
+
+#: escalas/catalog_strings.py
+msgid "Melodía tradicional «New Britain» (1829)"
+msgstr "Mélodie traditionnelle « New Britain » (1829)"
+
+#: escalas/forms.py
+msgid "La precisión no puede superar 100."
+msgstr "La précision ne peut pas dépasser 100."
+
+#: escalas/forms.py
+msgid "Nombre de la canción"
+msgstr "Nom de la chanson"
+
+#: escalas/forms.py
+msgid "Autor"
+msgstr "Auteur"
+
+#: escalas/forms.py
+msgid "Categoría"
+msgstr "Catégorie"
+
+#: escalas/forms.py
+msgid "Partitura (MIDI o MusicXML)"
+msgstr "Partition (MIDI ou MusicXML)"
+
+#: escalas/forms.py
+msgid "Pista mano derecha"
+msgstr "Piste main droite"
+
+#: escalas/forms.py
+msgid "Pista mano izquierda"
+msgstr "Piste main gauche"
+
+#: escalas/forms.py
+msgid "El nombre necesita al menos una letra o un número."
+msgstr "Le nom doit contenir au moins une lettre ou un chiffre."
+
+#: escalas/forms.py
+msgid "El archivo no puede pasar de 2 MB."
+msgstr "Le fichier ne peut pas dépasser 2 Mo."
+
+#: escalas/midi_import.py
+msgid "No es un archivo MIDI (falta la cabecera MThd)."
+msgstr "Ce n'est pas un fichier MIDI (l'en-tête MThd est absent)."
+
+#: escalas/midi_import.py
+msgid "Los MIDI con división SMPTE no están soportados."
+msgstr "Les fichiers MIDI à division SMPTE ne sont pas pris en charge."
+
+#: escalas/midi_import.py
+msgid "Pista MIDI mal formada."
+msgstr "Piste MIDI mal formée."
+
+#: escalas/midi_import.py
+msgid "Evento MIDI sin estado."
+msgstr "Événement MIDI sans statut."
+
+#: escalas/midi_import.py
+msgid "El MIDI no tiene notas en las pistas elegidas."
+msgstr "Le fichier MIDI n'a pas de notes dans les pistes choisies."
+
+#: escalas/models.py
+msgid "Básico"
+msgstr "Basique"
+
+#: escalas/models.py
+msgid "Intermedio"
+msgstr "Intermédiaire"
+
+#: escalas/models.py
+msgid "Avanzado"
+msgstr "Avancé"
+
+#: escalas/models.py
+msgid "Clásica"
+msgstr "Classique"
+
+#: escalas/models.py
+msgid "Cristiana"
+msgstr "Chrétienne"
+
+#: escalas/models.py
+msgid "Popular"
+msgstr "Populaire"
+
+#: escalas/musicxml_import.py
+msgid "No se pudo abrir el archivo .mxl."
+msgstr "Impossible d'ouvrir le fichier .mxl."
+
+#: escalas/musicxml_import.py
+msgid "El archivo MusicXML está mal formado."
+msgstr "Le fichier MusicXML est mal formé."
+
+#: escalas/musicxml_import.py
+msgid "Solo se admite MusicXML «partwise» (el que exportan MuseScore, Finale y Sibelius)."
+msgstr "Seul le MusicXML « partwise » est pris en charge (celui qu'exportent MuseScore, Finale et Sibelius)."
+
+#: escalas/musicxml_import.py
+msgid "El MusicXML no tiene partes."
+msgstr "Le MusicXML n'a aucune partie."
+
+#: escalas/musicxml_import.py
+msgid "El MusicXML no tiene notas."
+msgstr "Le MusicXML n'a aucune note."
+
+#: escalas/song_import.py
+#, python-format
+msgid "%(song)s · %(level)s: %(rh)d notas en la derecha, %(lh)d en la izquierda, %(tempo)d BPM, armadura %(key)d."
+msgstr "%(song)s · %(level)s : %(rh)d notes à la main droite, %(lh)d à la gauche, %(tempo)d BPM, armure %(key)d."
+
+#: escalas/song_import.py
+#, python-format
+msgid "Nivel %(level)d: %(errors)s"
+msgstr "Niveau %(level)d : %(errors)s"
+
+#: escalas/templates/escalas/_input_select.html
+msgid "Entrada"
+msgstr "Entrée"
+
+#: escalas/templates/escalas/_input_select.html
+#: escalas/templates/escalas/index.html
+msgid "Entrada de notas"
+msgstr "Entrée des notes"
+
+#: escalas/templates/escalas/_input_select.html
+#: escalas/templates/escalas/index.html
+msgid "Micrófono"
+msgstr "Microphone"
+
+#: escalas/templates/escalas/_input_select.html
+msgid "Teclado MIDI"
+msgstr "Clavier MIDI"
+
+#: escalas/templates/escalas/_midi_upload.html
+msgid "Agregar canción desde MIDI o MusicXML"
+msgstr "Ajouter une chanson depuis un MIDI ou un MusicXML"
+
+#: escalas/templates/escalas/_midi_upload.html
+#: escalas/templates/escalas/song.html
+msgid "solo administradores"
+msgstr "administrateurs uniquement"
+
+#: escalas/templates/escalas/_midi_upload.html
+msgid "(opcional)"
+msgstr "(facultatif)"
+
+#: escalas/templates/escalas/_midi_upload.html
+msgid "Sube un MusicXML (.mxl) o un MIDI con la versión completa a dos manos. El MusicXML es más exacto: se guarda como Avanzado y la app genera Intermedio y Básico. Si el MIDI trae una pista por mano se detectan solas; si trae una sola pista, las manos se separan por altura (desde Do central, derecha). Si ya existe una canción con ese nombre, se reemplazan sus versiones."
+msgstr "Envoyez un MusicXML (.mxl) ou un MIDI avec la version complète à deux mains. Le MusicXML est plus précis : il est enregistré comme Avancé et l'application génère l'Intermédiaire et le Basique. Si le MIDI contient une piste par main, elles sont détectées automatiquement ; s'il n'y a qu'une piste, les mains sont séparées par hauteur (à partir du do central, main droite). Si une chanson du même nom existe déjà, ses versions sont remplacées."
+
+#: escalas/templates/escalas/_midi_upload.html
+msgid "Crear canción"
+msgstr "Créer la chanson"
+
+#: escalas/templates/escalas/_nav.html
+msgid "Inicio"
+msgstr "Accueil"
+
+#: escalas/templates/escalas/_nav.html
+msgid "Piano"
+msgstr "Piano"
+
+#: escalas/templates/escalas/_nav.html escalas/templates/escalas/song.html
+msgid "Secciones"
+msgstr "Sections"
+
+#: escalas/templates/escalas/_nav.html escalas/templates/escalas/home.html
+#: escalas/templates/escalas/song.html
+msgid "Canciones"
+msgstr "Chansons"
+
+#: escalas/templates/escalas/_nav.html escalas/templates/escalas/home.html
+msgid "Práctica libre"
+msgstr "Pratique libre"
+
+#: escalas/templates/escalas/_nav.html
+msgid "Progreso"
+msgstr "Progression"
+
+#: escalas/templates/escalas/_nav.html
+#, python-format
+msgid "Preferencias de %(name)s"
+msgstr "Préférences de %(name)s"
+
+#: escalas/templates/escalas/_nav.html
+msgid "Salir"
+msgstr "Se déconnecter"
+
+#: escalas/templates/escalas/_nav.html
+msgid "Cuenta"
+msgstr "Compte"
+
+#: escalas/templates/escalas/_nav.html
+msgid "Registrarse"
+msgstr "S'inscrire"
+
+#: escalas/templates/escalas/_nav.html
+msgid "Idioma"
+msgstr "Langue"
+
+#: escalas/templates/escalas/_score_upload.html
+msgid "Elegir partitura"
+msgstr "Choisir une partition"
+
+#: escalas/templates/escalas/_score_upload.html
+msgid ".mxl, .musicxml, .mid · hasta 2 MB"
+msgstr ".mxl, .musicxml, .mid · jusqu'à 2 Mo"
+
+#: escalas/templates/escalas/_score_upload.html
+msgid "Opciones avanzadas"
+msgstr "Options avancées"
+
+#: escalas/templates/escalas/_score_upload.html
+msgid "Solo para MIDI: si trae una pista por mano y no se detectan solas. Con una sola pista, las manos se separan por altura (desde Do central)."
+msgstr "MIDI uniquement : s'il contient une piste par main et qu'elles ne sont pas détectées automatiquement. Avec une seule piste, les mains sont séparées par hauteur (à partir du do central)."
+
+#: escalas/templates/escalas/_score_upload.html
+msgid "Crear versiones"
+msgstr "Créer les versions"
+
+#: escalas/templates/escalas/base.html
+msgid "Escalas · práctica de piano"
+msgstr "Gammes · pratique du piano"
+
+#: escalas/templates/escalas/home.html
+msgid "Piano · elige tu camino"
+msgstr "Piano · choisissez votre parcours"
+
+#: escalas/templates/escalas/home.html
+msgid "¿Cómo quieres tocar?"
+msgstr "Comment voulez-vous jouer ?"
+
+#: escalas/templates/escalas/home.html
+msgid "Elige un camino. Puedes cambiar cuando quieras; tu progreso se guarda en cada uno."
+msgstr "Choisissez un parcours. Vous pouvez en changer à tout moment ; votre progression est enregistrée dans chacun."
+
+#: escalas/templates/escalas/home.html
+#, python-format
+msgid "%(n)s módulo"
+msgid_plural "%(n)s módulos"
+msgstr[0] "%(n)s module"
+msgstr[1] "%(n)s modules"
+
+#: escalas/templates/escalas/home.html
+msgid "Próximamente"
+msgstr "Bientôt"
+
+#: escalas/templates/escalas/home.html
+msgid "Piezas completas en tres versiones: mano derecha, izquierda y juntas, con puntos y estrellas."
+msgstr "Des pièces complètes en trois versions : main droite, main gauche et les deux ensemble, avec points et étoiles."
+
+#: escalas/templates/escalas/home.html
+msgid "Escalas, círculo armónico y afinador, sin orden fijo."
+msgstr "Gammes, progressions d'accords et accordeur, sans ordre imposé."
+
+#: escalas/templates/escalas/index.html
+#: escalas/templates/escalas/modules/_exercise.html
+#: escalas/templates/escalas/song.html
+msgid "Activar micrófono"
+msgstr "Activer le microphone"
+
+#: escalas/templates/escalas/index.html
+#: escalas/templates/escalas/modules/_exercise.html
+#: escalas/templates/escalas/song.html
+msgid "Nivel del micrófono (la raya es el umbral)"
+msgstr "Niveau du microphone (le trait marque le seuil)"
+
+#: escalas/templates/escalas/index.html
+msgid "Pantalla completa"
+msgstr "Plein écran"
+
+#: escalas/templates/escalas/index.html
+msgid "Ajustes"
+msgstr "Réglages"
+
+#: escalas/templates/escalas/index.html
+msgid "Opciones de práctica"
+msgstr "Options d'entraînement"
+
+#: escalas/templates/escalas/index.html escalas/templates/escalas/song.html
+msgid "Modo"
+msgstr "Mode"
+
+#: escalas/templates/escalas/index.html
+msgid "Escalas"
+msgstr "Gammes"
+
+#: escalas/templates/escalas/index.html
+msgid "Círculo armónico"
+msgstr "Progression d'accords"
+
+#: escalas/templates/escalas/index.html
+msgid "Afinador"
+msgstr "Accordeur"
+
+#: escalas/templates/escalas/index.html
+msgid "Tónica"
+msgstr "Tonique"
+
+#: escalas/templates/escalas/index.html
+msgid "Escala"
+msgstr "Gamme"
+
+#: escalas/templates/escalas/index.html
+msgid "Tonalidad"
+msgstr "Tonalité"
+
+#: escalas/templates/escalas/index.html
+msgid "Menor"
+msgstr "Mineur"
+
+#: escalas/templates/escalas/index.html
+msgid "Círculo"
+msgstr "Progression"
+
+#: escalas/templates/escalas/index.html
+msgid "Vueltas"
+msgstr "Tours"
+
+#: escalas/templates/escalas/index.html
+msgid "Posición de la mano derecha"
+msgstr "Position de la main droite"
+
+#: escalas/templates/escalas/index.html
+msgid "Enlazada"
+msgstr "Enchaînée"
+
+#: escalas/templates/escalas/index.html
+msgid "Fundamental"
+msgstr "Fondamentale"
+
+#: escalas/templates/escalas/index.html
+msgid "Octavas"
+msgstr "Octaves"
+
+#: escalas/templates/escalas/index.html
+msgid "Recorrido"
+msgstr "Parcours"
+
+#: escalas/templates/escalas/index.html
+msgid "Subir"
+msgstr "Monter"
+
+#: escalas/templates/escalas/index.html
+msgid "Subir y bajar"
+msgstr "Monter et descendre"
+
+#: escalas/templates/escalas/index.html
+msgid "Empieza en"
+msgstr "Commence sur"
+
+#: escalas/templates/escalas/index.html
+msgid "Octava 3 (grave)"
+msgstr "Octave 3 (grave)"
+
+#: escalas/templates/escalas/index.html
+msgid "Octava 4 (Do central)"
+msgstr "Octave 4 (do central)"
+
+#: escalas/templates/escalas/index.html
+msgid "Octava 5 (aguda)"
+msgstr "Octave 5 (aigu)"
+
+#: escalas/templates/escalas/index.html
+msgid "Practicar con metrónomo"
+msgstr "S'entraîner avec le métronome"
+
+#: escalas/templates/escalas/index.html
+msgid "Bajar tempo"
+msgstr "Ralentir"
+
+#: escalas/templates/escalas/index.html
+msgid "Subir tempo"
+msgstr "Accélérer"
+
+#: escalas/templates/escalas/index.html
+msgid "Notas por pulso"
+msgstr "Notes par temps"
+
+#: escalas/templates/escalas/index.html
+msgid "1 (negras)"
+msgstr "1 (noires)"
+
+#: escalas/templates/escalas/index.html
+msgid "2 (corcheas)"
+msgstr "2 (croches)"
+
+#: escalas/templates/escalas/index.html
+msgid "3 (tresillos)"
+msgstr "3 (triolets)"
+
+#: escalas/templates/escalas/index.html
+msgid "4 (semicorcheas)"
+msgstr "4 (doubles croches)"
+
+#: escalas/templates/escalas/index.html
+msgid "Subir 4 BPM tras una pasada perfecta"
+msgstr "Augmenter de 4 BPM après un passage parfait"
+
+#: escalas/templates/escalas/index.html
+#: escalas/templates/escalas/modules/chord_play.html
+#: escalas/templates/escalas/modules/melody_reading.html
+#: escalas/templates/escalas/modules/note_reading.html
+#: escalas/templates/escalas/song.html
+msgid "Oyendo:"
+msgstr "J'entends :"
+
+#: escalas/templates/escalas/index.html
+msgid "Toca una nota y mantenla."
+msgstr "Jouez une note et maintenez-la."
+
+#: escalas/templates/escalas/index.html
+msgid "Notas detectadas"
+msgstr "Notes détectées"
+
+#: escalas/templates/escalas/index.html
+#: escalas/templates/escalas/modules/_exercise.html
+#: escalas/templates/escalas/song.html
+msgid "Empezar"
+msgstr "Commencer"
+
+#: escalas/templates/escalas/index.html
+msgid "Escuchar la escala"
+msgstr "Écouter la gamme"
+
+#: escalas/templates/escalas/index.html
+#: escalas/templates/escalas/modules/_exercise.html
+#: escalas/templates/escalas/song.html
+msgid "Teclado"
+msgstr "Clavier"
+
+#: escalas/templates/escalas/index.html
+msgid "Teclado MIDI (USB)"
+msgstr "Clavier MIDI (USB)"
+
+#: escalas/templates/escalas/index.html
+msgid "Sensibilidad del micrófono"
+msgstr "Sensibilité du microphone"
+
+#: escalas/templates/escalas/index.html
+msgid "Calibrar ruido de fondo"
+msgstr "Calibrer le bruit de fond"
+
+#: escalas/templates/escalas/index.html
+msgid "La app se adapta sola al ruido del ambiente. Si detecta notas cuando no tocas, baja la sensibilidad; si no reacciona, súbela o acerca la tablet a los parlantes del teclado."
+msgstr "L'application s'adapte seule au bruit ambiant. Si elle détecte des notes quand vous ne jouez pas, baissez la sensibilité ; si elle ne réagit pas, augmentez-la ou rapprochez la tablette des haut-parleurs du clavier."
+
+#: escalas/templates/escalas/index.html
+msgid "Mostrar datos del micrófono (diagnóstico)"
+msgstr "Afficher les données du microphone (diagnostic)"
+
+#: escalas/templates/escalas/index.html
+#: escalas/templates/escalas/modules/note_reading.html
+msgid "Exigir la octava exacta"
+msgstr "Exiger l'octave exacte"
+
+#: escalas/templates/escalas/index.html
+msgid "Desactivado, basta con acertar el nombre de la nota. El micrófono a veces confunde octavas, así que conviene dejarlo apagado al principio."
+msgstr "Désactivé, il suffit de trouver le nom de la note. Le microphone confond parfois les octaves ; il vaut donc mieux le laisser désactivé au début."
+
+#: escalas/templates/escalas/index.html
+msgid "Compensación de latencia:"
+msgstr "Compensation de latence :"
+
+#: escalas/templates/escalas/index.html
+msgid "Solo afecta la medición de ritmo con metrónomo. Súbela si la app siempre dice que vas atrasado aunque no sea así."
+msgstr "Cela n'affecte que la mesure du rythme avec métronome. Augmentez-la si l'application dit toujours que vous êtes en retard alors que ce n'est pas le cas."
+
+#: escalas/templates/escalas/index.html
+msgid "Nombres de las notas"
+msgstr "Noms des notes"
+
+#: escalas/templates/escalas/index.html
+msgid "Listo"
+msgstr "Terminé"
+
+#: escalas/templates/escalas/modules/_exercise.html
+#, python-format
+msgid "Módulo %(number)s"
+msgstr "Module %(number)s"
+
+#: escalas/templates/escalas/modules/_exercise.html
+#, python-format
+msgid "Siguiente: %(title)s"
+msgstr "Suivant : %(title)s"
+
+#: escalas/templates/escalas/modules/chord_play.html
+msgid "Aparecerá el nombre de un acorde: tócalo con las tres o cuatro notas a la vez. Vale cualquier inversión."
+msgstr "Le nom d'un accord apparaîtra : jouez-le avec ses trois ou quatre notes en même temps. N'importe quel renversement convient."
+
+#: escalas/templates/escalas/modules/melody_reading.html
+msgid "Aparecerá una frase: tócala nota a nota, de izquierda a derecha. Si fallas una nota, sigue buscándola hasta dar con ella."
+msgstr "Une phrase apparaîtra : jouez-la note par note, de gauche à droite. Si vous ratez une note, continuez à la chercher jusqu'à la trouver."
+
+#: escalas/templates/escalas/modules/note_reading.html
+msgid "Aparecerá una nota en el pentagrama: tócala en el piano. Si te equivocas, la app te dice cuál era."
+msgstr "Une note apparaîtra sur la portée : jouez-la au piano. Si vous vous trompez, l'application vous dit laquelle c'était."
+
+#: escalas/templates/escalas/path.html
+#, python-format
+msgid "%(done)s de %(total)s con ronda perfecta"
+msgstr "%(done)s sur %(total)s avec un tour parfait"
+
+#: escalas/templates/escalas/path.html
+msgid "mejor ronda"
+msgstr "meilleur tour"
+
+#: escalas/templates/escalas/path.html
+msgid "Sin empezar"
+msgstr "Pas commencé"
+
+#: escalas/templates/escalas/path.html
+#, python-format
+msgid "Todavía no hay módulos en este camino. Mientras tanto, practica en la <a href=\"%(free_url)s\">práctica libre</a>."
+msgstr "Il n'y a pas encore de modules dans ce parcours. En attendant, entraînez-vous en <a href=\"%(free_url)s\">pratique libre</a>."
+
+#: escalas/templates/escalas/progress.html
+msgid "Progreso · Escalas"
+msgstr "Progression · Gammes"
+
+#: escalas/templates/escalas/progress.html
+msgid "Tu progreso"
+msgstr "Votre progression"
+
+#: escalas/templates/escalas/progress.html
+msgid "Todo lo que has practicado: escalas, módulos y canciones."
+msgstr "Tout ce que vous avez travaillé : gammes, modules et chansons."
+
+#: escalas/templates/escalas/progress.html
+msgid "Por ejercicio"
+msgstr "Par exercice"
+
+#: escalas/templates/escalas/progress.html
+msgid "Ejercicio"
+msgstr "Exercice"
+
+#: escalas/templates/escalas/progress.html
+msgid "Mejor pasada"
+msgstr "Meilleur passage"
+
+#: escalas/templates/escalas/progress.html
+msgid "Intentos"
+msgstr "Essais"
+
+#: escalas/templates/escalas/progress.html
+msgid "Último"
+msgstr "Dernier"
+
+#: escalas/templates/escalas/progress.html
+msgid "Todavía no hay intentos. Termina una escala o un círculo y aparecerá aquí."
+msgstr "Il n'y a pas encore d'essais. Terminez une gamme ou une progression et elle apparaîtra ici."
+
+#: escalas/templates/escalas/progress.html
+msgid "Últimos intentos"
+msgstr "Derniers essais"
+
+#: escalas/templates/escalas/progress.html
+msgid "Fecha"
+msgstr "Date"
+
+#: escalas/templates/escalas/progress.html
+msgid "Precisión"
+msgstr "Précision"
+
+#: escalas/templates/escalas/progress.html
+msgid "Errores"
+msgstr "Erreurs"
+
+#: escalas/templates/escalas/progress.html
+msgid "Duración"
+msgstr "Durée"
+
+#: escalas/templates/escalas/song.html
+msgid "Esta canción aún no tiene partitura"
+msgstr "Cette chanson n'a pas encore de partition"
+
+#: escalas/templates/escalas/song.html
+msgid "Sube aquí la partitura (la versión completa, a dos manos) y la app crea las tres versiones. Mejor en <b>MusicXML</b> (.mxl o .musicxml), que trae las duraciones exactas, las manos y las repeticiones; también sirve un MIDI."
+msgstr "Envoyez ici la partition (la version complète, à deux mains) et l'application crée les trois versions. Le mieux est le <b>MusicXML</b> (.mxl ou .musicxml), qui contient les durées exactes, les mains et les reprises ; un MIDI convient aussi."
+
+#: escalas/templates/escalas/song.html
+msgid "Un administrador debe cargar la partitura en MIDI para que esta canción esté disponible."
+msgstr "Un administrateur doit charger la partition MIDI pour que cette chanson soit disponible."
+
+#: escalas/templates/escalas/song.html
+msgid "Nivel"
+msgstr "Niveau"
+
+#: escalas/templates/escalas/song.html
+msgid "Pasos"
+msgstr "Étapes"
+
+#: escalas/templates/escalas/song.html
+msgid "Vista"
+msgstr "Affichage"
+
+#: escalas/templates/escalas/song.html
+msgid "Vista de las notas"
+msgstr "Affichage des notes"
+
+#: escalas/templates/escalas/song.html
+msgid "Modo de juego"
+msgstr "Mode de jeu"
+
+#: escalas/templates/escalas/song.html
+msgid "Espera"
+msgstr "Attente"
+
+#: escalas/templates/escalas/song.html
+msgid "A tempo"
+msgstr "En rythme"
+
+#: escalas/templates/escalas/song.html
+msgid "Velocidad"
+msgstr "Vitesse"
+
+#: escalas/templates/escalas/song.html
+msgid "Velocidad de las notas"
+msgstr "Vitesse des notes"
+
+#: escalas/templates/escalas/song.html
+msgid "Metrónomo"
+msgstr "Métronome"
+
+#: escalas/templates/escalas/song.html
+msgid "Sección a practicar"
+msgstr "Section à travailler"
+
+#: escalas/templates/escalas/song.html
+msgid "Compases"
+msgstr "Mesures"
+
+#: escalas/templates/escalas/song.html
+msgid "Desde el compás"
+msgstr "À partir de la mesure"
+
+#: escalas/templates/escalas/song.html
+msgid "Hasta el compás"
+msgstr "Jusqu'à la mesure"
+
+#: escalas/templates/escalas/song.html
+msgid "Todos"
+msgstr "Toutes"
+
+#: escalas/templates/escalas/song.html
+msgid "En bucle"
+msgstr "En boucle"
+
+#: escalas/templates/escalas/song.html
+msgid "Notas bien"
+msgstr "Notes justes"
+
+#: escalas/templates/escalas/song.html
+msgid "Puntos"
+msgstr "Points"
+
+#: escalas/templates/escalas/song.html
+msgid "Combo"
+msgstr "Combo"
+
+#: escalas/templates/escalas/song.html
+msgid "Ritmo"
+msgstr "Rythme"
+
+#: escalas/templates/escalas/song.html
+msgid "Al inicio de la sección"
+msgstr "Au début de la section"
+
+#: escalas/templates/escalas/song.html
+msgid "Al inicio"
+msgstr "Au début"
+
+#: escalas/templates/escalas/song.html
+msgid "Compás anterior"
+msgstr "Mesure précédente"
+
+#: escalas/templates/escalas/song.html
+msgid "◀ Compás"
+msgstr "◀ Mesure"
+
+#: escalas/templates/escalas/song.html
+msgid "Posición de la canción"
+msgstr "Position dans la chanson"
+
+#: escalas/templates/escalas/song.html
+msgid "Compás siguiente"
+msgstr "Mesure suivante"
+
+#: escalas/templates/escalas/song.html
+msgid "Compás ▶"
+msgstr "Mesure ▶"
+
+#: escalas/templates/escalas/song.html
+msgid "Escuchar"
+msgstr "Écouter"
+
+#: escalas/templates/escalas/song.html
+msgid "Pausa"
+msgstr "Pause"
+
+#: escalas/templates/escalas/song.html
+msgid "Marcar teclas"
+msgstr "Marquer les touches"
+
+#: escalas/templates/escalas/song.html
+msgid "Octava exacta"
+msgstr "Octave exacte"
+
+#: escalas/templates/escalas/song.html
+msgid "Reemplazar la partitura"
+msgstr "Remplacer la partition"
+
+#: escalas/templates/escalas/song.html
+msgid "Sube otro archivo (MusicXML o MIDI) y se reemplazan las tres versiones. Se conservan los récords, pero las notas cambian."
+msgstr "Envoyez un autre fichier (MusicXML ou MIDI) et les trois versions sont remplacées. Les records sont conservés, mais les notes changent."
+
+#: escalas/templates/escalas/song.html
+msgid "Notas cayendo hacia el teclado"
+msgstr "Notes tombant vers le clavier"
+
+#: escalas/templates/escalas/songs.html
+msgid "Canciones · Piano"
+msgstr "Chansons · Piano"
+
+#: escalas/templates/escalas/songs.html
+msgid "Toca canciones completas"
+msgstr "Jouez des chansons entières"
+
+#: escalas/templates/escalas/songs.html
+msgid "Cada canción tiene tres versiones: básica, intermedia y avanzada. En cada una aprendes primero la mano derecha, luego la izquierda y al final las dos juntas."
+msgstr "Chaque chanson a trois versions : basique, intermédiaire et avancée. Dans chacune, vous apprenez d'abord la main droite, puis la gauche, et enfin les deux ensemble."
+
+#: escalas/templates/escalas/songs.html
+msgid "Categorías"
+msgstr "Catégories"
+
+#: escalas/templates/escalas/songs.html
+msgid "Todas"
+msgstr "Toutes"
+
+#: escalas/templates/escalas/songs.html
+msgid "Falta la partitura"
+msgstr "Partition manquante"
+
+#: escalas/templates/escalas/songs.html
+msgid "Todavía no hay canciones. Agrégalas desde el admin."
+msgstr "Il n'y a pas encore de chansons. Ajoutez-en depuis l'administration."
+
+#: escalas/views.py
+#, python-format
+msgid "Canción creada: %(title)s."
+msgstr "Chanson créée : %(title)s."
+
+#: escalas/views.py
+#, python-format
+msgid "Canción actualizada: %(title)s."
+msgstr "Chanson mise à jour : %(title)s."
+
+#: escalas/views.py
+#, python-format
+msgid "Partitura cargada: %(title)s."
+msgstr "Partition chargée : %(title)s."
+
+#: escalas/views.py
+msgid "JSON inválido."
+msgstr "JSON invalide."
+
+#: escalas/views.py
+msgid "Se esperaba un objeto JSON."
+msgstr "Un objet JSON était attendu."

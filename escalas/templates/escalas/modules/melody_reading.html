@@ -1,0 +1,12 @@
+{% extends "escalas/modules/note_reading.html" %}{% load i18n %}
+{% block how %}{% trans "Aparecerá una frase: tócala nota a nota, de izquierda a derecha. Si fallas una nota, sigue buscándola hasta dar con ella." %}{% endblock %}
+{% block area %}
+<div class="read-card wide">
+  <div id="readStaff" class="read-staff"></div>
+  <div class="read-side">
+    <span id="counter" class="counter"></span>
+    <div id="hearing" class="hearing">{% trans "Oyendo:" %} <b>–</b></div>
+    <p id="cueMsg" class="cue-msg"></p>
+  </div>
+</div>
+{% endblock %}

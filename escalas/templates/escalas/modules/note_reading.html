@@ -1,0 +1,13 @@
+{% extends "escalas/modules/_exercise.html" %}{% load i18n %}
+{% block how %}{% trans "Aparecerá una nota en el pentagrama: tócala en el piano. Si te equivocas, la app te dice cuál era." %}{% endblock %}
+{% block area %}
+<div class="read-card">
+  <div id="readStaff" class="read-staff"></div>
+  <div class="read-side">
+    <span id="counter" class="counter"></span>
+    <div id="hearing" class="hearing">{% trans "Oyendo:" %} <b>–</b></div>
+    <p id="cueMsg" class="cue-msg"></p>
+  </div>
+</div>
+{% endblock %}
+{% block options %}<label class="check"><input type="checkbox" id="strictChk"> {% trans "Exigir la octava exacta" %}</label>{% endblock %}

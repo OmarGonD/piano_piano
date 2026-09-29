@@ -1,0 +1,37 @@
+{% extends "escalas/base.html" %}{% load i18n assets %}
+{% block title %}{% trans "Canciones · Piano" %}{% endblock %}
+{% block body_class %}scroll{% endblock %}
+{% block body %}
+<header class="top">
+  {% include "escalas/_nav.html" %}
+</header>
+<main class="page">
+  <section class="hero">
+    <h2>{% trans "Toca canciones completas" %}</h2>
+    <p>{% trans "Cada canción tiene tres versiones: básica, intermedia y avanzada. En cada una aprendes primero la mano derecha, luego la izquierda y al final las dos juntas." %}</p>
+  </section>
+  {% include "escalas/_messages.html" %}
+  {% include "escalas/_midi_upload.html" %}
+  <nav class="filters" aria-label="{% trans 'Categorías' %}">
+    <a href="{% url 'escalas:songs' %}"{% if not current %} aria-current="true"{% endif %}>{% trans "Todas" %} <span>{{ total }}</span></a>
+    {% for c in categories %}<a href="?categoria={{ c.value }}"{% if current == c.value %} aria-current="true"{% endif %}>{{ c.label }} <span>{{ c.count }}</span></a>{% endfor %}
+  </nav>
+  <div class="song-list">
+    {% for s in songs %}
+    <a class="song-card" href="{% url 'escalas:song' s.slug %}">
+      <span class="song-glyph" aria-hidden="true">♪</span>
+      <span class="song-body">
+        <b>{{ s.title|tr }} <span class="cat cat-{{ s.category }}">{{ s.get_category_display }}</span></b>
+        <span class="composer">{{ s.composer|tr }}</span>
+        <span>{{ s.description|tr }}</span>
+      </span>
+      <span class="song-levels">
+        {% for lv in s.levels %}<span class="chip{% if lv.best %} done{% endif %}">{{ lv.label }}{% if lv.best %} · {{ lv.best }}%{% endif %}</span>{% empty %}<span class="chip pending">{% trans "Falta la partitura" %}</span>{% endfor %}
+      </span>
+    </a>
+    {% empty %}
+    <p class="empty">{% trans "Todavía no hay canciones. Agrégalas desde el admin." %}</p>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

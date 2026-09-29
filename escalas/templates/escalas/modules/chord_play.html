@@ -1,0 +1,17 @@
+{% extends "escalas/modules/_exercise.html" %}{% load i18n %}
+{% block how %}{% trans "Aparecerá el nombre de un acorde: tócalo con las tres o cuatro notas a la vez. Vale cualquier inversión." %}{% endblock %}
+{% block area %}
+<div class="chord-card">
+  <div class="chord-main">
+    <span id="chordGroup" class="chord-group"></span>
+    <span id="chordName" class="chord-name">–</span>
+    <span id="chordNotes" class="chord-notes"></span>
+  </div>
+  <div class="read-side">
+    <span id="counter" class="counter"></span>
+    <div id="hearing" class="hearing">{% trans "Oyendo:" %} <b>–</b></div>
+    <p id="cueMsg" class="cue-msg"></p>
+  </div>
+</div>
+<div class="chord-strip" id="chordStrip"></div>
+{% endblock %}

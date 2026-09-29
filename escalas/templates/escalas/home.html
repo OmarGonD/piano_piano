@@ -1,0 +1,37 @@
+{% extends "escalas/base.html" %}{% load i18n assets %}
+{% block title %}{% trans "Piano · elige tu camino" %}{% endblock %}
+{% block body_class %}scroll{% endblock %}
+{% block body %}
+<header class="top">
+  {% include "escalas/_nav.html" %}
+</header>
+<main class="page">
+  <section class="hero">
+    <svg class="hero-staff" viewBox="0 0 320 44" aria-hidden="true">
+      <g class="sl2"><line x1="0" y1="8" x2="320" y2="8"/><line x1="0" y1="16" x2="320" y2="16"/><line x1="0" y1="24" x2="320" y2="24"/><line x1="0" y1="32" x2="320" y2="32"/><line x1="0" y1="40" x2="320" y2="40"/></g>
+      <g class="hn"><ellipse cx="70" cy="32" rx="6" ry="4.5"/><ellipse cx="110" cy="24" rx="6" ry="4.5"/><ellipse cx="150" cy="16" rx="6" ry="4.5"/><ellipse cx="190" cy="24" rx="6" ry="4.5"/><ellipse cx="230" cy="32" rx="6" ry="4.5"/></g>
+    </svg>
+    <h2>{% trans "¿Cómo quieres tocar?" %}</h2>
+    <p>{% trans "Elige un camino. Puedes cambiar cuando quieras; tu progreso se guarda en cada uno." %}</p>
+  </section>
+  <div class="path-grid">
+    {% for p in paths %}
+    <a class="path-card path-{{ p.slug }}" href="{% url 'escalas:path' p.slug %}">
+      <span class="path-glyph" aria-hidden="true">{% if p.slug == 'solista' %}𝄞{% else %}<span class="chord-glyph">Am<sup>7</sup></span>{% endif %}</span>
+      <h3>{{ p.name|tr }}</h3>
+      <p class="tagline">{{ p.tagline|tr }}</p>
+      <p>{{ p.description|tr }}</p>
+      <span class="path-meta">{% if p.module_count %}{% blocktrans count n=p.module_count %}{{ n }} módulo{% plural %}{{ n }} módulos{% endblocktrans %}{% else %}{% trans "Próximamente" %}{% endif %}</span>
+    </a>
+    {% endfor %}
+  </div>
+  <a class="songs-link" href="{% url 'escalas:songs' %}">
+    <span class="song-glyph" aria-hidden="true">♪</span>
+    <span><b>{% trans "Canciones" %}</b><span>{% trans "Piezas completas en tres versiones: mano derecha, izquierda y juntas, con puntos y estrellas." %}</span></span>
+  </a>
+  <a class="free-link" href="{% url 'escalas:index' %}">
+    <b>{% trans "Práctica libre" %}</b>
+    <span>{% trans "Escalas, círculo armónico y afinador, sin orden fijo." %}</span>
+  </a>
+</main>
+{% endblock %}

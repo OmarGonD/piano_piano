@@ -1,0 +1,19 @@
+{% load i18n %}{# formulario de subida de la partitura de una canción; usa song y score_form #}
+<form class="score-upload" method="post" action="{% url 'escalas:song_upload_score' song.slug %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label class="drop">
+    <span class="drop-icon" aria-hidden="true">♫</span>
+    <span class="drop-text"><b>{% trans "Elegir partitura" %}</b><small id="midiName">{% trans ".mxl, .musicxml, .mid · hasta 2 MB" %}</small></span>
+    {{ score_form.midi }}
+  </label>
+  <details class="adv">
+    <summary>{% trans "Opciones avanzadas" %}</summary>
+    <div class="row2">
+      <label class="field"><span>{{ score_form.rh_track.label }}</span>{{ score_form.rh_track }}</label>
+      <label class="field"><span>{{ score_form.lh_track.label }}</span>{{ score_form.lh_track }}</label>
+    </div>
+    <p class="hint">{% trans "Solo para MIDI: si trae una pista por mano y no se detectan solas. Con una sola pista, las manos se separan por altura (desde Do central)." %}</p>
+  </details>
+  <button class="btn primary" type="submit">{% trans "Crear versiones" %}</button>
+</form>
+<script>document.querySelector('.score-upload input[type=file]').addEventListener('change',e=>{document.getElementById('midiName').textContent=e.target.files[0]?.name||'.mxl, .musicxml, .mid · hasta 2 MB';});</script>

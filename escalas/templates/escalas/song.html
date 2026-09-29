@@ -1,0 +1,126 @@
+{% extends "escalas/base.html" %}{% load static assets %}{% load i18n %}
+{% block title %}{{ song.title|tr }} · {% trans "Canciones" %}{% endblock %}
+{% block body %}
+<div class="app" id="songApp">
+  <header class="top">
+    {% include "escalas/_nav.html" %}
+    {% if song_json.arrangements %}
+    <div class="mic">
+      <button id="micBtn" class="btn">{% trans "Activar micrófono" %}</button>
+      <div class="meter" title="{% trans 'Nivel del micrófono (la raya es el umbral)' %}"><div id="meterFill"></div><div id="meterGate"></div></div>
+    </div>
+    {% endif %}
+  </header>
+
+  <main class="solo-main">
+    {% if not song_json.arrangements %}
+    <section class="stage reading song-stage">
+      {% include "escalas/_messages.html" %}
+      <h2 class="module-title">{{ song.title|tr }}</h2>
+      <p class="composer">{{ song.composer|tr }}</p>
+      <div class="results pending-box">
+        <h2>{% trans "Esta canción aún no tiene partitura" %}</h2>
+        <p>{{ song.description|tr }}</p>
+        {% if score_form %}
+        <p>{% blocktrans trimmed %}Sube aquí la partitura (la versión completa, a dos manos) y la app crea las tres versiones. Mejor en <b>MusicXML</b> (.mxl o .musicxml), que trae las duraciones exactas, las manos y las repeticiones; también sirve un MIDI.{% endblocktrans %}</p>
+        {% include "escalas/_score_upload.html" %}
+        {% else %}
+        <p>{% trans "Un administrador debe cargar la partitura en MIDI para que esta canción esté disponible." %}</p>
+        {% endif %}
+      </div>
+    </section>
+    {% else %}
+    <section class="stage reading song-stage" aria-live="polite">
+      {% include "escalas/_messages.html" %}
+      <div class="song-head">
+        <div>
+          <h2 class="module-title">{{ song.title|tr }}</h2>
+          <p class="composer">{{ song.composer|tr }}</p>
+        </div>
+        <div class="seg level-seg" id="levelSeg" aria-label="{% trans 'Nivel' %}"></div>
+      </div>
+      <p id="arrInfo" class="intro"></p>
+      <div class="steps" id="steps" aria-label="{% trans 'Pasos' %}"></div>
+
+      <div class="song-options">
+        <div class="opt-group">
+          <span class="opt-label">{% trans "Vista" %}</span>
+          <div class="seg view-seg" id="viewSeg" role="group" aria-label="{% trans 'Vista de las notas' %}">
+            <button type="button" data-v="staff">{% trans "Partitura" %}</button><button type="button" data-v="rain">{% trans "Lluvia de notas" %}</button>
+          </div>
+        </div>
+        <div class="opt-group">
+          <span class="opt-label">{% trans "Modo" %}</span>
+          <div class="seg mode-seg" id="modeSeg" role="group" aria-label="{% trans 'Modo de juego' %}">
+            <button type="button" data-v="wait">{% trans "Espera" %}</button><button type="button" data-v="tempo">{% trans "A tempo" %}</button>
+          </div>
+        </div>
+        <div class="opt-group" id="tempoBox">
+          <span class="opt-label">{% trans "Velocidad" %}</span>
+          <div class="seg speed-seg" id="speedSeg" role="group" aria-label="{% trans 'Velocidad de las notas' %}">
+            <button type="button" data-v="30">30%</button><button type="button" data-v="60">60%</button><button type="button" data-v="90">90%</button><button type="button" data-v="100">100%</button><button type="button" data-v="120">120%</button><button type="button" data-v="150">150%</button>
+          </div>
+          <output id="tempoOut" class="tempo-out"></output>
+          <label class="check" id="metroBox"><input type="checkbox" id="metroChk"> {% trans "Metrónomo" %}</label>
+        </div>
+        <div class="opt-group sections-group">
+          <span class="opt-label">{% trans "Secciones" %}</span>
+          <div class="chips" id="sectionChips" role="group" aria-label="{% trans 'Sección a practicar' %}"></div>
+        </div>
+        <div class="opt-group">
+          <span class="opt-label">{% trans "Compases" %}</span>
+          <select id="fromSel" aria-label="{% trans 'Desde el compás' %}"></select><span aria-hidden="true">–</span><select id="toSel" aria-label="{% trans 'Hasta el compás' %}"></select>
+          <button type="button" class="btn small" id="fragAll">{% trans "Todos" %}</button>
+          <label class="check"><input type="checkbox" id="loopChk"> {% trans "En bucle" %}</label>
+          <span id="fragInfo" class="frag-info"></span>
+        </div>
+      </div>
+
+      <div class="hud">
+        <div><span>{% trans "Notas bien" %}</span><b id="good">0</b></div>
+        <div><span>{% trans "Puntos" %}</span><b id="score">0</b></div>
+        <div><span>{% trans "Combo" %}</span><b id="combo">–</b></div>
+        <div id="rhythmBox" hidden><span>{% trans "Ritmo" %}</span><b id="rhythm" class="rhythm">–</b></div>
+        <span id="pop" class="pop" aria-live="polite"></span>
+      </div>
+
+      <div id="songStaff" class="read-staff song-staff"></div>
+      <div class="song-status">
+        <div id="hearing" class="hearing">{% trans "Oyendo:" %} <b>–</b></div>
+        <p id="cueMsg" class="cue-msg"></p>
+      </div>
+      <div class="progress"><div id="progFill"></div></div>
+      <div id="listenBar" class="listen-bar" hidden>
+        <button type="button" class="btn small" id="seekStart" title="{% trans 'Al inicio de la sección' %}" aria-label="{% trans 'Al inicio' %}">⏮</button>
+        <button type="button" class="btn small" id="seekBack" title="{% trans 'Compás anterior' %}" aria-label="{% trans 'Compás anterior' %}">{% trans "◀ Compás" %}</button>
+        <input type="range" id="seekRange" min="0" max="1" step="1" value="0" aria-label="{% trans 'Posición de la canción' %}">
+        <button type="button" class="btn small" id="seekFwd" title="{% trans 'Compás siguiente' %}" aria-label="{% trans 'Compás siguiente' %}">{% trans "Compás ▶" %}</button>
+        <output id="seekOut" class="seek-out" aria-live="off">–</output>
+      </div>
+      <div class="actions">
+        <button id="startBtn" class="btn primary">{% trans "Empezar" %}</button>
+        <button id="listenBtn" class="btn">{% trans "Escuchar" %}</button>
+        <button id="pauseBtn" class="btn" hidden>{% trans "Pausa" %}</button>
+        <label class="check"><input type="checkbox" id="guideChk"> {% trans "Marcar teclas" %}</label>
+        <label class="check"><input type="checkbox" id="strictChk"> {% trans "Octava exacta" %}</label>
+      </div>
+      {% include "escalas/_input_select.html" %}
+      <div id="results" class="results" hidden></div>
+      {% if score_form %}
+      <details class="replace-score">
+        <summary>{% trans "Reemplazar la partitura" %} <small>{% trans "solo administradores" %}</small></summary>
+        <p class="hint">{% trans "Sube otro archivo (MusicXML o MIDI) y se reemplazan las tres versiones. Se conservan los récords, pero las notas cambian." %}</p>
+        {% include "escalas/_score_upload.html" %}
+      </details>
+      {% endif %}
+    </section>
+    {% endif %}
+  </main>
+
+  {% if song_json.arrangements %}<div class="kb-wrap"><canvas id="fall" class="fall" hidden aria-label="{% trans 'Notas cayendo hacia el teclado' %}"></canvas><div id="kb" class="kb" aria-label="{% trans 'Teclado' %}"></div></div>{% endif %}
+</div>
+{{ song_json|json_script:"song" }}
+{{ records|json_script:"records" }}
+<script>window.ESCALAS_URLS={attempts:"{% url 'escalas:create_attempt' %}",preferences:"{% url 'preferences' %}"};</script>
+{% if song_json.arrangements %}{% module_script 'escalas/js/song.js' %}{% endif %}
+{% endblock %}

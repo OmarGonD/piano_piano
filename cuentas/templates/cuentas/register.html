@@ -1,0 +1,36 @@
+{% extends "escalas/base.html" %}{% load i18n %}
+{% comment %}
+  Correo al que los usuarios escriben para pedir la activación de su cuenta.
+  Cámbialo aquí: es el único lugar donde aparece.
+{% endcomment %}
+{% block title %}{% trans "Registro · Piano" %}{% endblock %}
+{% block body_class %}scroll{% endblock %}
+{% block body %}
+{% with admin_email="tu-correo@ejemplo.com" %}
+<header class="top">{% include "escalas/_nav.html" %}</header>
+<main class="page auth">
+  {% if created %}
+  <section class="auth-card">
+    <h2>{% blocktrans with name=created.first_name %}¡Cuenta creada, {{ name }}!{% endblocktrans %}</h2>
+    <p>{% blocktrans with user=created.username %}Tu cuenta <b>{{ user }}</b> está pendiente de activación. Para activarla, envía un correo a:{% endblocktrans %}</p>
+    <p class="admin-email"><a href="mailto:{{ admin_email }}">{{ admin_email }}</a></p>
+    <p>{% trans "con tu nombre de usuario. Puedes usar este botón, que deja el mensaje escrito:" %}</p>
+    <a class="btn primary" href="mailto:{{ admin_email }}?subject={{ mail_subject|urlencode:'' }}&amp;body={{ mail_body|urlencode:'' }}">{% trans "Escribir el correo" %}</a>
+    <p class="auth-alt">{% url 'login' as login_url %}{% blocktrans %}Cuando tu cuenta esté activa podrás <a href="{{ login_url }}">entrar</a>.{% endblocktrans %}</p>
+  </section>
+  {% else %}
+  <section class="auth-card">
+    <h2>{% trans "Crear cuenta" %}</h2>
+    <p class="intro">{% blocktrans %}Después de registrarte, envía un correo a <b>{{ admin_email }}</b> para que activen tu cuenta.{% endblocktrans %}</p>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% include "cuentas/_form_errors.html" %}
+      {% for field in form %}{% include "cuentas/_field.html" %}{% endfor %}
+      <button class="btn primary" type="submit">{% trans "Registrarme" %}</button>
+    </form>
+    <p class="auth-alt">{% trans "¿Ya tienes cuenta?" %} <a href="{% url 'login' %}">{% trans "Entrar" %}</a></p>
+  </section>
+  {% endif %}
+</main>
+{% endwith %}
+{% endblock %}

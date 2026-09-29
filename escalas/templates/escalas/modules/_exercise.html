@@ -1,0 +1,39 @@
+{% extends "escalas/base.html" %}{% load static assets %}{% load i18n %}
+{% block title %}{{ module.title|tr }} · {{ module.path.name|tr }}{% endblock %}
+{% block body %}
+<div class="app">
+  <header class="top">
+    {% include "escalas/_nav.html" %}
+    <div class="mic">
+      <button id="micBtn" class="btn">{% trans "Activar micrófono" %}</button>
+      <div class="meter" title="{% trans 'Nivel del micrófono (la raya es el umbral)' %}"><div id="meterFill"></div><div id="meterGate"></div></div>
+    </div>
+  </header>
+
+  <main class="solo-main">
+    <section class="stage reading" aria-live="polite">
+      <div>
+        <p class="eyebrow"><span class="level-badge level-{{ module.level }}">{{ module.get_level_display }}</span> {% blocktrans %}Módulo {{ number }}{% endblocktrans %}</p>
+        <h2 class="module-title">{{ module.title|tr }}</h2>
+      </div>
+      <p id="intro" class="intro">{{ module.summary|tr }} {% block how %}{% endblock %}</p>
+      {% block area %}{% endblock %}
+      <div class="progress"><div id="progFill"></div></div>
+      <div class="actions">
+        <button id="startBtn" class="btn primary">{% trans "Empezar" %}</button>
+        {% block options %}{% endblock %}
+      </div>
+      {% include "escalas/_input_select.html" %}
+      <div id="results" class="results" hidden></div>
+      <p id="record" class="record"></p>
+      {% if next_module %}<a class="btn" href="{% url 'escalas:module' module.path.slug next_module.slug %}">{% blocktrans with title=next_module.title|tr %}Siguiente: {{ title }}{% endblocktrans %}</a>{% endif %}
+    </section>
+  </main>
+
+  <div class="kb-wrap"><div id="kb" class="kb" aria-label="{% trans 'Teclado' %}"></div></div>
+</div>
+{{ module_json|json_script:"module" }}
+{{ records|json_script:"records" }}
+<script>window.ESCALAS_URLS={attempts:"{% url 'escalas:create_attempt' %}"};</script>
+{% module_script 'escalas/js/'|add:script %}
+{% endblock %}

@@ -1,0 +1,660 @@
+# French translations for piano package.
+# Copyright (C) 2026 THE piano'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the piano package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: piano\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-29 10:41-0500\n"
+"PO-Revision-Date: 2026-09-29 10:41-0500\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: escalas/static/escalas/js/chordplay.js
+msgid "Notas: <strong>%(notes)s</strong>"
+msgstr "Notes : <strong>%(notes)s</strong>"
+
+#: escalas/static/escalas/js/chordplay.js
+msgid "Tócalo de memoria. Si fallas, verás sus notas."
+msgstr "Jouez-le de mémoire. Si vous ratez, vous verrez ses notes."
+
+#: escalas/static/escalas/js/chordplay.js
+msgid "Toca el acorde."
+msgstr "Jouez l'accord."
+
+#: escalas/static/escalas/js/chordplay.js
+msgid "¡Bien! %(chord)s."
+msgstr "Bien ! %(chord)s."
+
+#: escalas/static/escalas/js/chordplay.js escalas/static/escalas/js/practice.js
+#: escalas/static/escalas/js/song.js
+msgid "Sonó %(got)s. Busca %(want)s."
+msgstr "C'était %(got)s. Cherchez %(want)s."
+
+#: escalas/static/escalas/js/falling.js escalas/static/escalas/js/song.js
+msgid "Mano derecha"
+msgstr "Main droite"
+
+#: escalas/static/escalas/js/falling.js escalas/static/escalas/js/song.js
+msgid "Mano izquierda"
+msgstr "Main gauche"
+
+#: escalas/static/escalas/js/main.js
+msgid "Práctica detenida."
+msgstr "Entraînement arrêté."
+
+#: escalas/static/escalas/js/main.js
+msgid "Silencio 2 segundos…"
+msgstr "Silence pendant 2 secondes…"
+
+#: escalas/static/escalas/js/main.js
+msgid "Listo, ruido de fondo medido."
+msgstr "Terminé, bruit de fond mesuré."
+
+#: escalas/static/escalas/js/main.js
+msgid "Primero activa el micrófono."
+msgstr "Activez d'abord le microphone."
+
+#: escalas/static/escalas/js/main.js
+msgid "No hay escalas activas. Agrégalas desde el admin de Django."
+msgstr "Aucune gamme active. Ajoutez-en depuis l'administration Django."
+
+#: escalas/static/escalas/js/melody.js
+msgid "Frase %(p)s de %(count)s · nota %(n)s de %(len)s"
+msgstr "Phrase %(p)s sur %(count)s · note %(n)s sur %(len)s"
+
+#: escalas/static/escalas/js/melody.js
+msgid "Lee la frase de izquierda a derecha y tócala."
+msgstr "Lisez la phrase de gauche à droite et jouez-la."
+
+#: escalas/static/escalas/js/melody.js
+msgid "Sigue: nota %(n)s."
+msgstr "Suite : note %(n)s."
+
+#: escalas/static/escalas/js/melody.js
+msgid "Frase completa."
+msgstr "Phrase terminée."
+
+#: escalas/static/escalas/js/melody.js
+msgid "Sonó %(got)s. La nota %(n)s es %(want)s."
+msgstr "C'était %(got)s. La note %(n)s est %(want)s."
+
+#: escalas/static/escalas/js/melody.js
+msgid "Frase de ejemplo"
+msgstr "Phrase d'exemple"
+
+#: escalas/static/escalas/js/mic.js
+msgid "Este navegador no permite usar el micrófono aquí. Abre la app en Chrome, desde una dirección https."
+msgstr "Ce navigateur n'autorise pas l'usage du microphone ici. Ouvrez l'application dans Chrome, à partir d'une adresse https."
+
+#: escalas/static/escalas/js/mic.js
+msgid "No se pudo usar el micrófono. Revisa el permiso en Chrome (ícono junto a la dirección) y vuelve a intentarlo."
+msgstr "Impossible d'utiliser le microphone. Vérifiez l'autorisation dans Chrome (icône à côté de l'adresse) et réessayez."
+
+#: escalas/static/escalas/js/midiin.js
+msgid "Este navegador no soporta MIDI. Usa Chrome."
+msgstr "Ce navigateur ne prend pas en charge le MIDI. Utilisez Chrome."
+
+#: escalas/static/escalas/js/midiin.js
+msgid "No se pudo acceder a MIDI. Revisa el permiso en Chrome."
+msgstr "Impossible d'accéder au MIDI. Vérifiez l'autorisation dans Chrome."
+
+#: escalas/static/escalas/js/midiin.js
+msgid "Teclado conectado (%(n)s entrada)."
+msgid_plural "Teclado conectado (%(n)s entradas)."
+msgstr[0] "Clavier connecté (%(n)s entrée)."
+msgstr[1] "Clavier connecté (%(n)s entrées)."
+
+#: escalas/static/escalas/js/midiin.js
+msgid "No se detecta ningún teclado. Conéctalo por USB con un adaptador OTG."
+msgstr "Aucun clavier détecté. Branchez-le en USB avec un adaptateur OTG."
+
+#: escalas/static/escalas/js/practice.js escalas/static/escalas/js/session.js
+#: escalas/static/escalas/js/song.js
+msgid "Detener"
+msgstr "Arrêter"
+
+#: escalas/static/escalas/js/practice.js escalas/static/escalas/js/session.js
+#: escalas/static/escalas/js/song.js
+msgid "Empezar"
+msgstr "Commencer"
+
+#: escalas/static/escalas/js/practice.js escalas/static/escalas/js/song.js
+msgid "Cuenta: %(n)s…"
+msgstr "Décompte : %(n)s…"
+
+#: escalas/static/escalas/js/practice.js
+msgid "4… ¡ahora!"
+msgstr "4… maintenant !"
+
+#: escalas/static/escalas/js/practice.js escalas/static/escalas/js/song.js
+msgid "Repetir"
+msgstr "Recommencer"
+
+#: escalas/static/escalas/js/practice.js
+msgid "Tiendes a ir atrasado respecto al pulso."
+msgstr "Vous avez tendance à être en retard sur le pulse."
+
+#: escalas/static/escalas/js/practice.js
+msgid "Tiendes a adelantarte al pulso."
+msgstr "Vous avez tendance à devancer le pulse."
+
+#: escalas/static/escalas/js/practice.js escalas/static/escalas/js/song.js
+msgid "Vas centrado en el pulso."
+msgstr "Vous êtes bien centré sur le pulse."
+
+#: escalas/static/escalas/js/practice.js
+msgid "%(trend)s Desvío medio: %(ms)s ms."
+msgstr "%(trend)s Écart moyen : %(ms)s ms."
+
+#: escalas/static/escalas/js/practice.js
+msgid "Pasada limpia y a tiempo. Tempo subido a %(bpm)s BPM."
+msgstr "Passage propre et en rythme. Tempo augmenté à %(bpm)s BPM."
+
+#: escalas/static/escalas/js/practice.js
+msgid "Escala limpia"
+msgstr "Gamme propre"
+
+#: escalas/static/escalas/js/practice.js
+msgid "Escala completa"
+msgstr "Gamme terminée"
+
+#: escalas/static/escalas/js/practice.js
+msgid "notas sin error"
+msgstr "notes sans erreur"
+
+#: escalas/static/escalas/js/practice.js
+msgid "notas equivocadas"
+msgstr "notes fausses"
+
+#: escalas/static/escalas/js/practice.js
+msgid "duración"
+msgstr "durée"
+
+#: escalas/static/escalas/js/practice.js
+msgid "Muy bien. Repite o cambia de escala."
+msgstr "Très bien. Recommencez ou changez de gamme."
+
+#: escalas/static/escalas/js/practice.js
+msgid "Repasa las notas en rojo del pentagrama y vuelve a intentarlo."
+msgstr "Revoyez les notes en rouge sur la portée et réessayez."
+
+#: escalas/static/escalas/js/practice.js
+msgid "Círculo limpio"
+msgstr "Progression propre"
+
+#: escalas/static/escalas/js/practice.js
+msgid "Círculo completo"
+msgstr "Progression terminée"
+
+#: escalas/static/escalas/js/practice.js
+msgid "acordes sin error"
+msgstr "accords sans erreur"
+
+#: escalas/static/escalas/js/practice.js
+msgid "acordes equivocados"
+msgstr "accords faux"
+
+#: escalas/static/escalas/js/practice.js
+msgid "Muy bien. Repite, cambia de tonalidad o prueba otro círculo."
+msgstr "Très bien. Recommencez, changez de tonalité ou essayez une autre progression."
+
+#: escalas/static/escalas/js/practice.js
+msgid "Repasa los acordes en rojo y vuelve a intentarlo."
+msgstr "Revoyez les accords en rouge et réessayez."
+
+#: escalas/static/escalas/js/practice.js
+msgid "Escuchando. La app no detecta notas mientras suena el ejemplo."
+msgstr "Écoute en cours. L'application ne détecte pas de notes pendant l'exemple."
+
+#: escalas/static/escalas/js/practice.js
+msgid "Escuchando. La app no detecta acordes mientras suena el ejemplo."
+msgstr "Écoute en cours. L'application ne détecte pas d'accords pendant l'exemple."
+
+#: escalas/static/escalas/js/reading.js
+msgid "¿Qué nota es? Tócala en el piano."
+msgstr "Quelle est cette note ? Jouez-la au piano."
+
+#: escalas/static/escalas/js/reading.js
+msgid "¡Bien! Es %(note)s."
+msgstr "Bien ! C'est %(note)s."
+
+#: escalas/static/escalas/js/reading.js
+msgid "Eso es: %(note)s."
+msgstr "Voilà : %(note)s."
+
+#: escalas/static/escalas/js/reading.js
+msgid "Sonó %(got)s. La nota escrita es %(want)s: búscala."
+msgstr "C'était %(got)s. La note écrite est %(want)s : cherchez-la."
+
+#: escalas/static/escalas/js/session.js
+msgid "Tu mejor ronda: <b>%(best)s</b> · %(n)s intento."
+msgid_plural "Tu mejor ronda: <b>%(best)s</b> · %(n)s intentos."
+msgstr[0] "Votre meilleur tour : <b>%(best)s</b> · %(n)s essai."
+msgstr[1] "Votre meilleur tour : <b>%(best)s</b> · %(n)s essais."
+
+#: escalas/static/escalas/js/session.js
+msgid "Aún no has hecho este módulo."
+msgstr "Vous n'avez pas encore fait ce module."
+
+#: escalas/static/escalas/js/session.js
+msgid "Ronda perfecta y fluida. Ya puedes pasar al siguiente módulo."
+msgstr "Tour parfait et fluide. Vous pouvez passer au module suivant."
+
+#: escalas/static/escalas/js/session.js
+msgid "Todo bien. Ahora intenta ir más rápido: la meta es menos de %(t)s por acorde."
+msgstr "Tout est juste. Essayez maintenant d'aller plus vite : l'objectif est moins de %(t)s par accord."
+
+#: escalas/static/escalas/js/session.js
+msgid "Repite hasta acertar todo a la primera."
+msgstr "Recommencez jusqu'à tout réussir du premier coup."
+
+#: escalas/static/escalas/js/session.js
+msgid "Ronda perfecta"
+msgstr "Tour parfait"
+
+#: escalas/static/escalas/js/session.js
+msgid "Ronda completa"
+msgstr "Tour terminé"
+
+#: escalas/static/escalas/js/session.js
+msgid "a la primera"
+msgstr "du premier coup"
+
+#: escalas/static/escalas/js/session.js escalas/static/escalas/js/song.js
+msgid "errores"
+msgstr "erreurs"
+
+#: escalas/static/escalas/js/session.js
+msgid "por acorde"
+msgstr "par accord"
+
+#: escalas/static/escalas/js/session.js
+msgid "por nota"
+msgstr "par note"
+
+#: escalas/static/escalas/js/session.js escalas/static/escalas/js/song.js
+msgid "¡Muy bien!"
+msgstr "Très bien !"
+
+#: escalas/static/escalas/js/session.js
+msgid "Sigue practicando."
+msgstr "Continuez à vous entraîner."
+
+#: escalas/static/escalas/js/session.js escalas/static/escalas/js/song.js
+#: escalas/static/escalas/js/ui.js
+msgid "Micrófono activo"
+msgstr "Microphone actif"
+
+#: escalas/static/escalas/js/session.js
+msgid "Ronda detenida."
+msgstr "Tour arrêté."
+
+#: escalas/static/escalas/js/session.js
+msgid "Pulsa Empezar y toca en tu teclado MIDI."
+msgstr "Appuyez sur Commencer et jouez sur votre clavier MIDI."
+
+#: escalas/static/escalas/js/session.js
+msgid "Pulsa Empezar y activa el micrófono. También puedes responder en el teclado de la pantalla."
+msgstr "Appuyez sur Commencer et activez le microphone. Vous pouvez aussi répondre sur le clavier à l'écran."
+
+#: escalas/static/escalas/js/song.js
+msgid "Manos juntas"
+msgstr "Les deux mains"
+
+#: escalas/static/escalas/js/song.js
+msgid "Canción completa"
+msgstr "Chanson entière"
+
+#: escalas/static/escalas/js/song.js
+msgid "Fragmento: compases %(from)s–%(to)s (no cuenta para estrellas)"
+msgstr "Extrait : mesures %(from)s–%(to)s (ne compte pas pour les étoiles)"
+
+#: escalas/static/escalas/js/song.js
+msgid "Todo"
+msgstr "Tout"
+
+#: escalas/static/escalas/js/song.js
+msgid "%(hand)s: %(total)s notas a %(bpm)s BPM. Tras un compás de cuenta, la partitura avanza sola."
+msgstr "%(hand)s : %(total)s notes à %(bpm)s BPM. Après une mesure de décompte, la partition défile toute seule."
+
+#: escalas/static/escalas/js/song.js
+msgid "%(hand)s: %(total)s notas. Pulsa Empezar; la partitura espera a que toques cada nota."
+msgstr "%(hand)s : %(total)s notes. Appuyez sur Commencer ; la partition attend que vous jouiez chaque note."
+
+#: escalas/static/escalas/js/song.js
+msgid "Primero consigue una estrella (%(pct)s de notas bien) en «%(hand)s»."
+msgstr "Obtenez d'abord une étoile (%(pct)s de notes justes) dans « %(hand)s »."
+
+#: escalas/static/escalas/js/song.js
+msgid "¡Combo ×%(n)s!"
+msgstr "Combo ×%(n)s !"
+
+#: escalas/static/escalas/js/song.js
+msgid "Combo perdido"
+msgstr "Combo perdu"
+
+#: escalas/static/escalas/js/song.js
+msgid "Esta versión no tiene notas para esta mano en esos compases."
+msgstr "Cette version n'a pas de notes pour cette main dans ces mesures."
+
+#: escalas/static/escalas/js/song.js
+msgid "Toca juntas: %(notes)s"
+msgstr "Jouez ensemble : %(notes)s"
+
+#: escalas/static/escalas/js/song.js
+msgid "Toca la nota marcada."
+msgstr "Jouez la note indiquée."
+
+#: escalas/static/escalas/js/song.js
+msgid "Bien. Falta: %(notes)s"
+msgstr "Bien. Il manque : %(notes)s"
+
+#: escalas/static/escalas/js/song.js
+msgid "%(n)s… ¡ahora!"
+msgstr "%(n)s… maintenant !"
+
+#: escalas/static/escalas/js/song.js
+msgid "¡Perfecto!"
+msgstr "Parfait !"
+
+#: escalas/static/escalas/js/song.js
+msgid "Pronto"
+msgstr "Tôt"
+
+#: escalas/static/escalas/js/song.js
+msgid "Tarde"
+msgstr "Tard"
+
+#: escalas/static/escalas/js/song.js
+msgid "Fuera de tiempo"
+msgstr "Hors du temps"
+
+#: escalas/static/escalas/js/song.js
+msgid ", desvío medio %(ms)s ms"
+msgstr ", écart moyen %(ms)s ms"
+
+#: escalas/static/escalas/js/song.js
+msgid "Vuelta %(pass)s: %(pct)s de notas bien%(dev)s. Otra vez…"
+msgstr "Tour %(pass)s : %(pct)s de notes justes%(dev)s. Encore…"
+
+#: escalas/static/escalas/js/song.js
+msgid "Practicaste los compases %(from)s–%(to)s. Los fragmentos no cuentan para las estrellas."
+msgstr "Vous avez travaillé les mesures %(from)s–%(to)s. Les extraits ne comptent pas pour les étoiles."
+
+#: escalas/static/escalas/js/song.js
+msgid "¡Nuevo récord de puntos!"
+msgstr "Nouveau record de points !"
+
+#: escalas/static/escalas/js/song.js
+msgid "Desbloqueaste <b>%(hand)s</b>."
+msgstr "Vous avez débloqué <b>%(hand)s</b>."
+
+#: escalas/static/escalas/js/song.js
+msgid "%(advice)s Desvío medio: %(ms)s ms."
+msgstr "%(advice)s Écart moyen : %(ms)s ms."
+
+#: escalas/static/escalas/js/song.js
+msgid "Muy bien a %(bpm)s BPM. Prueba a subir el tempo."
+msgstr "Très bien à %(bpm)s BPM. Essayez d'augmenter le tempo."
+
+#: escalas/static/escalas/js/song.js
+msgid "Ya dominas este nivel. Prueba <b>%(level)s</b>."
+msgstr "Vous maîtrisez ce niveau. Essayez <b>%(level)s</b>."
+
+#: escalas/static/escalas/js/song.js
+msgid "Necesitas %(pct)s de notas bien para la primera estrella. ¡Otra vez!"
+msgstr "Il faut %(pct)s de notes justes pour la première étoile. Encore une fois !"
+
+#: escalas/static/escalas/js/song.js
+msgid "%(n)s de 3 estrellas"
+msgstr "%(n)s étoiles sur 3"
+
+#: escalas/static/escalas/js/song.js
+msgid "Sigue intentando"
+msgstr "Continuez d'essayer"
+
+#: escalas/static/escalas/js/song.js
+msgid "¡Bien!"
+msgstr "Bien !"
+
+#: escalas/static/escalas/js/song.js
+msgid "a %(bpm)s BPM"
+msgstr "à %(bpm)s BPM"
+
+#: escalas/static/escalas/js/song.js
+msgid "notas bien"
+msgstr "notes justes"
+
+#: escalas/static/escalas/js/song.js
+msgid "perfectas"
+msgstr "parfaites"
+
+#: escalas/static/escalas/js/song.js
+msgid "puntos"
+msgstr "points"
+
+#: escalas/static/escalas/js/song.js
+msgid "combo máximo"
+msgstr "combo maximal"
+
+#: escalas/static/escalas/js/song.js
+msgid "Siguiente: %(hand)s"
+msgstr "Suivant : %(hand)s"
+
+#: escalas/static/escalas/js/song.js
+msgid "%(pct)s de notas bien."
+msgstr "%(pct)s de notes justes."
+
+#: escalas/static/escalas/js/song.js
+msgid "Tiendes a tocar tarde."
+msgstr "Vous avez tendance à jouer en retard."
+
+#: escalas/static/escalas/js/song.js
+msgid "Tiendes a adelantarte."
+msgstr "Vous avez tendance à devancer."
+
+#: escalas/static/escalas/js/song.js
+msgid "Escuchar"
+msgstr "Écouter"
+
+#: escalas/static/escalas/js/song.js
+msgid "En pausa. Puedes moverte por la canción con la barra."
+msgstr "En pause. Vous pouvez vous déplacer dans la chanson avec la barre."
+
+#: escalas/static/escalas/js/song.js
+msgid "Escuchando a %(bpm)s BPM. La app no detecta notas mientras suena el ejemplo."
+msgstr "Écoute à %(bpm)s BPM. L'application ne détecte pas de notes pendant l'exemple."
+
+#: escalas/static/escalas/js/song.js
+msgid "Seguir"
+msgstr "Reprendre"
+
+#: escalas/static/escalas/js/song.js
+msgid "Pausa"
+msgstr "Pause"
+
+#: escalas/static/escalas/js/song.js
+msgid "Compás %(bar)s de %(total)s"
+msgstr "Mesure %(bar)s sur %(total)s"
+
+#: escalas/static/escalas/js/song.js
+msgid "Detenido."
+msgstr "Arrêté."
+
+#: escalas/static/escalas/js/staff.js escalas/static/escalas/js/ui.js
+msgid "Clave de sol"
+msgstr "Clé de sol"
+
+#: escalas/static/escalas/js/staff.js escalas/static/escalas/js/ui.js
+msgid "Clave de fa"
+msgstr "Clé de fa"
+
+#: escalas/static/escalas/js/staff.js
+msgid "Partitura"
+msgstr "Partition"
+
+#: escalas/static/escalas/js/theory.js
+msgid "menor"
+msgstr "mineur"
+
+#: escalas/static/escalas/js/theory.js
+msgid "mayor"
+msgstr "majeur"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Pentagrama de la escala"
+msgstr "Portée de la gamme"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Dedos"
+msgstr "Doigts"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Correcta"
+msgstr "Correcte"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Incorrecta"
+msgstr "Incorrecte"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Nota detectada"
+msgstr "Note détectée"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Notas tocadas: %(notes)s. %(status)s"
+msgstr "Notes jouées : %(notes)s. %(status)s"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Esperando notas"
+msgstr "En attente de notes"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Toca una nota para verla aquí"
+msgstr "Jouez une note pour la voir ici"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Toca una nota y mantenla."
+msgstr "Jouez une note et maintenez-la."
+
+#: escalas/static/escalas/js/ui.js
+msgid "Nota del teclado de pantalla"
+msgstr "Note du clavier à l'écran"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Escuchar el círculo"
+msgstr "Écouter la progression"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Escuchar la escala"
+msgstr "Écouter la gamme"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Activa el micrófono y toca cualquier nota."
+msgstr "Activez le microphone et jouez n'importe quelle note."
+
+#: escalas/static/escalas/js/ui.js
+msgid "Toca una nota: verás su nombre y qué tan afinada llega."
+msgstr "Jouez une note : vous verrez son nom et sa justesse."
+
+#: escalas/static/escalas/js/ui.js
+msgid "No hay círculos armónicos para esta tonalidad. Agrégalos desde el admin."
+msgstr "Il n'y a pas de progressions d'accords pour cette tonalité. Ajoutez-en depuis l'administration."
+
+#: escalas/static/escalas/js/ui.js
+msgid "Mano derecha: <strong>%(voice)s</strong> · Bajo: <strong>%(bass)s</strong>"
+msgstr "Main droite : <strong>%(voice)s</strong> · Basse : <strong>%(bass)s</strong>"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Después: <b>%(next)s</b>"
+msgstr "Ensuite : <b>%(next)s</b>"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Último acorde"
+msgstr "Dernier accord"
+
+#: escalas/static/escalas/js/ui.js
+msgid "%(title)s · acorde %(n)s de %(total)s"
+msgstr "%(title)s · accord %(n)s sur %(total)s"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Activa el micrófono para que la app te escuche. También puedes tocar los acordes en el teclado de la pantalla."
+msgstr "Activez le microphone pour que l'application vous entende. Vous pouvez aussi jouer les accords sur le clavier à l'écran."
+
+#: escalas/static/escalas/js/ui.js
+msgid "%(title)s. Pulsa Empezar: habrá 4 tiempos de cuenta y luego un acorde por compás."
+msgstr "%(title)s. Appuyez sur Commencer : 4 temps de décompte, puis un accord par mesure."
+
+#: escalas/static/escalas/js/ui.js
+msgid "%(title)s. Toca el primer acorde para empezar."
+msgstr "%(title)s. Jouez le premier accord pour commencer."
+
+#: escalas/static/escalas/js/ui.js
+msgid "<b>%(n)s</b> dedo"
+msgstr "doigt <b>%(n)s</b>"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Última nota"
+msgstr "Dernière note"
+
+#: escalas/static/escalas/js/ui.js
+msgid "%(title)s · nota %(n)s de %(total)s"
+msgstr "%(title)s · note %(n)s sur %(total)s"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Activa el micrófono para que la app te escuche. También puedes tocar el teclado de la pantalla."
+msgstr "Activez le microphone pour que l'application vous entende. Vous pouvez aussi jouer sur le clavier à l'écran."
+
+#: escalas/static/escalas/js/ui.js
+msgid "%(title)s. Pulsa Empezar: habrá 4 tiempos de cuenta."
+msgstr "%(title)s. Appuyez sur Commencer : 4 temps de décompte."
+
+#: escalas/static/escalas/js/ui.js
+msgid "%(title)s. Toca la primera nota para empezar."
+msgstr "%(title)s. Jouez la première note pour commencer."
+
+#: escalas/static/escalas/js/ui.js
+msgid "Oyendo:"
+msgstr "J'entends :"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Audio %(state)s · %(rate)s Hz · nivel %(level)s dB · umbral %(gate)s dB · tono %(pitch)s · claridad %(clar)s"
+msgstr "Audio %(state)s · %(rate)s Hz · niveau %(level)s dB · seuil %(gate)s dB · hauteur %(pitch)s · clarté %(clar)s"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Entrada: MIDI"
+msgstr "Entrée : MIDI"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Activar micrófono"
+msgstr "Activer le microphone"
+
+#: escalas/static/escalas/js/ui.js
+msgid " · limpia hasta <b>%(bpm)s BPM</b>"
+msgstr " · propre jusqu'à <b>%(bpm)s BPM</b>"
+
+#: escalas/static/escalas/js/ui.js
+msgid "%(n)s intento"
+msgid_plural "%(n)s intentos"
+msgstr[0] "%(n)s essai"
+msgstr[1] "%(n)s essais"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Tu mejor pasada en este círculo: <b>%(best)s</b>"
+msgstr "Votre meilleur passage sur cette progression : <b>%(best)s</b>"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Tu mejor pasada en esta escala: <b>%(best)s</b>"
+msgstr "Votre meilleur passage sur cette gamme : <b>%(best)s</b>"
+
+#: escalas/static/escalas/js/ui.js
+msgid "Aún no has practicado este círculo con estas opciones."
+msgstr "Vous n'avez pas encore travaillé cette progression avec ces options."

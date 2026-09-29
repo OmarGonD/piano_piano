@@ -1,0 +1,39 @@
+{% extends "escalas/base.html" %}{% load i18n assets %}
+{% block title %}{{ path.name|tr }} · Piano{% endblock %}
+{% block body_class %}scroll{% endblock %}
+{% block body %}
+<header class="top">
+  {% include "escalas/_nav.html" %}
+</header>
+<main class="page">
+  <section class="hero">
+    <p class="eyebrow">{{ path.name|tr }}</p>
+    <h2>{{ path.tagline|tr }}</h2>
+    <p>{{ path.description|tr }}</p>
+  </section>
+  {% for level in levels %}
+  <section class="level">
+    <div class="level-head">
+      <h2><span class="level-badge level-{{ level.value }}">{{ level.label }}</span></h2>
+      <span class="level-done">{% blocktrans with done=level.done total=level.modules|length %}{{ done }} de {{ total }} con ronda perfecta{% endblocktrans %}</span>
+    </div>
+    <ol class="module-list">
+      {% for m in level.modules %}
+      <li>
+        <a class="module-card" href="{% url 'escalas:module' path.slug m.slug %}">
+          <span class="module-num">{{ m.number }}</span>
+          <span class="module-body">
+            <b>{{ m.title|tr }}</b>
+            <span>{{ m.summary|tr }}</span>
+          </span>
+          <span class="module-rec">{% if m.record %}<b{% if m.record.best == 100 %} class="pct-ok"{% endif %}>{{ m.record.best }}%</b> {% trans "mejor ronda" %}{% else %}{% trans "Sin empezar" %}{% endif %}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+  {% empty %}
+  <p class="empty">{% url 'escalas:index' as free_url %}{% blocktrans trimmed %}Todavía no hay módulos en este camino. Mientras tanto, practica en la <a href="{{ free_url }}">práctica libre</a>.{% endblocktrans %}</p>
+  {% endfor %}
+</main>
+{% endblock %}

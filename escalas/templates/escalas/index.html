@@ -1,0 +1,133 @@
+{% extends "escalas/base.html" %}{% load static assets %}{% load i18n %}
+{% block body %}
+<div class="app">
+  <header class="top">
+    {% include "escalas/_nav.html" %}
+    <div class="mic">
+      <button id="micBtn" class="btn">{% trans "Activar micrófono" %}</button>
+      <div class="meter" title="{% trans 'Nivel del micrófono (la raya es el umbral)' %}"><div id="meterFill"></div><div id="meterGate"></div></div>
+    </div>
+    <button id="fsBtn" class="icon-btn" aria-label="{% trans 'Pantalla completa' %}" title="{% trans 'Pantalla completa' %}">⤢</button>
+    <button id="setBtn" class="icon-btn" aria-label="{% trans 'Ajustes' %}" title="{% trans 'Ajustes' %}">⚙</button>
+  </header>
+
+  <main class="main">
+    <aside class="controls" aria-label="{% trans 'Opciones de práctica' %}">
+      <div class="field wide">
+        <span>{% trans "Modo" %}</span>
+        <div class="seg" id="modeSeg">
+          <button data-v="practice">{% trans "Escalas" %}</button>
+          <button data-v="chords">{% trans "Círculo armónico" %}</button>
+          <button data-v="free">{% trans "Afinador" %}</button>
+        </div>
+      </div>
+      <label class="field"><span>{% trans "Tónica" %}</span><select id="rootSel"></select></label>
+      <label class="field no-chord"><span>{% trans "Escala" %}</span><select id="typeSel"></select></label>
+      <div class="field chord-only">
+        <span>{% trans "Tonalidad" %}</span>
+        <div class="seg" id="keySeg"><button data-v="major">{% trans "Mayor" %}</button><button data-v="minor">{% trans "Menor" %}</button></div>
+      </div>
+      <label class="field chord-only wide"><span>{% trans "Círculo" %}</span><select id="progSel"></select></label>
+      <div class="field chord-only">
+        <span>{% trans "Vueltas" %}</span>
+        <div class="seg" id="lapSeg"><button data-v="1">1</button><button data-v="2">2</button><button data-v="4">4</button></div>
+      </div>
+      <div class="field chord-only">
+        <span>{% trans "Posición de la mano derecha" %}</span>
+        <div class="seg" id="voiceSeg"><button data-v="near">{% trans "Enlazada" %}</button><button data-v="root">{% trans "Fundamental" %}</button></div>
+      </div>
+      <div class="field scale-only">
+        <span>{% trans "Octavas" %}</span>
+        <div class="seg" id="octSeg"><button data-v="1">1</button><button data-v="2">2</button></div>
+      </div>
+      <div class="field scale-only">
+        <span>{% trans "Recorrido" %}</span>
+        <div class="seg" id="dirSeg"><button data-v="up">{% trans "Subir" %}</button><button data-v="updown">{% trans "Subir y bajar" %}</button></div>
+      </div>
+      <label class="field scale-only"><span>{% trans "Empieza en" %}</span>
+        <select id="startSel"><option value="3">{% trans "Octava 3 (grave)" %}</option><option value="4">{% trans "Octava 4 (Do central)" %}</option><option value="5">{% trans "Octava 5 (aguda)" %}</option></select>
+      </label>
+
+      <div class="metro train-only wide">
+        <label class="check"><input type="checkbox" id="metroChk"> {% trans "Practicar con metrónomo" %}</label>
+        <div id="metroOpts" class="metro">
+          <div class="stepper">
+            <button id="bpmDown" aria-label="{% trans 'Bajar tempo' %}">−</button>
+            <output id="bpmOut">60 <small>BPM</small></output>
+            <button id="bpmUp" aria-label="{% trans 'Subir tempo' %}">+</button>
+          </div>
+          <label class="field scale-only"><span>{% trans "Notas por pulso" %}</span>
+            <select id="npbSel"><option value="1">{% trans "1 (negras)" %}</option><option value="2">{% trans "2 (corcheas)" %}</option><option value="3">{% trans "3 (tresillos)" %}</option><option value="4">{% trans "4 (semicorcheas)" %}</option></select>
+          </label>
+          <label class="check"><input type="checkbox" id="autoChk"> {% trans "Subir 4 BPM tras una pasada perfecta" %}</label>
+        </div>
+      </div>
+      <div class="record train-only wide" id="record"></div>
+    </aside>
+
+    <section class="stage" aria-live="polite">
+      <div class="cue">
+        <div class="cue-main"><span id="cueNote" class="cue-note">Do</span><span id="cueOct" class="cue-oct">4</span></div>
+        <div class="cue-side">
+          <div id="cueFinger" class="finger"></div>
+          <div id="cueNext" class="cue-next"></div>
+          <div id="hearing" class="hearing">{% trans "Oyendo:" %} <b>–</b></div>
+          <div id="beats" class="beats" hidden><i></i><i></i><i></i><i></i></div>
+        </div>
+        <p id="cueMsg" class="cue-msg"></p>
+        <p id="diag" class="diag"></p>
+        <div id="tuner" class="tuner" hidden>
+          <div class="tuner-scale"><div id="needle"></div></div>
+          <div id="tunerTxt" class="tuner-txt">{% trans "Toca una nota y mantenla." %}</div>
+        </div>
+      </div>
+      <div class="staff-wrap scale-only" id="staffWrap"></div>
+      <div class="staff-wrap played-staff" id="playedStaff" role="status" aria-label="{% trans 'Notas detectadas' %}"></div>
+      <div class="chord-strip chord-only" id="chordStrip"></div>
+      <div class="progress train-only"><div id="progFill"></div></div>
+      <div class="actions train-only">
+        <button id="startBtn" class="btn primary">{% trans "Empezar" %}</button>
+        <button id="listenBtn" class="btn">{% trans "Escuchar la escala" %}</button>
+      </div>
+      <div id="results" class="results" hidden></div>
+    </section>
+  </main>
+
+  <div class="kb-wrap"><div id="kb" class="kb" aria-label="{% trans 'Teclado' %}"></div></div>
+</div>
+
+<dialog id="setDlg">
+  <form method="dialog" class="dlg">
+    <h2>{% trans "Ajustes" %}</h2>
+    <div class="field">
+      <span>{% trans "Entrada de notas" %}</span>
+      <div class="seg" id="inputSeg"><button type="button" data-v="mic">{% trans "Micrófono" %}</button><button type="button" data-v="midi">{% trans "Teclado MIDI (USB)" %}</button></div>
+      <p class="hint" id="midiStatus"></p>
+    </div>
+    <div class="field">
+      <span>{% trans "Sensibilidad del micrófono" %}</span>
+      <input type="range" id="sensRange" min="0" max="100" step="1">
+      <div class="inline"><button type="button" class="btn" id="calBtn">{% trans "Calibrar ruido de fondo" %}</button><span class="hint" id="calTxt"></span></div>
+      <p class="hint">{% trans "La app se adapta sola al ruido del ambiente. Si detecta notas cuando no tocas, baja la sensibilidad; si no reacciona, súbela o acerca la tablet a los parlantes del teclado." %}</p>
+    </div>
+    <label class="check"><input type="checkbox" id="diagChk"> {% trans "Mostrar datos del micrófono (diagnóstico)" %}</label>
+    <label class="check"><input type="checkbox" id="strictChk"> {% trans "Exigir la octava exacta" %}</label>
+    <p class="hint">{% trans "Desactivado, basta con acertar el nombre de la nota. El micrófono a veces confunde octavas, así que conviene dejarlo apagado al principio." %}</p>
+    <div class="field">
+      <span>{% trans "Compensación de latencia:" %} <b id="latOut"></b></span>
+      <input type="range" id="latRange" min="0" max="250" step="5">
+      <p class="hint">{% trans "Solo afecta la medición de ritmo con metrónomo. Súbela si la app siempre dice que vas atrasado aunque no sea así." %}</p>
+    </div>
+    <div class="field">
+      <span>{% trans "Nombres de las notas" %}</span>
+      <div class="seg" id="notSeg"><button type="button" data-v="es">Do Re Mi</button><button type="button" data-v="en">C D E</button></div>
+    </div>
+    <div class="foot"><button class="btn primary" value="close">{% trans "Listo" %}</button></div>
+  </form>
+</dialog>
+{{ scale_types|json_script:"scale-types" }}
+{{ progressions|json_script:"progressions" }}
+{{ records|json_script:"records" }}
+<script>window.ESCALAS_URLS={attempts:"{% url 'escalas:create_attempt' %}"};</script>
+{% module_script 'escalas/js/main.js' %}
+{% endblock %}

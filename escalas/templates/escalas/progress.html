@@ -1,0 +1,43 @@
+{% extends "escalas/base.html" %}{% load i18n %}
+{% block title %}{% trans "Progreso · Escalas" %}{% endblock %}
+{% block body_class %}scroll{% endblock %}
+{% block body %}
+<header class="top">
+  {% include "escalas/_nav.html" %}
+</header>
+<main class="page">
+  <section class="hero"><h2>{% trans "Tu progreso" %}</h2><p>{% trans "Todo lo que has practicado: escalas, módulos y canciones." %}</p></section>
+  <section>
+    <h2>{% trans "Por ejercicio" %}</h2>
+    {% if summary %}
+    <div class="table-wrap"><table>
+      <thead><tr><th>{% trans "Ejercicio" %}</th><th class="num">{% trans "Mejor pasada" %}</th><th class="num">{% trans "Intentos" %}</th><th>{% trans "Último" %}</th></tr></thead>
+      <tbody>
+      {% for row in summary %}
+        <tr><td>{{ row.title }}</td>
+          <td class="num{% if row.best == 100 %} pct-ok{% endif %}">{{ row.best }}%</td>
+          <td class="num">{{ row.runs }}</td>
+          <td>{{ row.last|date:"j M Y, H:i" }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table></div>
+    {% else %}<p class="empty">{% trans "Todavía no hay intentos. Termina una escala o un círculo y aparecerá aquí." %}</p>{% endif %}
+  </section>
+  {% if recent %}
+  <section>
+    <h2>{% trans "Últimos intentos" %}</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>{% trans "Fecha" %}</th><th>{% trans "Ejercicio" %}</th><th class="num">{% trans "Precisión" %}</th><th class="num">{% trans "Errores" %}</th><th class="num">BPM</th><th class="num">{% trans "Duración" %}</th></tr></thead>
+      <tbody>
+      {% for a in recent %}
+        <tr><td>{{ a.created_at|date:"j M, H:i" }}</td><td>{{ a.title }}</td>
+          <td class="num{% if a.accuracy == 100 %} pct-ok{% endif %}">{{ a.accuracy }}%</td>
+          <td class="num">{{ a.errors }}</td><td class="num">{{ a.bpm|default:"–" }}</td>
+          <td class="num">{{ a.duration|floatformat:1 }} s</td></tr>
+      {% endfor %}
+      </tbody>
+    </table></div>
+  </section>
+  {% endif %}
+</main>
+{% endblock %}

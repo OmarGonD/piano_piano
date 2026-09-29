@@ -1,0 +1,3 @@
+{% if messages %}
+<ul class="flash">{% for m in messages %}<li data-kind="{{ m.tags }}">{{ m }}</li>{% endfor %}</ul>
+{% endif %}

@@ -1,0 +1,6 @@
+<label class="field auth-field">
+  <span>{{ field.label }}</span>
+  {{ field }}
+  {% if field.help_text and not field.errors %}<small class="help">{{ field.help_text|safe }}</small>{% endif %}
+  {% for e in field.errors %}<small class="err">{{ e }}</small>{% endfor %}
+</label>

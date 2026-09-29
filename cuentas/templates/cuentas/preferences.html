@@ -1,0 +1,27 @@
+{% extends "escalas/base.html" %}{% load i18n %}
+{% block title %}{% trans "Preferencias · Piano" %}{% endblock %}
+{% block body_class %}scroll{% endblock %}
+{% block body %}
+<header class="top">{% include "escalas/_nav.html" %}</header>
+<main class="page auth">
+  <section class="auth-card">
+    <h2>{% trans "Preferencias" %}</h2>
+    {% include "escalas/_messages.html" %}
+    <form method="post">
+      {% csrf_token %}
+      <fieldset class="pref-choice">
+        <legend>{{ form.song_view.label|capfirst }}</legend>
+        {% for radio in form.song_view %}
+        <label class="pref-option">
+          {{ radio.tag }}
+          <span><b>{{ radio.choice_label }}</b>
+            <small>{% if radio.data.value == 'staff' %}{% trans 'Las notas en el pentagrama, como en una partitura.' %}{% else %}{% trans 'Las notas caen hacia su tecla del teclado, con un color para cada mano.' %}{% endif %}</small>
+          </span>
+        </label>
+        {% endfor %}
+      </fieldset>
+      <button class="btn primary" type="submit">{% trans "Guardar" %}</button>
+    </form>
+  </section>
+</main>
+{% endblock %}

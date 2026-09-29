@@ -1,0 +1,20 @@
+{% extends "escalas/base.html" %}{% load i18n %}
+{% block title %}{% trans "Entrar · Piano" %}{% endblock %}
+{% block body_class %}scroll{% endblock %}
+{% block body %}
+<header class="top">{% include "escalas/_nav.html" %}</header>
+<main class="page auth">
+  <section class="auth-card">
+    <h2>{% trans "Entrar" %}</h2>
+    <p class="intro">{% trans "Tu avance se guarda en tu cuenta: escalas, módulos y canciones." %}</p>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% include "cuentas/_form_errors.html" %}
+      {% for field in form %}{% include "cuentas/_field.html" %}{% endfor %}
+      <input type="hidden" name="next" value="{{ next }}">
+      <button class="btn primary" type="submit">{% trans "Entrar" %}</button>
+    </form>
+    <p class="auth-alt">{% trans "¿No tienes cuenta?" %} <a href="{% url 'register' %}">{% trans "Regístrate" %}</a></p>
+  </section>
+</main>
+{% endblock %}

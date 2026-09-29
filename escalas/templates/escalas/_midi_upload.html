@@ -1,0 +1,16 @@
+{% load i18n %}{% if midi_form %}
+<details class="midi-upload">
+  <summary>{% trans "Agregar canción desde MIDI o MusicXML" %} <small>{% trans "solo administradores" %}</small></summary>
+  <form method="post" action="{% url 'escalas:song_upload_midi' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>{{ midi_form.title.label }} {{ midi_form.title }}</label>
+    <label>{{ midi_form.composer.label }} <small>{% trans "(opcional)" %}</small> {{ midi_form.composer }}</label>
+    <label>{{ midi_form.category.label }} {{ midi_form.category }}</label>
+    <label>{{ midi_form.midi.label }} {{ midi_form.midi }}</label>
+    <label>{{ midi_form.rh_track.label }} {{ midi_form.rh_track }}</label>
+    <label>{{ midi_form.lh_track.label }} {{ midi_form.lh_track }}</label>
+    <p class="hint">{% trans "Sube un MusicXML (.mxl) o un MIDI con la versión completa a dos manos. El MusicXML es más exacto: se guarda como Avanzado y la app genera Intermedio y Básico. Si el MIDI trae una pista por mano se detectan solas; si trae una sola pista, las manos se separan por altura (desde Do central, derecha). Si ya existe una canción con ese nombre, se reemplazan sus versiones." %}</p>
+    <button class="btn primary" type="submit">{% trans "Crear canción" %}</button>
+  </form>
+</details>
+{% endif %}

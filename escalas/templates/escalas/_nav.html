@@ -1,0 +1,31 @@
+{% load i18n assets %}<a class="brand" href="{% url 'escalas:home' %}" aria-label="{% trans 'Inicio' %}"><span class="glyph" aria-hidden="true">𝄞</span><span class="brand-name">{% trans "Piano" %}</span></a>
+{% if user.is_authenticated %}
+<nav class="mainnav" aria-label="{% trans 'Secciones' %}">
+  <a href="{% url 'escalas:home' %}"{% if nav_active == 'home' %} aria-current="page"{% endif %}>{% trans "Inicio" %}</a>
+  {% for p in nav_paths %}<a href="{% url 'escalas:path' p.slug %}"{% if nav_active == p.slug %} aria-current="page"{% endif %}>{{ p.name|tr }}</a>{% endfor %}
+  <a href="{% url 'escalas:songs' %}"{% if nav_active == 'songs' %} aria-current="page"{% endif %}>{% trans "Canciones" %}</a>
+  <a href="{% url 'escalas:index' %}"{% if nav_active == 'free' %} aria-current="page"{% endif %}>{% trans "Práctica libre" %}</a>
+  <a href="{% url 'escalas:progress' %}"{% if nav_active == 'progress' %} aria-current="page"{% endif %}>{% trans "Progreso" %}</a>
+</nav>
+<form class="usermenu" method="post" action="{% url 'logout' %}">
+  {% csrf_token %}
+  <a class="username" href="{% url 'preferences' %}" title="{% blocktrans with name=user.get_full_name|default:user.username %}Preferencias de {{ name }}{% endblocktrans %}"{% if request.resolver_match.url_name == 'preferences' %} aria-current="page"{% endif %}>{{ user.first_name|default:user.username }} <span aria-hidden="true">⚙</span></a>
+  <button type="submit" class="linklike">{% trans "Salir" %}</button>
+</form>
+<script>(()=>{const a=document.querySelector('.mainnav [aria-current]');if(a&&a.parentElement.scrollWidth>a.parentElement.clientWidth)a.parentElement.scrollLeft=a.offsetLeft-a.parentElement.clientWidth/2+a.clientWidth/2;})();</script>
+{% else %}
+<nav class="mainnav" aria-label="{% trans 'Cuenta' %}">
+  <a href="{% url 'login' %}"{% if request.resolver_match.url_name == 'login' %} aria-current="page"{% endif %}>{% trans "Entrar" %}</a>
+  <a href="{% url 'register' %}"{% if request.resolver_match.url_name == 'register' %} aria-current="page"{% endif %}>{% trans "Registrarse" %}</a>
+</nav>
+{% endif %}
+<form class="langmenu" method="post" action="{% url 'set_language' %}">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ request.get_full_path }}">
+  <label class="visually-hidden" for="langSel">{% trans "Idioma" %}</label>
+  <select id="langSel" name="language" onchange="this.form.submit()">
+    {% get_current_language as CUR %}{% get_language_info_list for LANGUAGES as langs %}
+    {% for l in langs %}<option value="{{ l.code }}"{% if l.code == CUR %} selected{% endif %}>{{ l.name_local|capfirst }}</option>{% endfor %}
+  </select>
+  <noscript><button type="submit" class="linklike">OK</button></noscript>
+</form>

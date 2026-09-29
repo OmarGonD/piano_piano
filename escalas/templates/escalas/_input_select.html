@@ -1,0 +1,7 @@
+{% load i18n %}<div class="input-row">
+  <span class="input-label">{% trans "Entrada" %}</span>
+  <div class="seg input-seg" id="inputSeg" role="group" aria-label="{% trans 'Entrada de notas' %}">
+    <button type="button" data-v="mic">{% trans "Micrófono" %}</button><button type="button" data-v="midi">{% trans "Teclado MIDI" %}</button>
+  </div>
+  <span id="inputStatus" class="input-status"></span>
+</div>
