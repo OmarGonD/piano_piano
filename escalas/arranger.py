@@ -55,14 +55,16 @@ def top_line(events):
 
 
 def simplify_rhythm(line, step):
-    """Deja como mucho una nota por casilla de `step` tiempos (la primera) y la alarga hasta la siguiente."""
-    kept, last_slot = [], None
+    """Deja como mucho una nota por casilla de `step` tiempos y la alarga hasta la siguiente.
+    En cada casilla se queda con la nota que más «pesa» como melodía: la que cae justo en el tiempo,
+    la más larga y, a igualdad, la más aguda (así los adornos y las notas de paso no se comen la melodía)."""
+    slots = {}
     for t, d, m in line:
-        slot = int(t // step)
-        if slot == last_slot:
-            continue
+        slots.setdefault(int(t // step), []).append((t, d, m))
+    kept = []
+    for slot in sorted(slots):
+        t, d, m = max(slots[slot], key=lambda n: ((abs(n[0] - slot * step) < 1e-6) * 3 + min(n[1], 4), n[2]))
         kept.append([slot * step, d, m])
-        last_slot = slot
     out = []
     for i, (t, d, m) in enumerate(kept):
         end = kept[i + 1][0] if i + 1 < len(kept) else t + max(d, step)
@@ -71,20 +73,53 @@ def simplify_rhythm(line, step):
 
 
 def bass_line(events, slot):
-    """La nota más grave de cada casilla de `slot` tiempos, sostenida toda la casilla."""
-    by_slot = {}
-    for t, d, m in events:
-        s = int(t // slot)
-        by_slot[s] = min(by_slot.get(s, 999), m)
-    return [[_num(s * slot), _num(slot), m] for s, m in sorted(by_slot.items())]
+    """La nota más grave que suena al empezar cada casilla de `slot` tiempos (si no hay, la más grave de la casilla),
+    con las casillas iguales unidas en una sola nota larga."""
+    if not events:
+        return []
+    last = max(t + d for t, d, _ in events)
+    out = []
+    for s in range(int(last // slot) + 1):
+        start, end = s * slot, (s + 1) * slot
+        sounding = [m for t, d, m in events if t <= start + 1e-6 < t + d - 1e-6]
+        inside = [m for t, d, m in events if start <= t < end]
+        pool = sounding or inside
+        if not pool:
+            continue
+        m = min(pool)
+        if out and out[-1][2] == m and abs(out[-1][0] + out[-1][1] - start) < 1e-6:
+            out[-1][1] = _num(out[-1][1] + slot)
+        else:
+            out.append([_num(start), _num(slot), m])
+    return out
+
+
+def pulse_bass(bass, beats_per_bar):
+    """Del bajo, un pulso por tiempo que alterna la fundamental y su quinta (la base de un acompañamiento fácil),
+    para que la izquierda conserve el movimiento de la canción."""
+    out = []
+    for t, d, m in bass:
+        n = max(1, int(round(d)))
+        for i in range(n):
+            out.append([_num(t + i), 1, m if i % 2 == 0 else m + 7])
+    return out
 
 
 def transpose_to_white(events, key_fifths):
-    """Transporta a Do mayor/La menor y lleva cualquier tecla negra que quede a la blanca de abajo."""
+    """Transporta a Do mayor/La menor. Una tecla negra que quede se lleva a la blanca vecina más cercana
+    a la nota anterior, para que la línea siga el mismo dibujo."""
     shift = -((7 * key_fifths) % 12)
     if shift < -6:
         shift += 12
-    return [[t, d, m + shift - (1 if (m + shift) % 12 in BLACK else 0)] for t, d, m in events]
+    out, prev = [], None
+    for t, d, m in events:
+        m += shift
+        if m % 12 in BLACK:
+            below, above = m - 1, m + 1
+            m = above if prev is not None and abs(above - prev) < abs(below - prev) else below
+        out.append([t, d, m])
+        prev = m
+    return out
 
 
 def fit_range(events, lo, hi):
@@ -105,15 +140,17 @@ def fit_range(events, lo, hi):
 
 def derive(notes, key_fifths, beats_per_bar, level):
     """Genera la versión de un nivel más fácil a partir de la versión completa.
-    Devuelve (notas, armadura)."""
+    Devuelve (notas, armadura).
+    Intermedio: la melodía a corcheas y un acompañamiento de fundamental y quinta que sigue el bajo original.
+    Básico: la melodía a negras en Do mayor/La menor y la fundamental de cada medio compás."""
     melody = top_line(notes['rh']) if notes['rh'] else []
+    half = beats_per_bar / 2 if beats_per_bar % 2 == 0 else beats_per_bar
     if level == 2:
-        half = beats_per_bar / 2 if beats_per_bar % 2 == 0 else beats_per_bar
         return {'rh': simplify_rhythm(melody, INTERMEDIATE_MIN_DURATION),
-                'lh': bass_line(notes['lh'], half)}, key_fifths
+                'lh': pulse_bass(bass_line(notes['lh'], half), beats_per_bar)}, key_fifths
     if level == 1:
         rh = simplify_rhythm(melody, BASIC_RULES['min_duration'])
-        lh = bass_line(notes['lh'], beats_per_bar)
+        lh = bass_line(notes['lh'], half)
         rh = fit_range(transpose_to_white(rh, key_fifths), *BASIC_RULES['ranges']['rh'])
         lh = fit_range(transpose_to_white(lh, key_fifths), *BASIC_RULES['ranges']['lh'])
         return {'rh': rh, 'lh': lh}, 0

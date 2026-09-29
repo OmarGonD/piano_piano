@@ -154,7 +154,7 @@ def song_upload_score(request, slug):
     d = form.cleaned_data
     try:
         with transaction.atomic():
-            lines = import_midi(song, 3, d['midi'].read(), True, d['rh_track'], d['lh_track'])
+            lines = import_midi(song, d['level'], d['midi'].read(), d['level'] == 3, d['rh_track'], d['lh_track'])
     except SongImportError as e:
         messages.error(request, str(e))
         return redirect('escalas:song', slug=slug)

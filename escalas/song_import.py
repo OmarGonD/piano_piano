@@ -16,6 +16,9 @@ DESCRIPTIONS = {
 }
 
 
+MANUAL_DESCRIPTION = _noop('Versión preparada a mano.')
+
+
 class SongImportError(ValueError):
     pass
 
@@ -31,7 +34,9 @@ def import_midi(song, level, data, derive_lower=False, rh_track=None, lh_track=N
     tempo = tempo or parsed['tempo']
     key = parsed['key_fifths'] if key is None else key
     beats = parsed['beats_per_bar']
-    versions = [(level, parsed['notes'], key, tempo, title or TITLES[level], '', parsed.get('fingering'))]
+    manual = not derive_lower and level < 3   # una versión fácil hecha a mano: no es «generada automáticamente»
+    versions = [(level, parsed['notes'], key, tempo, title or TITLES[level], MANUAL_DESCRIPTION if manual else '',
+                 parsed.get('fingering'))]
     if derive_lower:
         for lower in range(level - 1, 0, -1):
             notes, lower_key = derive(parsed['notes'], key, beats, lower)

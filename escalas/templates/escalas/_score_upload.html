@@ -6,6 +6,7 @@
     <span class="drop-text"><b>{% trans "Elegir partitura" %}</b><small id="midiName">{% trans ".mxl, .musicxml, .mid · hasta 2 MB" %}</small></span>
     {{ score_form.midi }}
   </label>
+  <label class="field"><span>{{ score_form.level.label }}</span>{{ score_form.level }}</label>
   <details class="adv">
     <summary>{% trans "Opciones avanzadas" %}</summary>
     <div class="row2">

@@ -310,7 +310,20 @@ class BasicLevelAndDeriveTests(LoggedInTestCase):
         inter, key2 = derive(self.FULL, -2, 4, 2)
         self.assertEqual(key2, -2)
         self.assertTrue(all(d >= 0.5 for _, d, _ in inter['rh']))
-        self.assertEqual(inter['lh'], [[0, 2, 43], [2, 2, 46], [4, 2, 48]])
+        # el bajo sigue al de la versión completa y late a negras alternando fundamental y quinta
+        self.assertEqual(inter['lh'], [[0, 1, 43], [1, 1, 50], [2, 1, 46], [3, 1, 53], [4, 1, 48], [5, 1, 55],
+                                       [6, 1, 48], [7, 1, 55]])
+        # en la básica, la fundamental de cada medio compás (las iguales se unen)
+        self.assertEqual([n[0] for n in basic['lh']], [0, 2, 4])
+
+    def test_melody_keeps_the_notes_that_carry_the_tune(self):
+        from .arranger import simplify_rhythm
+        # dos corcheas por tiempo: se conserva la que cae en el tiempo, no la de paso
+        line = [[0, .5, 60], [.5, .5, 72], [1, .5, 62], [1.5, .5, 74]]
+        self.assertEqual(simplify_rhythm(line, 1), [[0, 1, 60], [1, 1, 62]])
+        # sin nota en el tiempo, gana la más larga
+        line = [[.25, .25, 60], [.5, 1, 65]]
+        self.assertEqual(simplify_rhythm(line, 1)[0][2], 65)
 
     def test_import_with_derive_creates_song_and_three_levels(self):
         import tempfile
@@ -422,6 +435,14 @@ class BasicLevelAndDeriveTests(LoggedInTestCase):
         self.assertEqual(set(Song.objects.get(slug='la-maritza').arrangements.values_list('level', flat=True)), {1, 2, 3})
         res = self.client.post(url, {'midi': SimpleUploadedFile('x.mid', b'no es midi')}, follow=True)
         self.assertContains(res, 'data-kind="error"')
+        # una versión fácil hecha a mano reemplaza solo su nivel y no se marca como generada
+        lv1 = SimpleUploadedFile('b.mid', build_midi([[(0, 1, 62), (1, 1, 64)], [(0, 2, 48)]], key=0))
+        self.client.post(url, {'midi': lv1, 'level': 1})
+        song = Song.objects.get(slug='la-maritza')
+        basic = song.arrangements.get(level=1)
+        self.assertEqual(basic.notes['rh'], [[0, 1, 62], [1, 1, 64]])
+        self.assertEqual(basic.description, 'Versión preparada a mano.')
+        self.assertEqual(song.arrangements.get(level=3).notes['rh'][0][2], 67)   # la avanzada no cambia
         # con la partitura ya cargada, el administrador puede reemplazarla; un usuario normal no
         res = self.client.get(reverse('escalas:song', args=['la-maritza']))
         self.assertContains(res, 'Reemplazar la partitura')

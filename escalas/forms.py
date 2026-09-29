@@ -40,6 +40,10 @@ class SongMidiForm(forms.Form):
 
 class SongScoreForm(forms.Form):
     """Sube el MIDI de una canción que ya existe (título y categoría vienen de la canción)."""
+    LEVELS = [(3, gettext_lazy('Avanzado: la versión completa (se generan también las demás)')),
+              (2, gettext_lazy('Solo el nivel Intermedio, escrito a mano')),
+              (1, gettext_lazy('Solo el nivel Básico, escrito a mano'))]
+    level = forms.TypedChoiceField(label=gettext_lazy('Qué versión es'), choices=LEVELS, coerce=int, initial=3, required=False, empty_value=3)
     midi = forms.FileField(label=gettext_lazy('Partitura (MIDI o MusicXML)'))
     rh_track = forms.IntegerField(label=gettext_lazy('Pista mano derecha'), required=False, min_value=0)
     lh_track = forms.IntegerField(label=gettext_lazy('Pista mano izquierda'), required=False, min_value=0)

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 18:04+0000\n"
+"POT-Creation-Date: 2026-09-29 18:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: piano <piano@example.com>\n"
@@ -567,6 +567,22 @@ msgstr "O nome precisa de pelo menos uma letra ou um número."
 #: escalas/forms.py
 msgid "El archivo no puede pasar de 2 MB."
 msgstr "O ficheiro não pode ter mais de 2 MB."
+
+#: escalas/forms.py
+msgid "Avanzado: la versión completa (se generan también las demás)"
+msgstr "Avançado: a versão completa (as outras também são geradas)"
+
+#: escalas/forms.py
+msgid "Solo el nivel Intermedio, escrito a mano"
+msgstr "Só o nível Intermédio, escrito à mão"
+
+#: escalas/forms.py
+msgid "Solo el nivel Básico, escrito a mano"
+msgstr "Só o nível Básico, escrito à mão"
+
+#: escalas/forms.py
+msgid "Qué versión es"
+msgstr "Que versão é"
 
 #: escalas/midi_import.py
 msgid "No es un archivo MIDI (falta la cabecera MThd)."
