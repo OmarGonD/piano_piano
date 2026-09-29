@@ -795,3 +795,28 @@ dialog{border-width:1px;border-radius:22px}
 .nt.cur .fnum{fill:var(--accent)}
 .song-staff{padding:10px 12px}
 .song-staff svg{width:100%;height:auto;max-height:clamp(180px,42dvh,430px)}
+
+/* ---------- pentagrama como papel: fondo blanco, tinta negra ---------- */
+.staff-wrap,.song-staff,.read-staff{
+  --staff-ink:#111111; --surface:#FFFFFF; --fg:#111111; --muted:#4A4A4A;
+  --accent:#4B2FD0;    /* nota actual */
+  --ok:#12894F; --bad:#D22B3D;
+  background:#FFFFFF; color:#111111; border-color:#CFCFCF;
+}
+.read-staff{border-radius:12px;padding:8px 10px;border:1px solid #CFCFCF}
+.staff-wrap,.song-staff{box-shadow:0 1px 0 rgba(0,0,0,.06),0 10px 24px -16px rgba(0,0,0,.5)}
+.played-staff[data-result="wrong"]{border-color:var(--bad)}
+.played-staff[data-result="correct"]{border-color:var(--ok)}
+.sl,.ledger,.barline{stroke:#111111;stroke-opacity:1}
+.sl{stroke-width:1.2}
+.nt.cur ellipse{stroke-opacity:.3}
+/* la nota falla y sigue en rojo; con dos fallos seguidos da saltitos para llamar la atención */
+.nt.cur.err ellipse,.nt.err ellipse,.nt.err .stem,.nt.err .beam{fill:var(--bad);stroke:var(--bad)}
+.nt.err ellipse.open{fill:#FFFFFF}
+.nt.hop{animation:hop 1.1s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes hop{0%,55%,100%{transform:translateY(0)}12%{transform:translateY(-9px)}24%{transform:translateY(0)}34%{transform:translateY(-5px)}44%{transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){
+  .nt.hop{animation:none !important}
+  .nt.hop ellipse{stroke-width:9;stroke-opacity:.5}
+}
+.song-staff .nt.cur ellipse.open,.read-staff .nt.cur ellipse.open{fill:#E6E0FF}

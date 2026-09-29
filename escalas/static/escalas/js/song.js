@@ -80,8 +80,8 @@ function drawScore(idx=-1,groups=G.groups||buildGroups(sel.hand,frag.from,fragTo
   const cols=groups.slice(start,start+WINDOW).map((g,i)=>{
     const gi=start+i, newBar=i===0||g.bar!==groups[gi-1].bar;
     let cls='';
-    if(g.done) cls=g.err?'err':'ok';
-    else if(gi===idx) cls=g.err?'cur err':'cur';
+    if(g.done) cls=g.err?'err':'ok';   // en modo espera, al acertar por fin la nota pasa de rojo a verde
+    else if(gi===idx) cls=g.err?'cur err'+(g.hop?' hop':''):'cur';   // dos fallos seguidos: la nota da saltitos
     return {t:g.t,cls,bar:newBar,barNo:newBar?g.bar:null,
       rh:g.notes.filter(n=>n.hand==='rh').map(n=>({midi:n.m,d:n.d,f:n.f})),
       lh:g.notes.filter(n=>n.hand==='lh').map(n=>({midi:n.m,d:n.d,f:n.f}))};
@@ -306,7 +306,7 @@ function waitNote(m,src){
   if(G.prevPcs.has(pc)||G.hit.has(pc)) return;  // una nota que aún suena no es error
   if(G.lastWrong&&G.lastWrong.m===m&&performance.now()-G.lastWrong.t<1200) return;
   G.lastWrong={m,t:performance.now()};
-  G.errors++; g.err=true; breakCombo();
+  G.errors++; g.err=true; g.hop=(g.wrong=(g.wrong||0)+1)>=2; breakCombo();
   flashKey(kb,m,'hit-bad');
   drawScore(G.resolved); updateHud();
   setMsg(tf('Sonó %(got)s. Busca %(want)s.',{got:name(m),want:[...G.remaining].map(name).join(' + ')}),'bad');
@@ -314,7 +314,7 @@ function waitNote(m,src){
 function completeWaitGroup(g){
   G.times.push(performance.now()-G.shownAt);
   if(!g.err){ G.good+=g.notes.length; addPoints(g.notes.length,1); }
-  g.done=true;
+  g.done=true; g.err=false; g.hop=false;   // el error cuenta en la puntuación, pero la nota ya se tocó bien: verde
   G.prevPcs=new Set(g.notes.map(n=>mod12(n.m)));
   G.resolved++;
   if(G.resolved<G.groups.length) return nextGroup();

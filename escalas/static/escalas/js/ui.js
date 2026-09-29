@@ -43,7 +43,7 @@ export function markStaff(){
     const g=document.getElementById('nt'+i); if(!g) return;
     let c='';
     if(P.idx!=null&&i<P.idx) c=P.errs&&P.errs.has(i)?'err':'ok';
-    else if(i===cur&&(P.running||!P.idx)) c=P.errs&&P.errs.has(i)?'cur err':'cur';
+    else if(i===cur&&(P.running||!P.idx)) c=P.errs&&P.errs.has(i)?'cur err'+(P.tries&&P.tries[i]>=2?' hop':''):'cur';
     g.setAttribute('class','nt '+c);
   });
   const wrap=$('#staffWrap'), x=72+cur*40;

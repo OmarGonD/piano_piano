@@ -13,7 +13,7 @@ const matches=(m,n)=>S.strict?m===n.midi:mod12(m-n.midi)===0;
 
 export function startPractice(){
   const c=ac(); hideResults();
-  const P=app.P={running:true,idx:0,errs:new Set(),errCount:0,dev:[],lastOk:null,lastWrong:null,startT:null,gridT0:null,iv:60/S.bpm/S.npb,countIn:false};
+  const P=app.P={running:true,idx:0,errs:new Set(),tries:{},errCount:0,dev:[],lastOk:null,lastWrong:null,startT:null,gridT0:null,iv:60/S.bpm/S.npb,countIn:false};
   if(S.metro){
     const t0=c.currentTime+0.15; metroStart(t0,pulse); $('#beats').hidden=false;
     P.gridT0=t0+4*60/S.bpm; P.startT=P.gridT0; P.countIn=true;
@@ -72,7 +72,7 @@ export function handleNote(m,t,src){
     // el micrófono puede volver a oír la nota anterior al sostenerla: no es error
     if(P.lastOk!=null&&mod12(m-P.lastOk)===0) return;
     if(P.lastWrong&&P.lastWrong.m===m&&t-P.lastWrong.t<1.2) return;
-    P.lastWrong={m,t}; P.errCount++; P.errs.add(P.idx);
+    P.lastWrong={m,t}; P.errCount++; P.errs.add(P.idx); P.tries[P.idx]=(P.tries[P.idx]||0)+1;
     ui.flashKey(m,'hit-bad');
     const got=spellMidi(m), want=spellMidi(exp.midi);
     ui.refresh();

@@ -20,8 +20,8 @@ function draw(){
   const ph=R.phrases[R.p];
   const notes=ph.map((x,i)=>{
     const erred=R.errs.has(key(R.p,i));
-    if(i<R.n) return {...x,cls:erred?'err':'ok',label:erred?noteName(x):undefined};
-    if(i===R.n&&!R.phraseDone) return {...x,cls:erred?'cur err':'cur',label:erred?noteName(x):undefined};
+    if(i<R.n) return {...x,cls:'ok',label:erred?noteName(x):undefined};   // ya tocada bien: verde (aunque antes fallara)
+    if(i===R.n&&!R.phraseDone) return {...x,cls:erred?'cur err'+((R.tries.get(key(R.p,i))||0)>=2?' hop':''):'cur',label:erred?noteName(x):undefined};
     return {...x};
   });
   $('#readStaff').innerHTML=staffSvg({clef:cfg.clef,notes,h:11,width,ariaLabel:CLEFS[cfg.clef].name});
@@ -59,7 +59,7 @@ function onNote(m){
     if(R.lastOk!=null&&mod12(m-R.lastOk)===0) return;
     if(R.lastWrong&&R.lastWrong.m===m&&performance.now()-R.lastWrong.t<1200) return;
     R.lastWrong={m,t:performance.now()};
-    R.errors++; R.errs.add(key(R.p,R.n));
+    R.errors++; R.errs.add(key(R.p,R.n)); R.tries.set(key(R.p,R.n),(R.tries.get(key(R.p,R.n))||0)+1);
     ss.flash(m,'hit-bad');
     draw();
     ss.setMsg(tf('Sonó %(got)s. La nota %(n)s es %(want)s.',{got:noteName(m),n:R.n+1,want:noteName(t)}),'bad');
@@ -76,7 +76,7 @@ ss.setup({
   onNote,
   onStart:()=>{
     const phrases=Array.from({length:cfg.count},()=>phrase(pool,cfg.length,cfg.max_leap,cfg.accidentals));
-    R={phrases,p:0,errs:new Set(),errors:0,times:[]};
+    R={phrases,p:0,errs:new Set(),tries:new Map(),errors:0,times:[]};
     startPhrase();
   },
   onStop:preview,
