@@ -21,7 +21,7 @@ class RegistrationTests(TestCase):
         self.assertFalse(user.is_active)
         self.assertEqual(user.email, 'lucia@example.com')
         self.assertContains(res, 'pendiente de activación')
-        self.assertContains(res, 'mailto:tu-correo@ejemplo.com?subject=Activar%20cuenta%3A%20lucia')
+        self.assertContains(res, 'mailto:oma.gonzales@gmail.com?subject=Activar%20cuenta%3A%20lucia')
         self.assertContains(res, 'Usuario%3A%20lucia')
 
     def test_duplicate_email_rejected(self):
