@@ -72,9 +72,9 @@ def simplify_rhythm(line, step):
     return out
 
 
-def bass_line(events, slot):
+def bass_line(events, slot, max_len=None):
     """La nota más grave que suena al empezar cada casilla de `slot` tiempos (si no hay, la más grave de la casilla),
-    con las casillas iguales unidas en una sola nota larga."""
+    con las casillas iguales unidas en una sola nota larga (de `max_len` tiempos como mucho)."""
     if not events:
         return []
     last = max(t + d for t, d, _ in events)
@@ -87,7 +87,8 @@ def bass_line(events, slot):
         if not pool:
             continue
         m = min(pool)
-        if out and out[-1][2] == m and abs(out[-1][0] + out[-1][1] - start) < 1e-6:
+        if (out and out[-1][2] == m and abs(out[-1][0] + out[-1][1] - start) < 1e-6
+                and (max_len is None or out[-1][1] + slot <= max_len + 1e-6)):
             out[-1][1] = _num(out[-1][1] + slot)
         else:
             out.append([_num(start), _num(slot), m])
@@ -147,10 +148,10 @@ def derive(notes, key_fifths, beats_per_bar, level):
     half = beats_per_bar / 2 if beats_per_bar % 2 == 0 else beats_per_bar
     if level == 2:
         return {'rh': simplify_rhythm(melody, INTERMEDIATE_MIN_DURATION),
-                'lh': pulse_bass(bass_line(notes['lh'], half), beats_per_bar)}, key_fifths
+                'lh': pulse_bass(bass_line(notes['lh'], half, beats_per_bar), beats_per_bar)}, key_fifths
     if level == 1:
         rh = simplify_rhythm(melody, BASIC_RULES['min_duration'])
-        lh = bass_line(notes['lh'], half)
+        lh = bass_line(notes['lh'], half, beats_per_bar)   # como mucho una redonda/blanca con puntillo por compás
         rh = fit_range(transpose_to_white(rh, key_fifths), *BASIC_RULES['ranges']['rh'])
         lh = fit_range(transpose_to_white(lh, key_fifths), *BASIC_RULES['ranges']['lh'])
         return {'rh': rh, 'lh': lh}, 0

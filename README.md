@@ -75,6 +75,12 @@ Django 6.1 necesita **Python 3.12 o superior**: elige esa versión al crear la w
 Cada vez que actualices el código: `git pull` (o vuelve a subir los archivos), luego `migrate` y
 `collectstatic`, y al final **Reload**.
 
+## Versiones fáciles de las canciones
+
+Al subir una partitura completa (nivel Avanzado) la app genera sola las versiones Intermedio y Básico. Si mejora el
+algoritmo (`escalas/arranger.py`), `python manage.py rederive_songs` las regenera todas; no toca las versiones que
+subiste a mano (opción «Solo el nivel Intermedio/Básico, escrito a mano» al reemplazar la partitura).
+
 ## Idiomas
 
 La interfaz está en **español** (original), **inglés, portugués, francés e italiano**. El selector de idioma está en
