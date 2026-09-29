@@ -26,8 +26,15 @@ export function cutAudio(){
 }
 export const ctxInfo=()=>ctx?{state:ctx.state,sampleRate:ctx.sampleRate}:null;
 
+/* si muchas notas suenan a la vez (piezas rápidas en una tableta), cada nota usa menos armónicos para no saturar el audio */
+const HARMONICS=[[1,1],[2,.42],[3,.18],[4,.09],[5,.04]];
+let voices=[];
 export function tone(midi,t,dur){
-  const c=ac(); dur=dur||0.8; const f=440*Math.pow(2,(midi-69)/12);
+  const c=ac(); dur=dur||0.8;
+  const now=c.currentTime;
+  if(t<now+0.005) t=now+0.005;   // una nota programada en el pasado (temporizador retrasado) no debe quedar muda
+  voices=voices.filter(end=>end>now); voices.push(t+dur+0.6);
+  const parts=HARMONICS.slice(0,voices.length>36?1:voices.length>18?2:5); const f=440*Math.pow(2,(midi-69)/12);
   const g=c.createGain(), lp=c.createBiquadFilter();
   lp.type='lowpass'; lp.frequency.value=Math.min(9000,f*7);
   g.connect(lp); lp.connect(master);
@@ -35,7 +42,7 @@ export function tone(midi,t,dur){
   g.gain.exponentialRampToValueAtTime(0.32,t+0.006);
   g.gain.exponentialRampToValueAtTime(0.1,t+0.3);
   g.gain.exponentialRampToValueAtTime(0.0001,t+dur+0.5);
-  [[1,1],[2,.42],[3,.18],[4,.09],[5,.04]].forEach(([h,amp])=>{
+  parts.forEach(([h,amp])=>{
     const o=c.createOscillator(), og=c.createGain();
     og.gain.value=amp; o.frequency.value=f*h*(h>1?1.0015:1);
     o.connect(og); og.connect(g); o.start(t); o.stop(t+dur+0.6);

@@ -21,6 +21,7 @@
   <a href="{% url 'register' %}"{% if request.resolver_match.url_name == 'register' %} aria-current="page"{% endif %}>{% trans "Registrarse" %}</a>
 </nav>
 {% endif %}
+<button type="button" class="icon-btn theme-btn" onclick="toggleTheme()" aria-label="{% trans 'Cambiar entre tema claro y oscuro' %}" title="{% trans 'Cambiar entre tema claro y oscuro' %}">◐</button>
 <form class="langmenu" method="post" action="{% url 'set_language' %}">
   {% csrf_token %}
   <input type="hidden" name="next" value="{{ request.get_full_path }}">

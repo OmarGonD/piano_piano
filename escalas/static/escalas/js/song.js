@@ -491,7 +491,7 @@ function startDemo(startBeat){
   let next=0, lit=0;
   const schedule=()=>{
     const now=ac().currentTime;
-    while(next<notes.length&&t0+notes[next].at<now+0.5){
+    while(next<notes.length&&t0+notes[next].at<now+1.5){
       const n=notes[next++];
       tone(n.m,t0+n.at,Math.max(0.25,n.d*spb*0.95));
     }

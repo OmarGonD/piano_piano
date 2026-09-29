@@ -754,3 +754,8 @@ dialog{border-width:1px;border-radius:22px}
 
 .guest-note{margin:0;padding:12px 16px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);text-align:center}
 .guest-note a{color:var(--accent);font-weight:800}
+
+/* tema elegido por el usuario (por defecto oscuro): manda sobre el ajuste del sistema */
+:root[data-theme="dark"]{color-scheme:dark}
+:root[data-theme="light"]{color-scheme:light}
+.theme-btn{order:2;width:36px;height:36px;font-size:1.1rem;flex:0 0 auto}

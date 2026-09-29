@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 17:34+0000\n"
+"POT-Creation-Date: 2026-09-29 17:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: piano <piano@example.com>\n"
@@ -722,6 +722,10 @@ msgstr "Compte"
 #: escalas/templates/escalas/_nav.html
 msgid "Registrarse"
 msgstr "S'inscrire"
+
+#: escalas/templates/escalas/_nav.html
+msgid "Cambiar entre tema claro y oscuro"
+msgstr "Basculer entre thème clair et sombre"
 
 #: escalas/templates/escalas/_nav.html
 msgid "Idioma"
