@@ -77,6 +77,12 @@ export function createFalling(canvas,kb,view){
         ctx.fillStyle=grad; ctx.fill();
         if(current){ctx.lineWidth=2;ctx.strokeStyle='#FFFFFF';ctx.stroke();}
         ctx.shadowBlur=0; ctx.globalAlpha=1;
+        if(v.fingers&&n.f&&w>=16){
+          ctx.fillStyle='#FFFFFF'; ctx.font='800 '+Math.min(16,Math.max(11,w*0.55))+'px system-ui,sans-serif';
+          ctx.textAlign='center'; ctx.textBaseline='middle';
+          ctx.fillText(String(n.f),x+w/2,Math.max(Math.min(bot,H)-12,Math.max(top,0)+8));
+          ctx.textAlign='left';
+        }
         if(sounding){
           const key=n.m+':'+g.t;
           if(!lit.has(key)){

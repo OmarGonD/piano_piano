@@ -759,3 +759,9 @@ dialog{border-width:1px;border-radius:22px}
 :root[data-theme="dark"]{color-scheme:dark}
 :root[data-theme="light"]{color-scheme:light}
 .theme-btn{order:2;width:36px;height:36px;font-size:1.1rem;flex:0 0 auto}
+
+/* dedos en la partitura y en el teclado */
+.fnum{fill:var(--accent);font-weight:800;pointer-events:none}
+.nt .fnum{fill:currentColor}
+.key .fing[data-hand="lh"]{background:#3D8BFF}
+.key .fing[data-hand="rh"]{background:var(--pink)}

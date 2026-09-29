@@ -537,3 +537,41 @@ class FirstStepsTests(LoggedInTestCase):
                     {'notes': [60, 62], 'fingers': [1]}, {'notes': [60, 62], 'count': 0}):
             with self.assertRaises(ValidationError, msg=str(bad)):
                 check(bad)
+
+
+class FingeringTests(LoggedInTestCase):
+    def test_scale_fingerings_follow_the_textbook(self):
+        from .fingering import fingers_for_hand
+        up = [[i, 1, m] for i, m in enumerate([60, 62, 64, 65, 67, 69, 71, 72])]
+        self.assertEqual(fingers_for_hand(up, 'rh'), [1, 2, 3, 1, 2, 3, 4, 5])
+        down = [[i, 1, m] for i, m in enumerate([72, 71, 69, 67, 65, 64, 62, 60])]
+        self.assertEqual(fingers_for_hand(down, 'rh'), [5, 4, 3, 2, 1, 3, 2, 1])
+        self.assertEqual(fingers_for_hand([[i, 1, m] for i, m in enumerate([60, 59, 57, 55, 53, 52, 50, 48])], 'lh'),
+                         [1, 2, 3, 1, 2, 3, 4, 5])
+        # acordes con digitación fija: 1-3-5 y el orden de dedos sigue al de las notas
+        self.assertEqual(fingers_for_hand([[0, 1, 60], [0, 1, 64], [0, 1, 67]], 'rh'), [1, 3, 5])
+        self.assertEqual(fingers_for_hand([[0, 1, 48], [0, 1, 52], [0, 1, 55]], 'lh'), [5, 3, 1])
+        self.assertEqual(fingers_for_hand([], 'rh'), [])
+
+    def test_every_version_has_one_finger_per_note(self):
+        for a in SongArrangement.objects.all():
+            for hand in ('rh', 'lh'):
+                fs = a.fingering[hand]
+                self.assertEqual(len(fs), len(a.notes[hand]), a)
+                self.assertTrue(all(f in (1, 2, 3, 4, 5) for f in fs), a)
+        page = self.client.get(reverse('escalas:song', args=['passacaglia']))
+        self.assertContains(page, '"fingering"')
+        self.assertContains(page, 'id="fingerChk"')
+
+    def test_written_fingerings_in_musicxml_win(self):
+        from .musicxml_import import parse_musicxml
+        def note(step, fing=''):
+            tech = f'<notations><technical><fingering>{fing}</fingering></technical></notations>' if fing else ''
+            return (f'<note><pitch><step>{step}</step><octave>4</octave></pitch><duration>2</duration>'
+                    f'{tech}<staff>1</staff></note>')
+        xml = ('<score-partwise version="4.0"><part-list><score-part id="P1"><part-name>P</part-name></score-part></part-list>'
+               '<part id="P1"><measure number="1"><attributes><divisions>2</divisions><time><beats>4</beats>'
+               '<beat-type>4</beat-type></time></attributes>' + note('C', 4) + note('D') + note('E', 2) + note('F')
+               + '</measure></part></score-partwise>').encode()
+        r = parse_musicxml(xml)
+        self.assertEqual(r['fingering']['rh'], [4, None, 2, None])

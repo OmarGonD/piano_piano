@@ -93,6 +93,7 @@ def parse_musicxml(data, split=60):
         ('rh' if pi == 0 else 'lh')
     single = len(parts) == 1 and _n_staves(parts[0]) < 2
     notes = {'rh': [], 'lh': []}
+    written = {}   # id(nota) -> dedo escrito en la partitura
     meta = {}
     marks = []  # (compás de salida, nombre)
     for pi, part in enumerate(parts[:2]):
@@ -146,9 +147,9 @@ def parse_musicxml(data, split=60):
                         pitch = _midi(el.find('pitch'))
                         ties = {t.get('type') for t in el.findall('tie')}
                         events.append((start, dur, pitch, hand_of(pi, staff) if not single else
-                                       ('rh' if pitch >= split else 'lh'), staff, ties))
+                                       ('rh' if pitch >= split else 'lh'), staff, ties, _finger(el)))
                 end = max(end, cur)
-            for start, dur, pitch, hand, staff, ties in events:
+            for start, dur, pitch, hand, staff, ties, finger in events:
                 t = pos + start
                 key = (hand, staff, pitch)
                 if 'stop' in ties and key in open_ties:
@@ -159,6 +160,8 @@ def parse_musicxml(data, split=60):
                     continue
                 ev = [_num(float(t)), _num(float(dur)), pitch]
                 notes[hand].append(ev)
+                if finger:
+                    written[id(ev)] = finger
                 if 'start' in ties:
                     open_ties[key] = ev
             full = meta.get('beats', Fraction(4))
@@ -174,11 +177,20 @@ def parse_musicxml(data, split=60):
         notes[h].sort(key=lambda n: (n[0], n[2]))
     if not notes['rh'] and not notes['lh']:
         raise ScoreError(gettext('El MusicXML no tiene notas.'))
+    fingering = {h: [written.get(id(ev)) for ev in notes[h]] for h in notes}
+    if not any(f for fs in fingering.values() for f in fs):
+        fingering = None
     beats = meta.get('beats', Fraction(4))
     bpb = max(1, round(float(beats)))
     n_bars = math.ceil(max(n[0] + n[1] for h in notes.values() for n in h) / bpb - 1e-6)
     return {'notes': notes, 'tempo': round(meta.get('tempo', 100)), 'beats_per_bar': bpb,
-            'key_fifths': meta.get('key', 0), 'sections': _sections(marks, n_bars)}
+            'key_fifths': meta.get('key', 0), 'sections': _sections(marks, n_bars), 'fingering': fingering}
+
+
+def _finger(note):
+    """Dedo escrito en la partitura (1–5), o None."""
+    text = note.findtext('notations/technical/fingering')
+    return int(text) if text and text.strip().isdigit() and 1 <= int(text) <= 5 else None
 
 
 def _n_staves(part):

@@ -313,6 +313,10 @@ class SongArrangement(models.Model):
     key_fifths = models.SmallIntegerField(
         'armadura', default=0, help_text='Alteraciones de la armadura: negativo = bemoles, positivo = sostenidos.')
     notes = models.JSONField('notas', default=dict, help_text='{"rh": [[0, 1, 67], ...], "lh": [[0, 4, 43], ...]}')
+    fingering = models.JSONField(
+        'dedos', default=dict, blank=True,
+        help_text='Dedo (1 = pulgar … 5 = meñique) de cada nota, en el mismo orden: {"rh": [1, 2, ...], "lh": [...]}. '
+                  'Se calcula solo al importar; puedes corregirlo aquí.')
 
     class Meta:
         ordering = ['song', 'level']
@@ -341,7 +345,7 @@ class SongArrangement(models.Model):
     def to_json(self):
         return {'level': self.level, 'label': str(self.get_level_display()), 'title': gettext(self.title),
                 'description': gettext(self.description) if self.description else '', 'tempo': self.tempo, 'beats': self.beats_per_bar,
-                'key': self.key_fifths, 'notes': self.notes}
+                'key': self.key_fifths, 'notes': self.notes, 'fingering': self.fingering or {}}
 
 
 class Attempt(models.Model):

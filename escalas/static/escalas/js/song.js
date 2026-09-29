@@ -51,7 +51,7 @@ function setMsg(t,kind){const el=$('#cueMsg');el.textContent=t;el.dataset.kind=k
 
 /* ---------- datos ---------- */
 function events(hand){
-  const n=arr().notes, pick=h=>n[h].map(([t,d,m])=>({t,d,m,hand:h}));
+  const a=arr(), n=a.notes, fg=a.fingering||{}, pick=h=>n[h].map(([t,d,m],i)=>({t,d,m,hand:h,f:(fg[h]||[])[i]||null}));
   return hand==='both'?pick('rh').concat(pick('lh')):pick(hand);
 }
 /* agrupa las notas que empiezan a la vez: cada grupo es un «momento» a tocar */
@@ -83,13 +83,13 @@ function drawScore(idx=-1,groups=G.groups||buildGroups(sel.hand,frag.from,fragTo
     if(g.done) cls=g.err?'err':'ok';
     else if(gi===idx) cls=g.err?'cur err':'cur';
     return {t:g.t,cls,bar:newBar,barNo:newBar?g.bar:null,
-      rh:g.notes.filter(n=>n.hand==='rh').map(n=>({midi:n.m,d:n.d})),
-      lh:g.notes.filter(n=>n.hand==='lh').map(n=>({midi:n.m,d:n.d}))};
+      rh:g.notes.filter(n=>n.hand==='rh').map(n=>({midi:n.m,d:n.d,f:n.f})),
+      lh:g.notes.filter(n=>n.hand==='lh').map(n=>({midi:n.m,d:n.d,f:n.f}))};
   });
   const a=arr(), hand=sel.hand;
   const staves=hand==='rh'?['treble']:hand==='lh'?['bass']:['treble','bass'];
   $('#songStaff').innerHTML=scoreSvg({staves,key:a.key,beats:a.beats,columns:cols,
-    ranges:{treble:rangeOfHand('rh'),bass:rangeOfHand('lh')},width:760,h:7,timeSig:start===0&&groups[0].bar===1});
+    ranges:{treble:rangeOfHand('rh'),bass:rangeOfHand('lh')},fingers:showFingers(),width:760,h:7,timeSig:start===0&&groups[0].bar===1});
 }
 
 /* ---------- lluvia de notas ---------- */
@@ -102,7 +102,7 @@ function idleGroups(){
 /* posición actual en tiempos, los momentos a dibujar y cuál toca ahora */
 function fallView(){
   const a=arr(), secPerBeat=60/bpm();
-  const base={beats:a.beats,secPerBeat,hands:sel.hand==='both'?['rh','lh']:[sel.hand]};
+  const base={fingers:showFingers(),beats:a.beats,secPerBeat,hands:sel.hand==='both'?['rh','lh']:[sel.hand]};
   if(demo) return {...base,beat:(ac().currentTime-demo.t0)/secPerBeat+demo.base,groups:demo.groups,cur:-1};
   if(G.groups&&G.mode==='tempo'&&G.t0!=null){
     const now=G.running?gameNow():G.endBeatTime??gameNow();
@@ -122,6 +122,12 @@ function fallView(){
 const fall=createFalling($('#fall'),kb,fallView);
 /* la vista (partitura o lluvia de notas) es una preferencia del usuario: se cambia aquí o en Preferencias */
 let view=SONG.view==='rain'?'rain':'staff';
+/* al mostrar u ocultar los dedos se vuelve a dibujar lo que hay en pantalla */
+function applyFingers(){
+  if(G.running&&G.mode==='wait'&&G.groups&&G.groups[G.resolved]) guide(G.groups[G.resolved].notes.filter(n=>G.remaining.has(n.m)));
+  else if(G.running&&G.mode==='tempo'&&G.groups) tempoTick();
+  drawScore(G.running?G.resolved:-1);
+}
 function applyView(){
   const rain=view==='rain';
   $('#songApp').classList.toggle('falling',rain);
@@ -233,8 +239,20 @@ function updateHud(reset){
   $('#progFill').style.width=reset?'0%':(G.resolved/G.groups.length*100)+'%';
 }
 function pop(text){const el=$('#pop');el.textContent=text;el.classList.remove('show');void el.offsetWidth;el.classList.add('show');}
-function markKeys(midis){kb.querySelectorAll('.key').forEach(k=>k.classList.toggle('expect',midis.includes(+k.dataset.midi)));}
-function guide(midis){markKeys($('#guideChk').checked?midis:[]);}
+/* teclas esperadas; con «fingers» (nota → {dedo, mano}) cada una lleva su número de dedo */
+function markKeys(midis,fingers){
+  kb.querySelectorAll('.key').forEach(k=>{
+    const m=+k.dataset.midi, on=midis.includes(m), f=on&&fingers?fingers[m]:null, el=k.querySelector('.fing');
+    k.classList.toggle('expect',on);
+    if(el){ el.textContent=f?f.f:''; el.classList.toggle('has',!!f); el.dataset.hand=f?f.hand:''; }
+  });
+}
+const showFingers=()=>S.songFingers!==false;
+/* notes: las notas (con su dedo) que toca tocar ahora */
+function guide(notes){
+  const on=$('#guideChk').checked;
+  markKeys(on?notes.map(n=>n.m):[],on&&showFingers()?Object.fromEntries(notes.filter(n=>n.f).map(n=>[n.m,{f:n.f,hand:n.hand}])):null);
+}
 function addPoints(notes,factor){
   const before=mult();
   G.score+=Math.round(10*notes*before*factor);
@@ -269,7 +287,7 @@ function stopAll(msg){
 function nextGroup(){
   const g=G.groups[G.resolved];
   Object.assign(G,{remaining:new Set(g.notes.map(n=>n.m)),hit:new Set(),lastWrong:null,shownAt:performance.now()});
-  drawScore(G.resolved); updateHud(); guide([...G.remaining]);
+  drawScore(G.resolved); updateHud(); guide(g.notes.filter(n=>G.remaining.has(n.m)));
   const names=[...G.remaining].sort((a,b)=>a-b).map(name);
   setMsg(names.length>1?tf('Toca juntas: %(notes)s',{notes:names.join(' + ')}):gt('Toca la nota marcada.'));
 }
@@ -281,7 +299,7 @@ function waitNote(m,src){
     flashKey(kb,m,'hit-ok');
     // el micrófono oye una nota a la vez: en un momento con varias notas basta con reconocer una
     if(G.remaining.size===0||src==='mic') return completeWaitGroup(g);
-    guide([...G.remaining]); setMsg(tf('Bien. Falta: %(notes)s',{notes:[...G.remaining].map(name).join(' + ')}),'ok');
+    guide(g.notes.filter(n=>G.remaining.has(n.m))); setMsg(tf('Bien. Falta: %(notes)s',{notes:[...G.remaining].map(name).join(' + ')}),'ok');
     return;
   }
   const pc=mod12(m);
@@ -346,7 +364,7 @@ function tempoTick(){
   const idx=currentIndex(now);
   if(idx!==G.shown||changed){
     G.shown=idx; drawScore(idx); updateHud();
-    const g=G.groups[idx]; guide(g?g.notes.filter(n=>!n.state).map(n=>n.m):[]);
+    const g=G.groups[idx]; guide(g?g.notes.filter(n=>!n.state):[]);
   }
   if(now>=G.t0) $('#progFill').style.width=Math.min(100,(now-G.t0)/(G.lastT-G.t0+G.spb)*100)+'%';
   if(G.resolved>=G.groups.length) finishGame();
@@ -558,6 +576,8 @@ $('#listenBtn').onclick=playDemo;
 $('#pauseBtn').onclick=pauseDemo;
 $('#guideChk').checked=S.songGuide!==false;
 $('#guideChk').onchange=e=>{S.songGuide=e.target.checked;save();if(!e.target.checked)markKeys([]);};
+$('#fingerChk').checked=showFingers();
+$('#fingerChk').onchange=e=>{S.songFingers=e.target.checked;save();applyFingers();};
 $('#strictChk').checked=S.strict;
 $('#strictChk').onchange=e=>{S.strict=e.target.checked;save();};
 bindKeys(kb,(m,ts)=>{const c=ac();tone(m,c.currentTime,0.6);onNote(m,'touch',ts);});

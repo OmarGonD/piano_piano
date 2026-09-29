@@ -2,6 +2,7 @@
 from django.core.exceptions import ValidationError
 
 from .arranger import derive
+from .fingering import compute as compute_fingering
 from .midi_import import MidiError, to_arrangement
 from .musicxml_import import is_musicxml, parse_musicxml
 from .models import Module, SongArrangement
@@ -30,12 +31,12 @@ def import_midi(song, level, data, derive_lower=False, rh_track=None, lh_track=N
     tempo = tempo or parsed['tempo']
     key = parsed['key_fifths'] if key is None else key
     beats = parsed['beats_per_bar']
-    versions = [(level, parsed['notes'], key, tempo, title or TITLES[level], '')]
+    versions = [(level, parsed['notes'], key, tempo, title or TITLES[level], '', parsed.get('fingering'))]
     if derive_lower:
         for lower in range(level - 1, 0, -1):
             notes, lower_key = derive(parsed['notes'], key, beats, lower)
             versions.append((lower, notes, lower_key, max(50, round(tempo * (0.7 + 0.1 * lower))),
-                             TITLES[lower], DESCRIPTIONS[lower]))
+                             TITLES[lower], DESCRIPTIONS[lower], None))
     # se valida todo antes de guardar nada, para no dejar la canción a medias
     arrs = [_build(song, *v, beats) for v in versions]
     for arr in arrs:
@@ -48,10 +49,16 @@ def import_midi(song, level, data, derive_lower=False, rh_track=None, lh_track=N
                'lh': len(a.notes['lh']), 'tempo': a.tempo, 'key': a.key_fifths} for a in arrs]
 
 
-def _build(song, level, notes, key, tempo, title, description, beats):
+def _build(song, level, notes, key, tempo, title, description, explicit, beats):
     arr = SongArrangement.objects.filter(song=song, level=level).first() or SongArrangement(song=song, level=level)
     arr.title, arr.description, arr.notes = title, description or arr.description, notes
     arr.tempo, arr.beats_per_bar, arr.key_fifths = tempo, beats, key
+    # dedos calculados; los que trae escritos el MusicXML mandan sobre los calculados
+    arr.fingering = compute_fingering(notes)
+    for hand, written in (explicit or {}).items():
+        for i, f in enumerate(written):
+            if f:
+                arr.fingering[hand][i] = f
     try:
         arr.full_clean()
     except ValidationError as e:
