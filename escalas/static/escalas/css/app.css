@@ -765,3 +765,33 @@ dialog{border-width:1px;border-radius:22px}
 .nt .fnum{fill:currentColor}
 .key .fing[data-hand="lh"]{background:#3D8BFF}
 .key .fing[data-hand="rh"]{background:var(--pink)}
+
+/* ---------- pentagrama: más contraste en toda la app ---------- */
+:root{--staff-ink:#2A2150}
+:root[data-theme="dark"]{--staff-ink:#EDE9FB}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--staff-ink:#EDE9FB}}
+.sl{stroke:var(--staff-ink);stroke-opacity:.85;stroke-width:1.4}
+.ledger{stroke:var(--staff-ink);stroke-opacity:.95;stroke-width:1.7}
+.barline{stroke:var(--staff-ink);stroke-opacity:.9;stroke-width:1.6}
+.clef{fill:var(--staff-ink);font-weight:700}
+.clef-glyph,.keysig,.timesig{fill:var(--staff-ink)}
+.barno{fill:var(--staff-ink);fill-opacity:.8;font-size:12px;font-weight:800}
+.played-status{fill:var(--staff-ink)}
+/* notas por tocar: bien visibles; las ya tocadas y la actual, con color */
+.nt{color:var(--staff-ink);opacity:1}
+.nt.ghost{opacity:.55}
+.nt ellipse{stroke:currentColor;stroke-width:.6}
+.nt ellipse.open{fill:var(--surface);stroke:currentColor;stroke-width:2.6}
+.nt .stem{stroke-width:1.9}
+.nt .fg{fill:var(--staff-ink);font-weight:800}
+.nt.cur{color:var(--accent)}
+.nt.cur ellipse{stroke-opacity:.45;stroke-width:6}
+.nt.cur .stem,.nt.cur .beam{stroke:var(--accent)}
+.nt.ok{color:var(--ok)}
+.nt.err{color:var(--bad)}
+/* dedos: números claros junto a cada nota */
+.fnum{fill:var(--staff-ink);font-weight:800;paint-order:stroke;stroke:var(--surface);stroke-width:2.6px;stroke-linejoin:round}
+.nt .fnum{fill:currentColor}
+.nt.cur .fnum{fill:var(--accent)}
+.song-staff{padding:10px 12px}
+.song-staff svg{width:100%;height:auto;max-height:clamp(180px,42dvh,430px)}

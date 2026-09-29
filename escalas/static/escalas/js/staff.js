@@ -140,7 +140,7 @@ export function scoreSvg({staves,key=0,beats=4,columns,ranges={},width=720,h=7,t
         if(n.a!==current){ shown[id]=n.a; g+=`<text class="acc" x="${x-rx*1.5}" y="${yy+h}" text-anchor="end" font-size="${h*3}">${n.a===0?'♮':ACC[n.a]}</text>`; }
         g+=`<ellipse class="${fig.kind==='w'||fig.kind==='h'?'open':''}" cx="${nx}" cy="${yy}" rx="${rx}" ry="${ry}" transform="rotate(-20 ${nx} ${yy})"/>`;
         if(fig.dot){ const onLine=(st-L.bot)%2===0; g+=`<circle class="dot" cx="${x+rx*2.1+(shift?rx*2:0)}" cy="${onLine?L.y(st+1):yy}" r="${h*0.32}"/>`; }
-        if(fingers&&n.f){ const above=L.hand==='rh'; g+=`<text class="fnum" x="${nx}" y="${above?yy-h*1.9:yy+h*3.1}" text-anchor="middle" font-size="${h*1.9}">${n.f}</text>`; }
+        if(fingers&&n.f){ const above=L.hand==='rh'; g+=`<text class="fnum" x="${nx}" y="${above?yy-h*2.1:yy+h*3.6}" text-anchor="middle" font-size="${h*2.6}">${n.f}</text>`; }
         prevStep=st; prevShift=shift;
       });
       const steps=notes.map(n=>n.s.step);
