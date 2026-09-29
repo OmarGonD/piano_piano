@@ -514,6 +514,7 @@ class FirstStepsTests(LoggedInTestCase):
         from .models import LearningPath
         self.assertEqual(LearningPath.objects.filter(active=True).first().slug, 'primeros-pasos')
         res = self.client.get(reverse('escalas:home'))
+        self.assertEqual([p.slug for p in res.context['paths']], ['primeros-pasos', 'solista', 'banda'])
         self.assertContains(res, 'Primeros pasos')
         self.assertContains(res, 'Empieza aquí')
         res = self.client.get(reverse('escalas:path', args=['primeros-pasos']))

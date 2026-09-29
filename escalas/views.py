@@ -19,7 +19,7 @@ from django.utils.translation import gettext, gettext as _
 
 def home(request):
     paths = LearningPath.objects.filter(active=True).annotate(
-        module_count=Count('modules', filter=Q(modules__active=True)))
+        module_count=Count('modules', filter=Q(modules__active=True))).order_by('order', 'name')  # con annotate se pierde el orden del modelo
     return render(request, 'escalas/home.html', {'paths': paths})
 
 
