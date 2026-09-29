@@ -21,7 +21,7 @@ const kb=$('#kb');
 export function setMsg(t,kind){const el=$('#cueMsg');el.textContent=t;el.dataset.kind=kind||'';}
 export const setCounter=t=>{$('#counter').textContent=t;};
 export const setProgress=frac=>{$('#progFill').style.width=(frac*100)+'%';};
-export const hearingText=t=>{$('#hearing').innerHTML=`Oyendo: <b>${t??'–'}</b>`;};
+export const hearingText=t=>{$('#hearing').innerHTML=`${gt('Oyendo:')} <b>${t??'–'}</b>`;};
 export const flash=(m,cls,ms)=>flashKey(kb,m,cls,ms);
 export function markKeys(midis){kb.querySelectorAll('.key').forEach(k=>k.classList.toggle('expect',midis.includes(+k.dataset.midi)));}
 export const avg=xs=>xs.length?xs.reduce((a,b)=>a+b,0)/xs.length:0;

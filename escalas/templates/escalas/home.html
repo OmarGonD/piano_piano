@@ -17,7 +17,8 @@
   <div class="path-grid">
     {% for p in paths %}
     <a class="path-card path-{{ p.slug }}" href="{% url 'escalas:path' p.slug %}">
-      <span class="path-glyph" aria-hidden="true">{% if p.slug == 'solista' %}𝄞{% else %}<span class="chord-glyph">Am<sup>7</sup></span>{% endif %}</span>
+      <span class="path-glyph" aria-hidden="true">{% if p.slug == 'solista' %}𝄞{% elif p.slug == 'primeros-pasos' %}♪{% else %}<span class="chord-glyph">Am<sup>7</sup></span>{% endif %}</span>
+      {% if p.slug == 'primeros-pasos' %}<span class="start-badge">{% trans "Empieza aquí" %}</span>{% endif %}
       <h3>{{ p.name|tr }}</h3>
       <p class="tagline">{{ p.tagline|tr }}</p>
       <p>{{ p.description|tr }}</p>

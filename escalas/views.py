@@ -40,7 +40,7 @@ def path_detail(request, slug):
 
 
 # JS de cada tipo de ejercicio
-SCRIPTS = {'note_reading': 'reading.js', 'melody_reading': 'melody.js', 'chord_play': 'chordplay.js'}
+SCRIPTS = {'key_finding': 'keyfinding.js', 'note_reading': 'reading.js', 'melody_reading': 'melody.js', 'chord_play': 'chordplay.js'}
 
 
 def module_detail(request, path_slug, slug):

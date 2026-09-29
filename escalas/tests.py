@@ -130,7 +130,7 @@ class LevelTests(LoggedInTestCase):
         self.assertContains(res, 'Blues de 12 compases')
 
     def test_every_module_page_renders_with_its_script(self):
-        scripts = {'note_reading': 'reading.js', 'melody_reading': 'melody.js', 'chord_play': 'chordplay.js'}
+        scripts = {'key_finding': 'keyfinding.js', 'note_reading': 'reading.js', 'melody_reading': 'melody.js', 'chord_play': 'chordplay.js'}
         for m in Module.objects.select_related('path'):
             res = self.client.get(reverse('escalas:module', args=[m.path.slug, m.slug]))
             self.assertEqual(res.status_code, 200, m.slug)
@@ -507,3 +507,32 @@ class PerUserProgressTests(LoggedInTestCase):
         self.assertNotContains(res, '95%')
         res = self.client.get(reverse('escalas:song', args=['passacaglia']))
         self.assertContains(res, '"best": 40')
+
+
+class FirstStepsTests(LoggedInTestCase):
+    def test_path_comes_first_and_pages_render(self):
+        from .models import LearningPath
+        self.assertEqual(LearningPath.objects.filter(active=True).first().slug, 'primeros-pasos')
+        res = self.client.get(reverse('escalas:home'))
+        self.assertContains(res, 'Primeros pasos')
+        self.assertContains(res, 'Empieza aquí')
+        res = self.client.get(reverse('escalas:path', args=['primeros-pasos']))
+        self.assertContains(res, 'Cuando termines, elige tu camino')
+        for m in Module.objects.filter(path__slug='primeros-pasos'):
+            m.full_clean()
+            page = self.client.get(reverse('escalas:module', args=['primeros-pasos', m.slug]))
+            self.assertEqual(page.status_code, 200, m.slug)
+        page = self.client.get(reverse('escalas:module', args=['primeros-pasos', 'las-siete-notas']))
+        self.assertContains(page, 'id="keyName"')
+        self.assertContains(page, 'keyfinding.js')
+
+    def test_key_finding_config_is_validated(self):
+        from .models import LearningPath
+        path = LearningPath.objects.get(slug='primeros-pasos')
+        def check(cfg):
+            Module(path=path, slug='x', title='x', kind='key_finding', config=cfg).full_clean(exclude=['slug'])
+        check({'notes': [60, 62], 'count': 5})
+        for bad in ({}, {'notes': []}, {'notes': [60]}, {'notes': [60, 62], 'hints': 'mucho'},
+                    {'notes': [60, 62], 'fingers': [1]}, {'notes': [60, 62], 'count': 0}):
+            with self.assertRaises(ValidationError, msg=str(bad)):
+                check(bad)

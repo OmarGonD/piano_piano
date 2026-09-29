@@ -726,3 +726,28 @@ dialog{border-width:1px;border-radius:22px}
 .langmenu{flex:0 0 auto;order:2}
 .langmenu select{width:auto;padding:6px 26px 6px 10px;border-radius:999px;font-weight:800;font-size:.85rem;background:var(--surface)}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- tres caminos: un color por camino ---------- */
+.path-card.path-primeros-pasos::before{background:var(--teal)}
+.path-card.path-solista::before{background:var(--accent)}
+.path-card.path-banda::before{background:var(--pink)}
+.path-card.path-primeros-pasos .tagline{color:var(--teal)}
+.path-card.path-solista .tagline{color:var(--accent)}
+.path-card.path-banda .tagline{color:var(--pink)}
+.path-card.path-primeros-pasos .path-glyph{background:var(--teal);color:#053B32}
+.path-card.path-solista .path-glyph{background:var(--accent);color:var(--accent-ink)}
+.path-card.path-banda .path-glyph{background:var(--pink);color:#fff}
+.path-card.path-primeros-pasos:hover{border-color:var(--teal);box-shadow:var(--shadow),0 0 0 1px var(--teal)}
+.path-card.path-solista:hover{border-color:var(--accent);box-shadow:var(--shadow),0 0 0 1px var(--accent)}
+.path-card.path-banda:hover{border-color:var(--pink);box-shadow:var(--shadow),0 0 0 1px var(--pink)}
+.path-card.path-primeros-pasos .path-meta{background:color-mix(in srgb,var(--teal) 22%,transparent)}
+.path-card.path-solista .path-meta{background:color-mix(in srgb,var(--accent) 22%,transparent)}
+.path-card.path-banda .path-meta{background:color-mix(in srgb,var(--pink) 22%,transparent)}
+.path-card .path-glyph{font-family:"Noto Music",serif}
+.start-badge{position:absolute;top:18px;right:18px;padding:4px 12px;border-radius:999px;background:var(--teal);color:#053B32;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.next-steps{border:1px solid var(--line);border-radius:18px;background:var(--surface);padding:22px 24px;box-shadow:var(--shadow)}
+.next-steps h2{margin:0 0 12px}
+.next-grid{display:flex;gap:12px;flex-wrap:wrap}
+.key-name{font-size:clamp(56px,9vw,104px)}
+.key-name[data-state="ok"]{color:var(--ok)}
+.key-name[data-state="bad"]{color:var(--bad)}

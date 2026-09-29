@@ -1,0 +1,16 @@
+{% extends "escalas/modules/_exercise.html" %}{% load i18n %}
+{% block how %}{% trans "Aparecerá el nombre de una nota: búscala en el teclado y tócala. No necesitas leer partitura." %}{% endblock %}
+{% block area %}
+<div class="chord-card key-card">
+  <div class="chord-main">
+    <span id="keyFinger" class="chord-group"></span>
+    <span id="keyName" class="chord-name key-name">–</span>
+  </div>
+  <div class="read-side">
+    <span id="counter" class="counter"></span>
+    <div id="hearing" class="hearing">{% trans "Oyendo:" %} <b>–</b></div>
+    <p id="cueMsg" class="cue-msg"></p>
+  </div>
+</div>
+{% endblock %}
+{% block options %}<label class="check"><input type="checkbox" id="strictChk"> {% trans "Exigir la octava exacta" %}</label>{% endblock %}

@@ -35,5 +35,14 @@
   {% empty %}
   <p class="empty">{% url 'escalas:index' as free_url %}{% blocktrans trimmed %}Todavía no hay módulos en este camino. Mientras tanto, practica en la <a href="{{ free_url }}">práctica libre</a>.{% endblocktrans %}</p>
   {% endfor %}
+  {% if path.slug == 'primeros-pasos' and levels %}
+  <section class="next-steps">
+    <h2>{% trans "Cuando termines, elige tu camino" %}</h2>
+    <div class="next-grid">
+      <a class="btn primary" href="{% url 'escalas:path' 'solista' %}">{% trans "Seguir con Solista: leer partituras" %}</a>
+      <a class="btn" href="{% url 'escalas:path' 'banda' %}">{% trans "Seguir con Banda: tocar acordes" %}</a>
+    </div>
+  </section>
+  {% endif %}
 </main>
 {% endblock %}

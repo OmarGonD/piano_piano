@@ -23,7 +23,7 @@ function show(){
   const t=R.targets[R.idx];
   Object.assign(R,{firstTry:true,lastWrong:null,shownAt:performance.now(),locked:false});
   draw([{...t,cls:'cur'}],t.clef);
-  ss.setCounter(`Nota ${R.idx+1} de ${R.targets.length}`);
+  ss.setCounter(tf('Nota %(n)s de %(total)s',{n:R.idx+1,total:R.targets.length}));
   ss.setProgress(R.idx/R.targets.length);
   ss.setMsg(gt('¿Qué nota es? Tócala en el piano.'));
 }
@@ -53,7 +53,7 @@ function onNote(m){
     R.errors++; R.firstTry=false;
     ss.flash(m,'hit-bad');
     // la nota tocada se dibuja solo si está cerca; si no, basta con el mensaje
-    const played=Math.abs(m-t.midi)<=12?[{midi:m,cls:'err ghost',label:`tocaste ${noteName(m)}`}]:[];
+    const played=Math.abs(m-t.midi)<=12?[{midi:m,cls:'err ghost',label:tf('tocaste %(note)s',{note:noteName(m)})}]:[];
     draw([{...t,cls:'cur err',label:noteName(t)},...played],t.clef);
     ss.setMsg(tf('Sonó %(got)s. La nota escrita es %(want)s: búscala.',{got:noteName(m),want:noteName(t)}),'bad');
   }

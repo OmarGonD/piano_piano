@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 15:47+0000\n"
+"POT-Creation-Date: 2026-09-29 16:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: piano <piano@example.com>\n"
@@ -451,6 +451,84 @@ msgstr "Jean Renard et Pierre Delanoë (chantée par Sylvie Vartan)"
 msgid "Melodía tradicional «New Britain» (1829)"
 msgstr "Mélodie traditionnelle « New Britain » (1829)"
 
+#: escalas/catalog_strings.py
+msgid "Primeros pasos"
+msgstr "Premiers pas"
+
+#: escalas/catalog_strings.py
+msgid "Empieza aquí si nunca has tocado el piano."
+msgstr "Commencez ici si vous n'avez jamais joué du piano."
+
+#: escalas/catalog_strings.py
+msgid "Conoce el teclado, encuentra las notas y toca tus primeras melodías. Después podrás seguir con Solista (leer partituras) o con Banda (acordes)."
+msgstr "Découvrez le clavier, trouvez les notes et jouez vos premières mélodies. Ensuite, vous pourrez continuer avec Soliste (lire des partitions) ou Groupe (accords)."
+
+#: escalas/catalog_strings.py
+msgid "Encuentra el Do"
+msgstr "Trouvez le do"
+
+#: escalas/catalog_strings.py
+msgid "El Do es la tecla blanca justo a la izquierda de cada grupo de dos teclas negras. Búscalo en todo el teclado."
+msgstr "Le do est la touche blanche située juste à gauche de chaque groupe de deux touches noires. Cherchez-le sur tout le clavier."
+
+#: escalas/catalog_strings.py
+msgid "Las siete notas blancas"
+msgstr "Les sept notes blanches"
+
+#: escalas/catalog_strings.py
+msgid "Do, Re, Mi, Fa, Sol, La y Si: aprende dónde está cada una a partir del Do central."
+msgstr "Do, ré, mi, fa, sol, la et si : apprenez où se trouve chacune à partir du do central."
+
+#: escalas/catalog_strings.py
+msgid "Cinco notas, cinco dedos"
+msgstr "Cinq notes, cinq doigts"
+
+#: escalas/catalog_strings.py
+msgid "Mano derecha sobre Do, Re, Mi, Fa y Sol con los dedos 1 al 5. Toca la nota que se indica con su dedo."
+msgstr "Main droite sur do, ré, mi, fa et sol avec les doigts 1 à 5. Jouez la note indiquée avec son doigt."
+
+#: escalas/catalog_strings.py
+msgid "Teclas blancas sin ayuda"
+msgstr "Touches blanches sans aide"
+
+#: escalas/catalog_strings.py
+msgid "Ahora la tecla solo se ilumina si te equivocas. Prueba en dos octavas."
+msgstr "Maintenant la touche ne s'allume que si vous vous trompez. Essayez sur deux octaves."
+
+#: escalas/catalog_strings.py
+#| msgid "Las dos claves alternadas"
+msgid "Las teclas negras"
+msgstr "Les touches noires"
+
+#: escalas/catalog_strings.py
+msgid "Sostenidos (♯) y bemoles (♭): cada tecla negra tiene dos nombres. Búscalas por su vecina blanca."
+msgstr "Dièses (♯) et bémols (♭) : chaque touche noire a deux noms. Trouvez-les grâce à leur voisine blanche."
+
+#: escalas/catalog_strings.py
+msgid "Tu primera lectura: de Do a Sol"
+msgstr "Votre première lecture : du do au sol"
+
+#: escalas/catalog_strings.py
+msgid "Cinco notas en clave de sol, del Do central al Sol, para empezar a leer el pentagrama."
+msgstr "Cinq notes en clé de sol, du do central au sol, pour commencer à lire la portée."
+
+#: escalas/catalog_strings.py
+msgid "Tu primera melodía"
+msgstr "Votre première mélodie"
+
+#: escalas/catalog_strings.py
+#| msgid "Lee frases cortas de cinco notas que se mueven por notas vecinas, como en una melodía."
+msgid "Frases cortas de cuatro notas que suben y bajan de a poco."
+msgstr "Courtes phrases de quatre notes qui montent et descendent peu à peu."
+
+#: escalas/catalog_strings.py
+msgid "Tus primeros acordes: Do y Sol"
+msgstr "Vos premiers accords : do et sol"
+
+#: escalas/catalog_strings.py
+msgid "Toca tres notas a la vez: Do mayor y Sol mayor, con las teclas marcadas."
+msgstr "Jouez trois notes à la fois : do majeur et sol majeur, avec les touches indiquées."
+
 #: escalas/forms.py
 msgid "La precisión no puede superar 100."
 msgstr "La précision ne peut pas dépasser 100."
@@ -683,6 +761,11 @@ msgid "Elige un camino. Puedes cambiar cuando quieras; tu progreso se guarda en 
 msgstr "Choisissez un parcours. Vous pouvez en changer à tout moment ; votre progression est enregistrée dans chacun."
 
 #: escalas/templates/escalas/home.html
+#| msgid "Empieza en"
+msgid "Empieza aquí"
+msgstr "Commencez ici"
+
+#: escalas/templates/escalas/home.html
 #, python-format
 msgid "%(n)s módulo"
 msgid_plural "%(n)s módulos"
@@ -847,6 +930,7 @@ msgstr "Augmenter de 4 BPM après un passage parfait"
 
 #: escalas/templates/escalas/index.html
 #: escalas/templates/escalas/modules/chord_play.html
+#: escalas/templates/escalas/modules/key_finding.html
 #: escalas/templates/escalas/modules/melody_reading.html
 #: escalas/templates/escalas/modules/note_reading.html
 #: escalas/templates/escalas/song.html
@@ -898,6 +982,7 @@ msgid "Mostrar datos del micrófono (diagnóstico)"
 msgstr "Afficher les données du microphone (diagnostic)"
 
 #: escalas/templates/escalas/index.html
+#: escalas/templates/escalas/modules/key_finding.html
 #: escalas/templates/escalas/modules/note_reading.html
 msgid "Exigir la octava exacta"
 msgstr "Exiger l'octave exacte"
@@ -936,6 +1021,11 @@ msgstr "Suivant : %(title)s"
 msgid "Aparecerá el nombre de un acorde: tócalo con las tres o cuatro notas a la vez. Vale cualquier inversión."
 msgstr "Le nom d'un accord apparaîtra : jouez-le avec ses trois ou quatre notes en même temps. N'importe quel renversement convient."
 
+#: escalas/templates/escalas/modules/key_finding.html
+#| msgid "Aparecerá el nombre de un acorde: tócalo con las tres o cuatro notas a la vez. Vale cualquier inversión."
+msgid "Aparecerá el nombre de una nota: búscala en el teclado y tócala. No necesitas leer partitura."
+msgstr "Le nom d'une note apparaîtra : cherchez-la sur le clavier et jouez-la. Pas besoin de savoir lire une partition."
+
 #: escalas/templates/escalas/modules/melody_reading.html
 msgid "Aparecerá una frase: tócala nota a nota, de izquierda a derecha. Si fallas una nota, sigue buscándola hasta dar con ella."
 msgstr "Une phrase apparaîtra : jouez-la note par note, de gauche à droite. Si vous ratez une note, continuez à la chercher jusqu'à la trouver."
@@ -961,6 +1051,19 @@ msgstr "Pas commencé"
 #, python-format
 msgid "Todavía no hay módulos en este camino. Mientras tanto, practica en la <a href=\"%(free_url)s\">práctica libre</a>."
 msgstr "Il n'y a pas encore de modules dans ce parcours. En attendant, entraînez-vous en <a href=\"%(free_url)s\">pratique libre</a>."
+
+#: escalas/templates/escalas/path.html
+#| msgid "Piano · elige tu camino"
+msgid "Cuando termines, elige tu camino"
+msgstr "Quand vous aurez fini, choisissez votre parcours"
+
+#: escalas/templates/escalas/path.html
+msgid "Seguir con Solista: leer partituras"
+msgstr "Continuer avec Soliste : lire des partitions"
+
+#: escalas/templates/escalas/path.html
+msgid "Seguir con Banda: tocar acordes"
+msgstr "Continuer avec Groupe : jouer des accords"
 
 #: escalas/templates/escalas/progress.html
 msgid "Progreso · Escalas"

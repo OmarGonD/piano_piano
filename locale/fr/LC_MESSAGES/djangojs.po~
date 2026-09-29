@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: piano\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 10:41-0500\n"
+"POT-Creation-Date: 2026-09-29 10:42-0500\n"
 "PO-Revision-Date: 2026-09-29 10:41-0500\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -251,6 +251,10 @@ msgstr "Tour parfait et fluide. Vous pouvez passer au module suivant."
 #: escalas/static/escalas/js/session.js
 msgid "Todo bien. Ahora intenta ir más rápido: la meta es menos de %(t)s por acorde."
 msgstr "Tout est juste. Essayez maintenant d'aller plus vite : l'objectif est moins de %(t)s par accord."
+
+#: escalas/static/escalas/js/session.js
+msgid "Todo bien. Ahora intenta ir más rápido: la meta es menos de %(t)s por nota."
+msgstr "Tout est juste. Essayez maintenant d'aller plus vite : l'objectif est moins de %(t)s par note."
 
 #: escalas/static/escalas/js/session.js
 msgid "Repite hasta acertar todo a la primera."
@@ -658,3 +662,7 @@ msgstr "Votre meilleur passage sur cette gamme : <b>%(best)s</b>"
 #: escalas/static/escalas/js/ui.js
 msgid "Aún no has practicado este círculo con estas opciones."
 msgstr "Vous n'avez pas encore travaillé cette progression avec ces options."
+
+#: escalas/static/escalas/js/ui.js
+msgid "Aún no has practicado esta escala con estas opciones."
+msgstr "Vous n'avez pas encore travaillé cette gamme avec ces options."

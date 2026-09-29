@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: piano\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 10:42-0500\n"
+"POT-Creation-Date: 2026-09-29 11:32-0500\n"
 "PO-Revision-Date: 2026-09-29 10:41-0500\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -24,6 +24,10 @@ msgstr "Notas: <strong>%(notes)s</strong>"
 #: escalas/static/escalas/js/chordplay.js
 msgid "Tócalo de memoria. Si fallas, verás sus notas."
 msgstr "Toque-o de memória. Se falhar, verá as suas notas."
+
+#: escalas/static/escalas/js/chordplay.js
+msgid "Acorde %(n)s de %(total)s"
+msgstr "Acorde %(n)s de %(total)s"
 
 #: escalas/static/escalas/js/chordplay.js
 msgid "Toca el acorde."
@@ -45,6 +49,30 @@ msgstr "Mão direita"
 #: escalas/static/escalas/js/falling.js escalas/static/escalas/js/song.js
 msgid "Mano izquierda"
 msgstr "Mão esquerda"
+
+#: escalas/static/escalas/js/keyfinding.js
+msgid "Dedo %(n)s"
+msgstr "Dedo %(n)s"
+
+#: escalas/static/escalas/js/keyfinding.js escalas/static/escalas/js/reading.js
+msgid "Nota %(n)s de %(total)s"
+msgstr "Nota %(n)s de %(total)s"
+
+#: escalas/static/escalas/js/keyfinding.js
+msgid "Busca esa tecla y tócala."
+msgstr "Procure essa tecla e toque-a."
+
+#: escalas/static/escalas/js/keyfinding.js
+msgid "¡Bien! Esa es la tecla."
+msgstr "Muito bem! Essa é a tecla."
+
+#: escalas/static/escalas/js/keyfinding.js
+msgid "Eso es."
+msgstr "É isso."
+
+#: escalas/static/escalas/js/keyfinding.js
+msgid "Esa no es. Prueba con otra tecla."
+msgstr "Essa não. Experimente outra tecla."
 
 #: escalas/static/escalas/js/main.js
 msgid "Práctica detenida."
@@ -231,8 +259,16 @@ msgid "Eso es: %(note)s."
 msgstr "É isso: %(note)s."
 
 #: escalas/static/escalas/js/reading.js
+msgid "tocaste %(note)s"
+msgstr "tocou %(note)s"
+
+#: escalas/static/escalas/js/reading.js
 msgid "Sonó %(got)s. La nota escrita es %(want)s: búscala."
 msgstr "Soou %(got)s. A nota escrita é %(want)s: procure-a."
+
+#: escalas/static/escalas/js/session.js escalas/static/escalas/js/ui.js
+msgid "Oyendo:"
+msgstr "A ouvir:"
 
 #: escalas/static/escalas/js/session.js
 msgid "Tu mejor ronda: <b>%(best)s</b> · %(n)s intento."
@@ -624,10 +660,6 @@ msgstr "%(title)s. Prima Começar: haverá 4 tempos de contagem."
 #: escalas/static/escalas/js/ui.js
 msgid "%(title)s. Toca la primera nota para empezar."
 msgstr "%(title)s. Toque a primeira nota para começar."
-
-#: escalas/static/escalas/js/ui.js
-msgid "Oyendo:"
-msgstr "A ouvir:"
 
 #: escalas/static/escalas/js/ui.js
 msgid "Audio %(state)s · %(rate)s Hz · nivel %(level)s dB · umbral %(gate)s dB · tono %(pitch)s · claridad %(clar)s"

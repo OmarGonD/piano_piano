@@ -47,7 +47,7 @@ function show(){
   $('#chordGroup').textContent=c.group||'';
   showHints(c,cfg.hints==='always');
   renderStrip(R.items,R.idx);
-  ss.setCounter(`Acorde ${R.idx+1} de ${R.items.length}`);
+  ss.setCounter(tf('Acorde %(n)s de %(total)s',{n:R.idx+1,total:R.items.length}));
   ss.setProgress(R.idx/R.items.length);
   ss.setMsg(gt('Toca el acorde.'));
 }

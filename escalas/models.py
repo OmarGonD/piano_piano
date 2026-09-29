@@ -139,6 +139,28 @@ def _check_range(cfg):
         _cfg_error('accidentals debe ser true o false.')
 
 
+def _validate_key_finding(cfg):
+    notes = cfg.get('notes')
+    if not isinstance(notes, list) or not notes or not all(
+            isinstance(n, int) and not isinstance(n, bool) and 21 <= n <= 108 for n in notes):
+        _cfg_error('notes debe ser una lista de notas MIDI (21–108).')
+    if len({n % 12 for n in notes}) < 2 and not cfg.get('any_octave'):
+        _cfg_error('notes necesita al menos dos notas distintas (o any_octave: true).')
+    if cfg.get('hints', 'always') not in ('always', 'on_error', 'none'):
+        _cfg_error('hints debe ser "always", "on_error" o "none".')
+    _check_int(cfg, 'count', 1, 50, 12)
+    fingers = cfg.get('fingers')
+    if fingers is not None and (not isinstance(fingers, list) or len(fingers) != len(notes)
+                                or not all(isinstance(f, int) and 1 <= f <= 5 for f in fingers)):
+        _cfg_error('fingers debe tener un dedo (1–5) por cada nota.')
+    rng = cfg.get('range')
+    if rng is not None and (not isinstance(rng, list) or len(rng) != 2 or rng[1] - rng[0] < 4):
+        _cfg_error('range debe ser [grave, agudo] con al menos 4 semitonos.')
+    for key in ('exact', 'any_octave'):
+        if not isinstance(cfg.get(key, False), bool):
+            _cfg_error(f'{key} debe ser true o false.')
+
+
 def _validate_note_reading(cfg):
     if cfg.get('clef') not in ('treble', 'bass', 'mixed'):
         _cfg_error('clef debe ser "treble", "bass" o "mixed".')
@@ -184,9 +206,9 @@ def _validate_chord_play(cfg):
 
 class Module(models.Model):
     # cada tipo de ejercicio tiene su plantilla (templates/escalas/modules/<kind>.html), su JS y su validador
-    KINDS = [('note_reading', 'Lectura de notas'), ('melody_reading', 'Lectura de frases'),
-             ('chord_play', 'Tocar acordes')]
-    VALIDATORS = {'note_reading': _validate_note_reading, 'melody_reading': _validate_melody_reading,
+    KINDS = [('key_finding', 'Encontrar teclas'), ('note_reading', 'Lectura de notas'),
+             ('melody_reading', 'Lectura de frases'), ('chord_play', 'Tocar acordes')]
+    VALIDATORS = {'key_finding': _validate_key_finding, 'note_reading': _validate_note_reading, 'melody_reading': _validate_melody_reading,
                   'chord_play': _validate_chord_play}
 
     class Level(models.IntegerChoices):
@@ -202,7 +224,9 @@ class Module(models.Model):
     kind = models.CharField('tipo de ejercicio', max_length=30, choices=KINDS)
     config = models.JSONField(
         'configuración', default=dict, blank=True,
-        help_text='Lectura de notas: {"clef": "treble|bass|mixed", "low": 64, "high": 77, "accidentals": false, '
+        help_text='Encontrar teclas: {"notes": [60, 62, 64], "count": 12, "hints": "always|on_error|none", '
+                  '"fingers": [1, 2, 3], "exact": false, "any_octave": false}. '
+                  'Lectura de notas: {"clef": "treble|bass|mixed", "low": 64, "high": 77, "accidentals": false, '
                   '"count": 15}. Lectura de frases: además "length" y "max_leap" (en grados). '
                   'Acordes: {"chords": ["C", "Am", "G7"], "count": 12, "hints": "always|on_error"} o '
                   '{"sequences": [{"name": "I–V–vi–IV en Do", "chords": ["C", "G", "Am", "F"]}], "laps": 2}.')
