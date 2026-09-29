@@ -25,6 +25,7 @@
       </div>
       {% include "escalas/_input_select.html" %}
       <div id="results" class="results" hidden></div>
+      {% if not user.is_authenticated %}<p class="hint guest-note">{% url 'register' as register_url %}{% blocktrans trimmed %}Estás practicando sin cuenta, así que tu avance no se guarda. <a href="{{ register_url }}">Crea una cuenta</a> para conservarlo.{% endblocktrans %}</p>{% endif %}
       <p id="record" class="record"></p>
       {% if next_module %}<a class="btn" href="{% url 'escalas:module' module.path.slug next_module.slug %}">{% blocktrans with title=next_module.title|tr %}Siguiente: {{ title }}{% endblocktrans %}</a>{% endif %}
     </section>

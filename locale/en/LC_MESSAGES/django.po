@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 16:33+0000\n"
+"POT-Creation-Date: 2026-09-29 17:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: piano <piano@example.com>\n"
@@ -146,6 +146,11 @@ msgid ""
 "Nombre: %(name)s\n"
 "Correo: %(email)s\n"
 msgstr ""
+"Hi, I signed up on the piano app and would like to activate my account.\n"
+"\n"
+"Username: %(user)s\n"
+"Name: %(name)s\n"
+"Email: %(email)s\n"
 
 #: cuentas/views.py
 msgid "Preferencias guardadas."
@@ -496,7 +501,6 @@ msgid "Ahora la tecla solo se ilumina si te equivocas. Prueba en dos octavas."
 msgstr "Now the key only lights up if you make a mistake. Try it over two octaves."
 
 #: escalas/catalog_strings.py
-#| msgid "Las dos claves alternadas"
 msgid "Las teclas negras"
 msgstr "The black keys"
 
@@ -517,7 +521,6 @@ msgid "Tu primera melodía"
 msgstr "Your first melody"
 
 #: escalas/catalog_strings.py
-#| msgid "Lee frases cortas de cinco notas que se mueven por notas vecinas, como en una melodía."
 msgid "Frases cortas de cuatro notas que suben y bajan de a poco."
 msgstr "Short four-note phrases that rise and fall gradually."
 
@@ -761,7 +764,11 @@ msgid "Elige un camino. Puedes cambiar cuando quieras; tu progreso se guarda en 
 msgstr "Choose a path. You can switch whenever you like; your progress is saved in each one."
 
 #: escalas/templates/escalas/home.html
-#| msgid "Empieza en"
+#, python-format
+msgid "<b>Primeros pasos</b> no necesita cuenta: empieza ahora. Para guardar tu progreso y usar Solista, Banda y las canciones, <a href=\"%(register_url)s\">crea una cuenta</a> o <a href=\"%(login_url)s\">entra</a>."
+msgstr "<b>First steps</b> doesn't need an account: start right now. To save your progress and use Soloist, Band and the songs, <a href=\"%(register_url)s\">create an account</a> or <a href=\"%(login_url)s\">sign in</a>."
+
+#: escalas/templates/escalas/home.html
 msgid "Empieza aquí"
 msgstr "Start here"
 
@@ -1014,6 +1021,11 @@ msgstr "Module %(number)s"
 
 #: escalas/templates/escalas/modules/_exercise.html
 #, python-format
+msgid "Estás practicando sin cuenta, así que tu avance no se guarda. <a href=\"%(register_url)s\">Crea una cuenta</a> para conservarlo."
+msgstr "You are practising without an account, so your progress is not saved. <a href=\"%(register_url)s\">Create an account</a> to keep it."
+
+#: escalas/templates/escalas/modules/_exercise.html
+#, python-format
 msgid "Siguiente: %(title)s"
 msgstr "Next: %(title)s"
 
@@ -1022,7 +1034,6 @@ msgid "Aparecerá el nombre de un acorde: tócalo con las tres o cuatro notas a 
 msgstr "The name of a chord will appear: play it with its three or four notes at once. Any inversion works."
 
 #: escalas/templates/escalas/modules/key_finding.html
-#| msgid "Aparecerá el nombre de un acorde: tócalo con las tres o cuatro notas a la vez. Vale cualquier inversión."
 msgid "Aparecerá el nombre de una nota: búscala en el teclado y tócala. No necesitas leer partitura."
 msgstr "The name of a note will appear: find it on the keyboard and play it. You don't need to read sheet music."
 
@@ -1053,7 +1064,6 @@ msgid "Todavía no hay módulos en este camino. Mientras tanto, practica en la <
 msgstr "There are no modules on this path yet. In the meantime, practise in <a href=\"%(free_url)s\">free practice</a>."
 
 #: escalas/templates/escalas/path.html
-#| msgid "Piano · elige tu camino"
 msgid "Cuando termines, elige tu camino"
 msgstr "When you finish, choose your path"
 

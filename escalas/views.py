@@ -1,7 +1,8 @@
 import json
 
 from django.contrib import messages
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import login_not_required, user_passes_test
+from django.contrib.auth.views import redirect_to_login
 from django.db import transaction
 from django.db.models import Count, Max, Q
 from django.http import JsonResponse
@@ -11,22 +12,30 @@ from django.views.decorators.http import require_POST
 
 from cuentas.models import Preferences
 
+from .access import PUBLIC_PATHS
 from .forms import AttemptForm, SongMidiForm, SongScoreForm
 from .models import Attempt, LearningPath, Module, Progression, ScaleType, Song
 from .song_import import SongImportError, import_midi
 from django.utils.translation import gettext, gettext as _
 
 
+def _records(request, keys=None):
+    """Récords del usuario; sin sesión no hay ninguno."""
+    return Attempt.records(request.user, keys) if request.user.is_authenticated else {}
+
+
+@login_not_required
 def home(request):
     paths = LearningPath.objects.filter(active=True).annotate(
         module_count=Count('modules', filter=Q(modules__active=True))).order_by('order', 'name')  # con annotate se pierde el orden del modelo
     return render(request, 'escalas/home.html', {'paths': paths})
 
 
+@login_not_required
 def path_detail(request, slug):
     lpath = get_object_or_404(LearningPath, slug=slug, active=True)
     modules = list(lpath.modules.filter(active=True))
-    records = Attempt.records(request.user, [m.record_key for m in modules])
+    records = _records(request, [m.record_key for m in modules])
     levels = []
     for number, m in enumerate(modules, 1):
         m.number = number
@@ -43,9 +52,12 @@ def path_detail(request, slug):
 SCRIPTS = {'key_finding': 'keyfinding.js', 'note_reading': 'reading.js', 'melody_reading': 'melody.js', 'chord_play': 'chordplay.js'}
 
 
+@login_not_required
 def module_detail(request, path_slug, slug):
     module = get_object_or_404(Module.objects.select_related('path'), slug=slug, path__slug=path_slug,
                                active=True, path__active=True)
+    if not request.user.is_authenticated and module.path.slug not in PUBLIC_PATHS:
+        return redirect_to_login(request.get_full_path())
     siblings = list(module.path.modules.filter(active=True))
     idx = siblings.index(module)
     return render(request, f'escalas/modules/{module.kind}.html', {
@@ -55,7 +67,7 @@ def module_detail(request, path_slug, slug):
         'next_module': siblings[idx + 1] if idx + 1 < len(siblings) else None,
         'module_json': {'slug': module.slug, 'title': gettext(module.title), 'key': module.record_key,
                         'config': module.config},
-        'records': Attempt.records(request.user, [module.record_key]),
+        'records': _records(request, [module.record_key]),
     })
 
 
@@ -171,7 +183,10 @@ def progress(request):
 
 
 @require_POST
+@login_not_required
 def create_attempt(request):
+    if not request.user.is_authenticated:  # sin cuenta se practica, pero el avance no se guarda
+        return JsonResponse({'saved': False}, status=401)
     try:
         data = json.loads(request.body)
     except (ValueError, UnicodeDecodeError):

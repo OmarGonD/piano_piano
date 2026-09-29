@@ -9,9 +9,13 @@ DATA = {'username': 'lucia', 'first_name': 'Lucía', 'email': 'Lucia@Example.com
 
 class RegistrationTests(TestCase):
     def test_app_requires_login(self):
-        for name in ('escalas:home', 'escalas:songs', 'escalas:progress'):
+        for name in ('escalas:songs', 'escalas:progress', 'escalas:index'):
             res = self.client.get(reverse(name))
             self.assertRedirects(res, reverse('login') + '?next=' + reverse(name), fetch_redirect_response=False)
+        # Solista y Banda también piden cuenta, aunque su lista de módulos se vea
+        for args in (('solista', 'clave-de-sol-pentagrama'), ('banda', 'acordes-mayores')):
+            url = reverse('escalas:module', args=args)
+            self.assertRedirects(self.client.get(url), reverse('login') + '?next=' + url, fetch_redirect_response=False)
         self.assertEqual(self.client.get(reverse('register')).status_code, 200)
         self.assertEqual(self.client.get(reverse('login')).status_code, 200)
 
@@ -56,7 +60,7 @@ class RegistrationTests(TestCase):
         self.client.force_login(user)
         res = self.client.post(reverse('logout'))
         self.assertRedirects(res, reverse('login'))
-        self.assertEqual(self.client.get(reverse('escalas:home')).status_code, 302)
+        self.assertEqual(self.client.get(reverse('escalas:songs')).status_code, 302)
 
 
 class PreferencesTests(TestCase):
@@ -88,3 +92,24 @@ class PreferencesTests(TestCase):
         self.assertEqual(res.status_code, 200)
         from .models import Preferences
         self.assertFalse(Preferences.objects.filter(user=self.user).exists())
+
+
+class GuestFirstStepsTests(TestCase):
+    """Primeros pasos se puede practicar sin cuenta; el avance no se guarda."""
+    def test_guest_can_open_first_steps(self):
+        home = self.client.get(reverse('escalas:home'))
+        self.assertContains(home, 'no necesita cuenta')
+        self.assertContains(home, 'Primeros pasos')
+        path = self.client.get(reverse('escalas:path', args=['primeros-pasos']))
+        self.assertEqual(path.status_code, 200)
+        for slug in ('las-siete-notas', 'primera-lectura', 'primeros-acordes'):
+            page = self.client.get(reverse('escalas:module', args=['primeros-pasos', slug]))
+            self.assertEqual(page.status_code, 200, slug)
+            self.assertContains(page, 'sin cuenta')
+        # el menú de invitado ofrece el camino abierto, no el resto
+        self.assertContains(home, reverse('escalas:path', args=['primeros-pasos']))
+        self.assertNotContains(home, reverse('escalas:songs'))
+
+    def test_guest_attempts_are_not_saved(self):
+        res = self.client.post(reverse('escalas:create_attempt'), '{}', content_type='application/json')
+        self.assertEqual(res.status_code, 401)

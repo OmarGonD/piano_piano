@@ -15,6 +15,8 @@
 <script>(()=>{const a=document.querySelector('.mainnav [aria-current]');if(a&&a.parentElement.scrollWidth>a.parentElement.clientWidth)a.parentElement.scrollLeft=a.offsetLeft-a.parentElement.clientWidth/2+a.clientWidth/2;})();</script>
 {% else %}
 <nav class="mainnav" aria-label="{% trans 'Cuenta' %}">
+  <a href="{% url 'escalas:home' %}"{% if nav_active == 'home' %} aria-current="page"{% endif %}>{% trans "Inicio" %}</a>
+  {% for p in nav_public_paths %}<a href="{% url 'escalas:path' p.slug %}"{% if nav_active == p.slug %} aria-current="page"{% endif %}>{{ p.name|tr }}</a>{% endfor %}
   <a href="{% url 'login' %}"{% if request.resolver_match.url_name == 'login' %} aria-current="page"{% endif %}>{% trans "Entrar" %}</a>
   <a href="{% url 'register' %}"{% if request.resolver_match.url_name == 'register' %} aria-current="page"{% endif %}>{% trans "Registrarse" %}</a>
 </nav>
