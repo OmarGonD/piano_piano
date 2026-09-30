@@ -13,6 +13,7 @@ import {showLevel} from './ui.js';
 import {setupInputSelector} from './inputsel.js';
 import {createFalling} from './falling.js';
 import {gt,tf,tn} from './i18n.js';
+import {track} from './analytics.js';
 
 const SONG=readJson('song');
 const HANDS={rh:gt('Mano derecha'),lh:gt('Mano izquierda'),both:gt('Manos juntas')};
@@ -21,6 +22,7 @@ const STAR_AT=[60,80,95];       // % de notas bien para 1, 2 y 3 estrellas
 const UNLOCK_AT=STAR_AT[0];     // una estrella en un paso desbloquea el siguiente
 const WINDOW=10;                // columnas visibles de la partitura
 const kb=$('#kb');
+track('song_view',{song:SONG.slug});
 
 const saved=store.get('song:'+SONG.slug,{});
 let sel={level:saved.level??SONG.arrangements[0].level,hand:saved.hand||'rh'};
@@ -277,6 +279,7 @@ function startGame(){
      prevPcs:new Set(),pass:(G.pass||0)+1,full:isFull()};
   $('#results').hidden=true; $('#startBtn').textContent=gt('Detener');
   waitPos=null;
+  if(G.pass===1) track('song_start',{song:SONG.slug,level:arr().level,hand:sel.hand,game_mode:G.mode,speed_pct:opts.tempoPct,fragment:!G.full});
   if(G.pass>1) return beginPlay();      // repetición automática: sin cuenta atrás
   // cuenta atrás para colocar las manos; se muestran las primeras notas con sus dedos
   guide(G.groups[0].notes);

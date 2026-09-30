@@ -1,5 +1,6 @@
 /* Récords: vienen embebidos en la página y se actualizan al guardar cada intento en el servidor. */
 import {readJson} from './dom.js';
+import {track} from './analytics.js';
 
 const cache=new Map(Object.entries(readJson('records')||{}));
 const csrf=()=>{const m=document.querySelector('meta[name="csrf-token"]');return m?m.content:'';};
@@ -9,6 +10,7 @@ export const getRecord=key=>cache.get(key)||null;
 export async function recordAttempt(a){
   // actualización optimista: la UI no espera a la red
   const r=Object.assign({best:0,bpm:0,runs:0},cache.get(a.config_key));
+  track('attempt_completed',{practice_mode:a.mode,item:a.title,accuracy:a.accuracy,errors:a.errors,duration_s:a.duration,bpm:a.bpm});
   r.runs++; r.best=Math.max(r.best,a.accuracy);
   if(a.bpm&&a.accuracy===100) r.bpm=Math.max(r.bpm||0,a.bpm);
   cache.set(a.config_key,r);

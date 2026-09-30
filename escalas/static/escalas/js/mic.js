@@ -1,5 +1,6 @@
 /* Micrófono: captura, umbral de ruido adaptativo y seguimiento de notas/acordes estables.
    No conoce la página: cada página le pasa sus reacciones con configureMic(). */
+import {track} from './analytics.js';
 import {S,app} from './state.js';
 import {ac,audio} from './audio.js';
 import {rms as rmsOf,yin,chromaFrom,classifyChord,pcsKey} from './dsp.js';
@@ -47,6 +48,7 @@ export async function startMic(){
   // salida muda: algunos navegadores no procesan nodos que no llegan al destino
   const sink=c.createGain(); sink.gain.value=0; analyser.connect(sink); analyserF.connect(sink); sink.connect(c.destination);
   try{await c.resume();}catch(e){}
+  track('mic_enabled');
   micBuf=new Float32Array(2048); fbuf=new Float32Array(analyserF.frequencyBinCount);
   app.micOn=true;
   requestWake(); hooks.started(); requestAnimationFrame(loop);
