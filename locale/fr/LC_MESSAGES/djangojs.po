@@ -698,3 +698,7 @@ msgstr "Vous n'avez pas encore travaillé cette progression avec ces options."
 #: escalas/static/escalas/js/ui.js
 msgid "Aún no has practicado esta escala con estas opciones."
 msgstr "Vous n'avez pas encore travaillé cette gamme avec ces options."
+
+#: escalas/static/escalas/js/song.js
+msgid "Coloca las manos… empezamos en %(n)s"
+msgstr "Placez vos mains… départ dans %(n)s"

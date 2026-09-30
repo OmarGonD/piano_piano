@@ -272,9 +272,26 @@ function startGame(){
      prevPcs:new Set(),pass:(G.pass||0)+1,full:isFull()};
   $('#results').hidden=true; $('#startBtn').textContent=gt('Detener');
   waitPos=null;
+  if(G.pass>1) return beginPlay();      // repetición automática: sin cuenta atrás
+  // cuenta atrás para colocar las manos; se muestran las primeras notas con sus dedos
+  guide(G.groups[0].notes);
+  let left=COUNTDOWN;
+  const tick=()=>{
+    if(!G.running) return;
+    if(left<=0){ countdownTimer=null; return beginPlay(); }
+    setMsg(tf('Coloca las manos… empezamos en %(n)s',{n:left})); left--;
+    countdownTimer=setTimeout(tick,1000);
+  };
+  tick();
+}
+const COUNTDOWN=5;
+let countdownTimer=null;
+function beginPlay(){
+  markKeys([]);
   if(G.mode==='tempo') startTempo(); else nextGroup();
 }
 function stopAll(msg){
+  clearTimeout(countdownTimer); countdownTimer=null;
   const was=G.running;
   if(was&&G.mode==='tempo'&&G.t0!=null) G.endBeatTime=gameNow();  // la lluvia se queda donde paró
   G.running=false; G.pass=0;

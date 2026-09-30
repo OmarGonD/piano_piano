@@ -146,7 +146,7 @@ select{width:100%;padding:9px 10px;border-radius:10px;border:1px solid var(--lin
 .kb-wrap{height:clamp(150px,27dvh,240px);padding:8px 10px 10px;border-top:1px solid var(--line);background:var(--surface)}
 .kb{position:relative;height:100%;touch-action:none;user-select:none;-webkit-user-select:none}
 .key{position:absolute;top:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;padding-bottom:10px}
-.white{height:100%;color-scheme:light;background:#fff;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4//8/AAX+Av4N70a4AAAAAElFTkSuQmCC);border:1px solid #AEB7C4;border-radius:0 0 8px 8px;z-index:1}
+.white{height:100%;color-scheme:only light;forced-color-adjust:none;background:#fff;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4//8/AAX+Av4N70a4AAAAAElFTkSuQmCC);border:1px solid #AEB7C4;border-radius:0 0 8px 8px;z-index:1}
 .black{height:61%;background:var(--ebony);border-radius:0 0 5px 5px;z-index:2;padding-bottom:8px}
 .key .lbl{font-size:.72rem;color:#6B7180;font-weight:600}
 .key .fing{display:none;width:28px;height:28px;border-radius:50%;background:#1B2230;color:#fff;font-weight:800;font-size:.95rem;place-items:center}
@@ -820,3 +820,6 @@ dialog{border-width:1px;border-radius:22px}
   .nt.hop ellipse{stroke-width:9;stroke-opacity:.5}
 }
 .song-staff .nt.cur ellipse.open,.read-staff .nt.cur ellipse.open{fill:#E6E0FF}
+
+/* teclas y papel: el modo oscuro forzado del navegador no debe tocarlos (salían grises en tabletas) */
+.kb .key,.kb-wrap .kb{color-scheme:only light;forced-color-adjust:none}
