@@ -175,6 +175,7 @@ def parse_musicxml(data, split=60):
     for h in notes:
         notes[h] = [ev for ev in notes[h] if 21 <= ev[2] <= 108 and ev[1] > 0]
     _fit_hands(notes)
+    _drop_doubled(notes)
     for h in notes:
         notes[h].sort(key=lambda n: (n[0], n[2]))
     if not notes['rh'] and not notes['lh']:
@@ -210,6 +211,29 @@ def _fit_hands(notes):
                 there = [e[2] for e in notes[other] if e[0] == start]
                 if not there or max(there + [ev[2]]) - min(there + [ev[2]]) <= MAX_HAND_SPAN:
                     notes[other].append(ev)
+
+
+def _drop_doubled(notes, split=60):
+    """La misma nota sonando a la vez en las dos manos (los pentagramas la duplican): se queda solo en la mano de su
+    registro (derecha desde el Do central) y esa mano la mantiene mientras suene en cualquiera de las dos."""
+    changed = True
+    while changed:
+        changed = _drop_doubled_once(notes, split)
+
+
+def _drop_doubled_once(notes, split):
+    for ev in list(notes['rh']):
+        for other in list(notes['lh']):
+            if ev[2] != other[2] or not (ev[0] < other[0] + other[1] and other[0] < ev[0] + ev[1]):
+                continue
+            keep, drop, hand = (ev, other, 'lh') if ev[2] >= split else (other, ev, 'rh')
+            if drop[0] < keep[0]:
+                keep[1] += keep[0] - drop[0]
+                keep[0] = drop[0]
+            keep[1] = max(keep[0] + keep[1], drop[0] + drop[1]) - keep[0]
+            notes[hand].remove(drop)
+            return True
+    return False
 
 
 def _finger(note):
