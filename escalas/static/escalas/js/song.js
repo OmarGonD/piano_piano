@@ -286,20 +286,32 @@ function startGame(){
   let left=COUNTDOWN;
   const tick=()=>{
     if(!G.running) return;
-    if(left<=0){ countdownTimer=null; return beginPlay(); }
-    setMsg(tf('Coloca las manos… empezamos en %(n)s',{n:left})); left--;
+    if(left<=0){ countdownTimer=null; showCount(0); return beginPlay(); }
+    setMsg(tf('Coloca las manos… empezamos en %(n)s',{n:left})); showCount(left); left--;
     countdownTimer=setTimeout(tick,1000);
   };
   tick();
 }
 const COUNTDOWN=5;
+/* número gigante y translúcido sobre toda la pantalla; deja ver la lluvia y el teclado detrás */
+function showCount(n){
+  let el=document.getElementById('countdown');
+  if(!n){ if(el) el.remove(); return; }
+  if(!el){
+    el=document.createElement('div'); el.id='countdown'; el.setAttribute('aria-hidden','true');
+    el.innerHTML='<div class="cd-label"></div><b></b>'; document.body.appendChild(el);
+  }
+  el.firstChild.textContent=gt('Coloca las manos');
+  const b=el.querySelector('b'); b.textContent=n;
+  b.style.animation='none'; void b.offsetWidth; b.style.animation='';
+}
 let countdownTimer=null;
 function beginPlay(){
   markKeys([]);
   if(G.mode==='tempo') startTempo(); else nextGroup();
 }
 function stopAll(msg){
-  clearTimeout(countdownTimer); countdownTimer=null;
+  clearTimeout(countdownTimer); countdownTimer=null; showCount(0);
   const was=G.running;
   if(was&&G.mode==='tempo'&&G.t0!=null) G.endBeatTime=gameNow();  // la lluvia se queda donde paró
   G.running=false; G.pass=0;
