@@ -174,6 +174,8 @@ def parse_musicxml(data, split=60):
                         ev[0] = _num(ev[0] + float(shift))
     for h in notes:
         notes[h] = [ev for ev in notes[h] if 21 <= ev[2] <= 108 and ev[1] > 0]
+    _fit_hands(notes)
+    for h in notes:
         notes[h].sort(key=lambda n: (n[0], n[2]))
     if not notes['rh'] and not notes['lh']:
         raise ScoreError(gettext('El MusicXML no tiene notas.'))
@@ -185,6 +187,29 @@ def parse_musicxml(data, split=60):
     n_bars = math.ceil(max(n[0] + n[1] for h in notes.values() for n in h) / bpb - 1e-6)
     return {'notes': notes, 'tempo': round(meta.get('tempo', 100)), 'beats_per_bar': bpb,
             'key_fifths': meta.get('key', 0), 'sections': _sections(marks, n_bars), 'fingering': fingering}
+
+
+MAX_HAND_SPAN = 12     # semitonos que una mano alcanza a la vez (una octava)
+
+
+def _fit_hands(notes):
+    """Las notas que una mano toca a la vez y no alcanza (más de una octava entre la más grave y la más aguda)
+    pasan a la otra mano si allí caben; si no, se descartan. La derecha conserva las agudas y la izquierda las graves."""
+    for hand, other in (('rh', 'lh'), ('lh', 'rh')):
+        groups = {}
+        for ev in notes[hand]:
+            groups.setdefault(ev[0], []).append(ev)
+        for start, evs in groups.items():
+            evs.sort(key=lambda e: e[2], reverse=(hand == 'rh'))     # de la que se conserva a la que sobra
+            keep = [evs[0]]
+            for ev in evs[1:]:
+                if abs(ev[2] - keep[0][2]) <= MAX_HAND_SPAN:
+                    keep.append(ev)
+                    continue
+                notes[hand].remove(ev)
+                there = [e[2] for e in notes[other] if e[0] == start]
+                if not there or max(there + [ev[2]]) - min(there + [ev[2]]) <= MAX_HAND_SPAN:
+                    notes[other].append(ev)
 
 
 def _finger(note):
