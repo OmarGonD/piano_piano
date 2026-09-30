@@ -153,6 +153,17 @@ Canciones incluidas:
 La lista se filtra por categoría (`/canciones/?categoria=cristiana`): Clásica, Cristiana o Popular.
 Al importar una canción nueva, su categoría se indica con `--category`.
 
+### Cargar las canciones de `songs/` (MusicXML)
+
+Los `.mxl` de la carpeta `songs/` (el nombre del archivo es el slug) se cargan todos de una vez, como Avanzado
+y con Intermedio y Básico generados. Las canciones nuevas salen de `songs/titles.json`:
+
+```bash
+python manage.py load_songs
+```
+
+Para añadir una canción: copia el `.mxl` a `songs/`, añade su entrada a `titles.json` y vuelve a ejecutarlo.
+
 ### Importar desde MIDI
 
 ```bash

@@ -1,0 +1,32 @@
+{
+  "a-cruel-angels-thesis": {
+    "title": "A cruel angel's thesis",
+    "composer": "Hidetoshi Sato",
+    "category": "popular"
+  },
+  "clocks": {
+    "title": "Clocks",
+    "composer": "Coldplay",
+    "category": "popular"
+  },
+  "interestelar": {
+    "title": "Interestelar",
+    "composer": "",
+    "category": "popular"
+  },
+  "never-meant-to-belong": {
+    "title": "Never meant to belong",
+    "composer": "Shiro Sagisu",
+    "category": "popular"
+  },
+  "rurouni-kenshin-samurai-x-opening-1": {
+    "title": "Rurouni Kenshin (Samurai X) Opening 1",
+    "composer": "",
+    "category": "popular"
+  },
+  "la-maritza": {
+    "title": "La Maritza",
+    "composer": "Jean Renard y Pierre Delanoë (canta Sylvie Vartan)",
+    "category": "popular"
+  }
+}
