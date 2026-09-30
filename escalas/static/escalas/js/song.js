@@ -71,7 +71,12 @@ function rangeOf(hand){
   const ms=events(hand).map(e=>e.m);
   return ms.length?[Math.min(...ms),Math.max(...ms)]:[60,72];
 }
-function rangeOfHand(h){const ms=arr().notes[h].map(n=>n[2]);return ms.length?[Math.min(...ms),Math.max(...ms)]:null;}
+
+/* rango de las notas que se ven ahora: así el hueco entre pentagramas no lo marca una nota lejana de otra parte de la canción */
+function rangeOfCols(cols,hand){
+  const ms=cols.flatMap(c=>c[hand].map(n=>n.midi));
+  return ms.length?[Math.min(...ms),Math.max(...ms)]:null;
+}
 
 /* ---------- partitura ---------- */
 function drawScore(idx=-1,groups=G.groups||buildGroups(sel.hand,frag.from,fragTo())){
@@ -89,7 +94,7 @@ function drawScore(idx=-1,groups=G.groups||buildGroups(sel.hand,frag.from,fragTo
   const a=arr(), hand=sel.hand;
   const staves=hand==='rh'?['treble']:hand==='lh'?['bass']:['treble','bass'];
   $('#songStaff').innerHTML=scoreSvg({staves,key:a.key,beats:a.beats,columns:cols,
-    ranges:{treble:rangeOfHand('rh'),bass:rangeOfHand('lh')},fingers:showFingers(),width:760,h:7,timeSig:start===0&&groups[0].bar===1});
+    ranges:{treble:rangeOfCols(cols,'rh'),bass:rangeOfCols(cols,'lh')},fingers:showFingers(),width:760,h:7,timeSig:start===0&&groups[0].bar===1});
 }
 
 /* ---------- lluvia de notas ---------- */

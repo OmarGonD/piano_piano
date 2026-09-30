@@ -89,7 +89,8 @@ export function scoreSvg({staves,key=0,beats=4,columns,ranges={},width=720,h=7,t
   for(const clef of staves){
     const C=CLEFS[clef], bot=C.bottom, top=bot+8;
     const r=ranges[clef], steps=r?[spell(spellInKey(r[0],key)).step,spell(spellInKey(r[1],key)).step]:[bot,top];
-    const hi=Math.max(top+2,steps[1]+1)+4, lo=Math.min(bot-2,steps[0]-1)-4;  // margen para plicas
+    let hi=Math.max(top+2,steps[1]+1)+4, lo=Math.min(bot-2,steps[0]-1)-4;  // margen para plicas
+    hi=top+Math.ceil((hi-top)/3)*3; lo=bot-Math.ceil((bot-lo)/3)*3;  // por tramos: la partitura no salta con cada nota
     const base=y0;  // se fija aquí: y0 sigue creciendo para el siguiente pentagrama
     layout.push({clef,C,bot,top,mid:bot+4,hand:clef==='treble'?'rh':'lh',y:s=>base+(hi-s)*h});
     y0+=(hi-lo)*h+h;
@@ -131,18 +132,26 @@ export function scoreSvg({staves,key=0,beats=4,columns,ranges={},width=720,h=7,t
       const notes=list.map(n=>({...spellInKey(n.midi,key),d:n.d,f:n.f})).map(n=>({...n,s:spell(n)})).sort((a,b)=>a.s.step-b.s.step);
       const fig=figure(Math.max(...notes.map(n=>n.d)));
       let g='', prevStep=null, prevShift=false;
+      let hasAcc=false; const fingerAt=[];  // acordes: los dedos van en columna a la izquierda, cada uno a la altura de su nota
       notes.forEach(n=>{
         const st=n.s.step, yy=L.y(st);
         const shift=prevStep!=null&&st-prevStep===1&&!prevShift, nx=x+(shift?rx*2:0);
         for(let l=L.bot-2;l>=st;l-=2) g+=`<line class="ledger" x1="${x-rx*1.8}" x2="${x+rx*1.8}" y1="${L.y(l)}" y2="${L.y(l)}"/>`;
         for(let l=L.top+2;l<=st;l+=2) g+=`<line class="ledger" x1="${x-rx*1.8}" x2="${x+rx*1.8}" y1="${L.y(l)}" y2="${L.y(l)}"/>`;
         const id=`${n.l}:${n.s.oct}`, current=id in shown?shown[id]:alt[n.l];
-        if(n.a!==current){ shown[id]=n.a; g+=`<text class="acc" x="${x-rx*1.5}" y="${yy+h}" text-anchor="end" font-size="${h*3}">${n.a===0?'♮':ACC[n.a]}</text>`; }
+        if(n.a!==current){ hasAcc=true; shown[id]=n.a; g+=`<text class="acc" x="${x-rx*1.5}" y="${yy+h}" text-anchor="end" font-size="${h*3}">${n.a===0?'♮':ACC[n.a]}</text>`; }
         g+=`<ellipse class="${fig.kind==='w'||fig.kind==='h'?'open':''}" cx="${nx}" cy="${yy}" rx="${rx}" ry="${ry}" transform="rotate(-20 ${nx} ${yy})"/>`;
         if(fig.dot){ const onLine=(st-L.bot)%2===0; g+=`<circle class="dot" cx="${x+rx*2.1+(shift?rx*2:0)}" cy="${onLine?L.y(st+1):yy}" r="${h*0.32}"/>`; }
-        if(fingers&&n.f){ const above=L.hand==='rh'; g+=`<text class="fnum" x="${nx}" y="${above?yy-h*2.1:yy+h*3.6}" text-anchor="middle" font-size="${h*2.6}">${n.f}</text>`; }
+        if(fingers&&n.f){
+          if(notes.length===1){ const above=L.hand==='rh'; g+=`<text class="fnum" x="${nx}" y="${above?yy-h*2.1:yy+h*3.6}" text-anchor="middle" font-size="${h*2.6}">${n.f}</text>`; }
+          else fingerAt.push({f:n.f,yy});
+        }
         prevStep=st; prevShift=shift;
       });
+      if(fingerAt.length){
+        const fx=x-rx*(hasAcc?5.6:2.6);
+        fingerAt.forEach(e=>{ g+=`<text class="fnum" x="${fx}" y="${e.yy+h*0.9}" text-anchor="end" font-size="${h*2.4}">${e.f}</text>`; });
+      }
       const steps=notes.map(n=>n.s.step);
       cols[i][L.hand]={g,fig,x,rx,lowY:L.y(steps[0]),highY:L.y(steps[steps.length-1]),
         avg:steps.reduce((a,b)=>a+b,0)/steps.length,mid:L.mid,t:col.t,beamable:fig.flags>0};
