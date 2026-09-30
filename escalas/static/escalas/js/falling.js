@@ -1,6 +1,6 @@
 /* Lluvia de notas: las notas caen hacia el teclado y llegan a la línea cuando hay que tocarlas.
    El lienzo va justo encima del teclado y con su mismo ancho, así cada barra cae sobre su tecla. */
-import {isBlack} from './theory.js';
+import {isBlack,letter,mod12,SHARP_SPELL} from './theory.js';
 import {gt,tf,tn} from './i18n.js';
 
 /* mismos colores que las teclas del teclado (.key.demo-rh / .demo-lh en app.css) */
@@ -77,10 +77,19 @@ export function createFalling(canvas,kb,view){
         ctx.fillStyle=grad; ctx.fill();
         if(current){ctx.lineWidth=2;ctx.strokeStyle='#FFFFFF';ctx.stroke();}
         ctx.shadowBlur=0; ctx.globalAlpha=1;
-        if(v.fingers&&n.f&&w>=16){
-          ctx.fillStyle='#FFFFFF'; ctx.font='800 '+Math.min(16,Math.max(11,w*0.55))+'px system-ui,sans-serif';
-          ctx.textAlign='center'; ctx.textBaseline='middle';
-          ctx.fillText(String(n.f),x+w/2,Math.max(Math.min(bot,H)-12,Math.max(top,0)+8));
+        const bh=Math.min(bot,H)-Math.max(top,-8);
+        if(w>=14&&bh>=18){
+          // nombre de la nota, abajo de la barra (donde hay que tocarla)
+          const [nl,na]=SHARP_SPELL[mod12(n.m)], nm=letter(nl,na);
+          ctx.font='800 '+Math.min(15,Math.max(9,w*0.5))+'px system-ui,sans-serif';
+          ctx.fillStyle='#FFFFFF'; ctx.textAlign='center'; ctx.textBaseline='middle';
+          ctx.shadowColor='rgba(0,0,0,.6)'; ctx.shadowBlur=3;
+          ctx.fillText(nm,x+w/2,Math.min(bot,H)-11,w+4);
+          ctx.shadowBlur=0;
+          if(v.fingers&&n.f&&bh>=40){
+            ctx.font='800 '+Math.min(16,Math.max(11,w*0.55))+'px system-ui,sans-serif';
+            ctx.fillText(String(n.f),x+w/2,Math.max(top,0)+10);
+          }
           ctx.textAlign='left';
         }
         if(sounding){
